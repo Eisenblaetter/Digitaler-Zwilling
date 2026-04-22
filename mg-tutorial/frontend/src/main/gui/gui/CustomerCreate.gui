@@ -1,0 +1,17 @@
+package gui;
+
+import mc.fenix.arrange.GemCard;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.basic.GemButton;
+import mc.fenix.input.GemTextInput;
+
+import Carrental.Customer;
+
+component CustomerCreate(Customer customer) {
+  @GemCard(title = "Register customer", component = @GemColumn(width = "40ch", rowGap = "5px", components = [
+    name@GemTextInput(labelText = "Name: ", entry = customer.name),
+    email@GemTextInput(labelText = "E-Mail: ", entry = customer.email),
+    age@GemTextInput(labelText = "Age: ", entry = customer.age),
+    register@GemButton(label = "Register", leftClick = createCustomer(customer))
+  ]));
+}

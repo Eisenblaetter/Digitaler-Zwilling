@@ -1,0 +1,44 @@
+package gui;
+
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemGrid;
+import mc.fenix.basic.GemButton;
+import mc.fenix.input.GemTextareaInput;
+import mc.fenix.input.GemCheckBoxInput;
+import mc.fenix.input.GemRadioInput;
+import mc.fenix.basic.GemImage;
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemLink;
+// TODO: GUI Basics - GemText and NavContainer import
+/*SOL start GUI Basics*/
+import gui.navigation.NavContainer;
+/*SOL end GUI Basics*/
+
+page Start() {
+  /* component usages, control statements, etc. */
+  @GemText(value="This is a tutorial application for developers learning to create a MontiGem app.");
+  @GemLink(
+    url = "https://monticore.pages.rwth-aachen.de/umlp/Tutorial.html",
+    text = "Visit the tutorial page to learn how to build a MontiGem app."
+  );
+  /*SOL start 00_Prerequisites.md*/
+  /*
+  @GemText(value="Hello, World!");
+  /**/
+  /*SOL end 00_Prerequisites.md*/
+  /*SOL start 02_GUIBasics.md*/
+  /*
+  @GemText(color = "red", value = "My first component");
+  @GemText(value = "second one");
+  /**/
+  /*SOL end 02_GUIBasics.md*/
+  /*SOL start 02_GUIBasics.md*/
+  /*
+  @NavContainer(content = [
+    @GemText(color = "red", value = "My first component"),
+    @GemText(value = "second one")
+  ]);
+  /**/
+  /*SOL end 02_GUIBasics.md*/
+}

@@ -1,0 +1,9 @@
+/*SOL start GUI Update objects*/
+package gui;
+
+import Carrental.Car;
+
+page CarUpdate(Car car) {
+  @CarForm(car = car);
+}
+/*SOL end GUI Update objects*/

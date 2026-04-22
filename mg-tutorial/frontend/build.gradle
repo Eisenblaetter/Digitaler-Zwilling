@@ -1,0 +1,25 @@
+/* (c) https://github.com/MontiCore/monticore */
+import de.montigem.gradle.specific.GUI2Java2TSTask
+
+plugins {
+  id 'de.rwth.se.montigem-frontend'
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
+}
+
+tasks.named("gui2java2ts", GUI2Java2TSTask) {
+  guiCreateModels = ["gui.CarCreate", "gui.CustomerCreate"]
+}
+
+dependencies {
+  testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+  useJUnitPlatform()
+}

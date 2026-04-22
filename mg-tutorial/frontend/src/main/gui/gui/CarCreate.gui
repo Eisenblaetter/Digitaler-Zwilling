@@ -1,0 +1,17 @@
+/*SOL start GUI Update objects*/
+package gui;
+
+import mc.fenix.basic.GemButton;
+
+import Carrental.Car;
+
+page CarCreate(Car car) {
+  @CarForm(
+    car = car,
+    button = @GemButton(
+      label = "Create",
+      leftClick = createAndNavigate(car)
+    )
+  );
+}
+/*SOL end GUI Update objects*/

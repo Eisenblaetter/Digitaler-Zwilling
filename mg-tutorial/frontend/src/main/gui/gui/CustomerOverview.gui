@@ -1,0 +1,48 @@
+package gui;
+
+import mc.fenix.arrange.GemCard;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemGrid;
+import mc.fenix.basic.GemText;
+import mc.fenix.charts.GemPieChart;
+import mc.fenix.navigation.GemNavItem;
+import mc.fenix.navigation.GemNavList;
+import mc.fenix.charts.GemPieChartTypes.GemPieChartData;
+
+import gui.CustomerCreate;
+
+import Carrental.Customer;
+
+page CustomerOverview(List<Customer> customers, GemPieChartData chartData) {
+  @GemRow(colGap = "25px", components = [
+    @GemNavList(width = "40ch", height = "100vh", components = [
+      @GemNavItem(title = "Home", target = "/gui/Start"),
+      @GemNavItem(title = "Simple car list", target = "/gui/SimpleCarList"),
+      @GemNavItem(title = "Customer overview", target = "/gui/CustomerOverview")
+    ]),
+    @GemRow(hAlign = "space-between", components = [
+      @GemColumn(rowGap = "10px", components = [
+        @GemText(value = "Customers", size = "2rem"),
+        @iterate(Customer customer : customers) {
+          customerInfo@GemCard(
+            title = customer.name,
+            component = @GemRow(colGap = "20px", vAlign = "bottom", hAlign = "space-between", components = [
+              @GemGrid(width = "auto", colGap = "5px", rowGap = "5px", rows = [
+                [ @GemText(value = "Name:"), name@GemText(value = customer.name) ],
+                [ @GemText(value = "Email:"), email@GemText(value = customer.email) ],
+                [ @GemText(value = "Age:"), age@GemText(value = customer.age) ]
+              ])
+            ])
+          );
+        },
+        createComponent@CustomerCreate()
+      ]),
+      @GemColumn(rowGap = "10px", hAlign = "top", components = [
+        @GemCard(title = "Customer Age Distribution", component =
+          ageDistribtion@GemPieChart(data = chartData)
+        )
+      ])
+    ])
+  ]);
+}

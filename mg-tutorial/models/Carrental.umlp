@@ -1,0 +1,64 @@
+/* (c) https://github.com/MontiCore/monticore */
+
+import java.time.LocalDateTime;
+
+umlp Carrental {
+
+  class Customer {
+    String name;
+    String email;
+    int age;
+  }
+
+  // TODO: Class Diagram Basics - Enum
+
+  // TODO: Class Diagram Basics - Associations
+
+	/*SOL start Class Diagram Basics*/
+	enum RentableStatus {
+		AVAILABLE,
+    RENTED,
+    MAINTENANCE;
+	}
+
+	class RentalTransaction {
+    LocalDateTime rentalDate;
+    LocalDateTime returnDate;
+    float totalCost;
+  }
+
+  association [*] RentalTransaction <-> Customer [1];
+	/*SOL end Class Diagram Basics*/
+
+  // TODO: GUI Basics - Create class car for SimpleCarList
+	/*SOL start Class GUI Basics*/
+  class Car {
+    String make;
+    String name;
+    String model;
+    RentableStatus rentableStatus = RentableStatus.AVAILABLE;
+    float costPerDay;
+    float mileage;
+  }
+  /*SOL end Class GUI Basics*/
+
+  // TODO: Adding services to the class diagram
+  /*SOL start Class Services*/
+  <<singleton>>
+  class RentalService {
+    void rentCar(Car rentedCar);
+    void returnCar(Car rentedCar);
+    void processPayment(RentalTransaction rentalTransaction);
+  }
+  /*SOL end Class Services*/
+
+  // TODO: Updating Objects
+  /*SOL start GUI Updating Objects*/
+  class MileageDataPoint {
+     LocalDateTime recordDate;
+     float mileage;
+  }
+
+  association [1] Car -> MileageDataPoint [*];
+  /*SOL end GUI Updating Objects*/
+}
