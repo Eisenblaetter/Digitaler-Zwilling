@@ -1,5 +1,12 @@
 # 26.Praktikum1
 
+## MontiGem Nexus Zugang
+
+```
+Username: student-regensburg
+Password: SE-is-great
+```
+
 
 
 ## Getting started
