@@ -1,8 +1,10 @@
 FROM alpine
 RUN apk update && apk add python3 py3-pip
-# Optional: mqtt-recorder may need a virtual environment or --break-system-packages depending on Alpine/Pip version, 
-# but simply pip3 install is the start. Depending on the python version, --break-system-packages is needed.
-RUN pip3 install --break-system-packages mqtt-recorder
+
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+RUN pip install --no-cache-dir mqtt-recorder
 
 WORKDIR /
 COPY simple_process.csv /
