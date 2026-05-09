@@ -1,0 +1,19 @@
+services:
+  mqtt-recorder-replay:
+    build: ./mqtt-replay
+    container_name: mqtt-recorder
+    depends_on:
+      - mosquitto-replay
+
+  mosquitto-replay:
+    image: eclipse-mosquitto:latest
+    container_name: mqtt-broker
+    restart: unless-stopped
+    ports:
+      - "1883:1883"    # MQTT
+      - "8883:8883"    # MQTTS (secure)
+      - "9001:9001"    # WebSockets
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
