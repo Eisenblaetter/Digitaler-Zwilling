@@ -3,7 +3,7 @@
 ## Sprint Zwischenstand
 
 Recap, wer hat was gemacht bis jetzt:
-- Darius: Überlegungen Simulations-Architektur (Docker Replay, MQTT Broker) -> bis zur Besprechung Frau Michael Replay-Container und Broker aufsetzen
+- Darius: Design der Gesamt-Architektur, Überlegungen Simulations-Architektur (Docker Replay, MQTT Broker) -> bis zur Besprechung Frau Michael Replay-Container und Broker aufsetzen
 - Miriam: MontiGem Login-Modul einbauen, Fehlermeldungen mit Pfaden und unterschiedlichen Packages/Modulen
 - Theresa: UI-Mockups Platzhalter für alle Seiten, grob draufgeschrieben was dazugehört; Gantt-Diagramm Idee für Scheduling -> siehe PDF GitLab
 - Samuel: Ideen für UI Design, einzelne Elemente -> siehe PDF GitLab
