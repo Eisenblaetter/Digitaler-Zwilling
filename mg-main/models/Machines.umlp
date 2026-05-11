@@ -28,7 +28,6 @@ umlp Machines {
         List<String> errors;
 
         // Allgemein gültig
-        String imageName;
         String lastUpdate;
     }
 

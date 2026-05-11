@@ -7,6 +7,7 @@ import mc.fenix.basic.GemButton;
 import mc.fenix.basic.GemImage;
 import mc.fenix.arrange.GemCard;
 
+//page MachineDetailsPopup(
 component MachineDetailsPopup(
     String name,
     String status,
@@ -14,9 +15,7 @@ component MachineDetailsPopup(
     Integer rpm,
     Integer load,
     String lastMaintenance,
-    String imageUrl
-) {
-
+){
   @GemCard(
     title = "Machine Details",
     titleComponent = @GemText(value = name, size = "1.4rem", weight = "bold"),
@@ -24,10 +23,9 @@ component MachineDetailsPopup(
 
       //links Bild
       @GemImage(
-        source = imageUrl,
+        source = "assets/images/" + m.name + ".png"
         width = "320px",
         height = "240px",
-        objectFit = "cover"
       ),
 
       //rechts details
@@ -49,7 +47,10 @@ component MachineDetailsPopup(
         ]),
 
         @GemRow(colGap = "10px", components = [
-          @GemText(value = "Load: "),
+          @GemLoadingSpinner(
+             size = "10px",
+             intermediate = true,
+             label = "Loading ..."
           @GemText(value = load.toString() + " %")
         ]),
 
