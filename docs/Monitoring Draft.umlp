@@ -3,20 +3,6 @@ import java.util.List;
 
 umlp Monitoring{
 
-    class MQTTRecord {
-        String TopicString;
-        LocalDateTime payloadTimestamp;
-        String payloadValue
-        int duplicateDelivery;
-        boolean retainContent;
-        LocalDateTime epoch;
-        double latency;
-    }
-
-    class MQTTFetcher {
-      List<MQTTRecord> getLastMQTTRecord();
-    }
-
     enum Status{
         RUNNING,
         SUCCESS,
@@ -35,7 +21,7 @@ umlp Monitoring{
     class MonitoringAction{
         String destinationIp;
         Status executionStatus = Status.PENDING;
-        List<MQTTRecord> currentRecords;             // String noch mit MQTTRecorder ersetzen
+        List<String> currentRecords;             // String noch mit MQTTRecorder ersetzen
     }
 
     association [1] MonitoringLog <-> MonitoringAction [1];
