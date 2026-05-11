@@ -1,0 +1,29 @@
+import java.time.LocalDateTime;
+import java.util.List;
+
+umlp Monitoring{
+
+    enum Status{
+        RUNNING,
+        SUCCESS,
+        FAILURE,
+        PENDING;
+    }
+
+    class MonitoringLog{
+        String runId;
+        int invoker;
+        LocalDateTime startTimestamp;
+        LocalDateTime endTimestamp;
+
+    }
+
+    class MonitoringAction{
+        String destinationIp;
+        Status executionStatus = Status.PENDING;
+        List<String> currentRecords;             // String noch mit MQTTRecorder ersetzen
+    }
+
+    association [1] MonitoringLog <-> MonitoringAction [1];
+    
+}
