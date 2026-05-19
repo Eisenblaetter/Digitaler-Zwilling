@@ -11,13 +11,10 @@ import mc.fenix.input.GemRadioInput;
 import mc.fenix.basic.GemImage;
 import mc.fenix.basic.GemText;
 import mc.fenix.basic.GemLink;
-// TODO: GUI Basics - GemText and NavContainer import
-/*SOL start GUI Basics*/
+
 import gui.navigation.NavContainer;
-/*SOL end GUI Basics*/
 
 page Start() {
-  /* component usages, control statements, etc. */
   @GemText(value="This is a tutorial application for developers learning to create a MontiGem app.");
   @GemLink(
     url = "https://monticore.pages.rwth-aachen.de/umlp/Tutorial.html",
@@ -32,5 +29,4 @@ page Start() {
     title = "Info Text",
     component = @GemText(value = "Some Text")
   );
-
 }
