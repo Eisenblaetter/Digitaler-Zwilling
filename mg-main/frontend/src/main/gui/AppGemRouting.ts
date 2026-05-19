@@ -8,12 +8,5 @@ export const routes: Route[] = [
     pathMatch: "full",
     redirectTo: "gui/Start"
   },
-  /*SOL start 03_TOPMechanism.md*/
-  {
-    path: "",
-    pathMatch: "full",
-    redirectTo: "gui/SimpleCarList"
-  },
-  /*SOL end 03_TOPMechanism.md*/
   ...routesTOP
 ]

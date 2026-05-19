@@ -12,7 +12,7 @@ java {
 }
 
 tasks.named("gui2java2ts", GUI2Java2TSTask) {
-  guiCreateModels = ["gui.CarCreate", "gui.CustomerCreate"]
+  guiCreateModels = [] // TODO: figure out what this does
 }
 
 dependencies {

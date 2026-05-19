@@ -33,24 +33,4 @@ page Start() {
     component = @GemText(value = "Some Text")
   );
 
-
-  /*SOL start 00_Prerequisites.md*/
-  /*
-  @GemText(value="Hello, World!");
-  /**/
-  /*SOL end 00_Prerequisites.md*/
-  /*SOL start 02_GUIBasics.md*/
-  /*
-  @GemText(color = "red", value = "My first component");
-  @GemText(value = "second one");
-  /**/
-  /*SOL end 02_GUIBasics.md*/
-  /*SOL start 02_GUIBasics.md*/
-  /*
-  @NavContainer(content = [
-    @GemText(color = "red", value = "My first component"),
-    @GemText(value = "second one")
-  ]);
-  /**/
-  /*SOL end 02_GUIBasics.md*/
 }

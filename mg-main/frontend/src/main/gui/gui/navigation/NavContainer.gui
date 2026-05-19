@@ -7,6 +7,7 @@ import mc.fenix.arrange.GemColumn;
 import mc.fenix.navigation.GemNavItem;
 import mc.fenix.navigation.GemNavList;
 
+// TODO: adjust this to digital twin structure
 component NavContainer(List<GUIViewElement> content) {
   // row of components, from left to right: navigation bar, main content.
   @GemRow(colGap = "25px", components = [

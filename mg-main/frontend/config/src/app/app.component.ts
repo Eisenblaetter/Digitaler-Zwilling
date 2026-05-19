@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CarrentalManagerClientImpl } from 'carrental/CarrentalManagerClientImpl';
-import { CarrentalComponentObserverManager } from 'CarrentalComponentObserverManager';
+import { DigitalTwinManagerClientImpl } from 'DigitalTwin/DigitalTwinManagerClientImpl';
+import { DigitalTwinComponentObserverManager } from 'DigitalTwinComponentObserverManager';
 import {GemLineChartTypesDeSer} from '@umlp/charts'
 import { ClientCommandManager,BaseClassObjectMapper , ClientCommandWebsocketCommunication, CommandManager } from '@umlp/commonj2ts';
 
@@ -11,13 +11,13 @@ import { ClientCommandManager,BaseClassObjectMapper , ClientCommandWebsocketComm
 })
 export class AppComponent {
   constructor() {
-    CarrentalManagerClientImpl.init();
+    DigitalTwinManagerClientImpl.init();
     const cmdManager = new ClientCommandManager(new ClientCommandWebsocketCommunication(
       `${document.baseURI.replace(/^http/, 'ws').replace(/\/$/, '')}` + '/umlp/api/command'
     ));
     CommandManager.initMe(cmdManager);
     (<any>window).websocket_connected = true;
-    CarrentalComponentObserverManager.init();
+    DigitalTwinComponentObserverManager.init();
     BaseClassObjectMapper.addDeSers(GemLineChartTypesDeSer.getInstance().getDeSerMap())
   }
 }
