@@ -1,0 +1,34 @@
+/*SOL start 02_GUIBasics.md*/
+package gui;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.arrange.GemColumn;
+
+import gui.navigation.NavContainer;
+
+// data class
+import Carrental.Car;
+
+page SimpleCarList(List<Car> cars) {
+  @NavContainer(content = [
+    @GemColumn(rowGap = "10px", components = [
+
+      @GemText(value = "Car list", size = "2rem"),
+      // iterate (loop) through cars and show their info
+      @iterate(Car c : cars) {
+        // if it's Ford then show that it costs more
+        @guard(c.make.equals("Ford")) {
+          @GemText(value = "Pricey!", color = "red");
+        }
+        else {
+          @GemText(value = "Not pricey!", color = "green");
+        }
+        @GemText(value = "Model: " + c.model);
+        @GemText(value = "Make: " + c.make);
+        @GemText(value = "Name: " + c.name);
+      }
+
+    ])
+  ]);
+}
+/*SOL end 02_GUIBasics.md*/

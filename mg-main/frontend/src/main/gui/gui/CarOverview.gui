@@ -1,0 +1,52 @@
+/*SOL start GUI Functions*/
+package gui;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemImage;
+import mc.fenix.basic.GemButton;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemGrid;
+import mc.fenix.arrange.GemCard;
+import gui.navigation.NavContainer;
+
+import Carrental.Car;
+
+page CarOverview(List<Car> cars) {
+  @NavContainer(content = [
+    @GemColumn(rowGap = "10px", width = "50%", hAlign = "center", components = [
+
+      @GemText(value = getAvailableCarsTitle(), size = "2rem", weight = "bold"),
+      @iterate(Car c : cars) {
+        carInfo@GemCard(
+          title = c.make + " " + c.model + " " + c.name,
+          component = @GemRow(colGap = "20px", vAlign = "bottom", hAlign = "space-between",
+            components = [
+              @GemImage(width = "200px", source = "assets/images/" + c.make + ".jpg"),
+              @GemGrid(width = "auto", colGap = "5px", rowGap = "5px", rows = [
+                [
+                  @GemText(value = "Status:"),
+                  @GemText(
+                    value = c.rentableStatus,
+                    color = c.rentableStatus == RentableStatus.AVAILABLE ? "green" : "red"
+                  )
+                ],
+                [
+                  @GemText(value = "Mileage:"),
+                  @GemText(value = c.mileage + " miles")
+                ]
+              ]),
+              @GemColumn(width = "40ch", rowGap = "10px", hAlign = "right", components = [
+                @GemText(value = (c.costPerDay * 3) + "€ for 3 days", size = "1.5rem"),
+                @GemButton(width = "calc(8ch + 10px)", label = "Rent car", leftClick = rentCar(c)),
+                @GemButton(width = "calc(10ch + 10px)", label = "Update car", leftClick = updateCar(c))
+              ])
+            ]
+          )
+        );
+      }
+
+    ])
+  ]);
+}
+/*SOL end GUI Functions*/

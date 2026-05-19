@@ -1,0 +1,96 @@
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
+
+plugins {
+  id 'base'
+  id 'maven-publish'
+  id 'de.rwth.se.montigem-backend' version "$mc_version" apply(false)
+  id 'de.rwth.se.montigem-frontend' version "$mc_version" apply(false)
+}
+
+subprojects {
+  repositories {
+    if ("true" == getProperty('useLocalRepo')) {
+      mavenLocal()
+    }
+    maven {
+      credentials.username mavenUser
+      credentials.password mavenPassword
+      url repo
+    }
+
+    mavenCentral()
+  }
+}
+
+def transformed = buildDir.toPath().resolve("training-transformed")
+tasks.register('transformTrainingFiles') {
+  doFirst {
+    transformed.toFile().mkdirs()
+
+    def outputStream = new ByteArrayOutputStream()
+    exec {
+      commandLine 'git', 'ls-files'
+      standardOutput = outputStream
+    }
+
+    outputStream.toString().trim().eachLine {
+      def f = project.rootDir.toPath().resolve(it).toFile()
+      def resPath = transformed.resolve(it)
+      resPath.parent.toFile().mkdirs()
+
+      if (it =~ /\.(png|jpg|jpeg|gif|svg|ico)$/) {
+        Files.copy(f.toPath(), resPath, StandardCopyOption.REPLACE_EXISTING)
+      } else {
+        String t = f.getText('UTF-8').replaceAll("(?m)(?s)/[*]SOL start[^*]*[*]/.*?/[*]SOL end[^*]*[*]/", "")
+
+        if (t.isBlank()) {
+          println "Skipping $f since it is blank"
+        }
+        else {
+          println "Adding $f"
+          resPath.toFile().setText(t, 'UTF-8')
+        }
+      }
+    }
+  }
+}
+
+tasks.register('packTrainingAsZip', Zip) {
+  from(transformed)
+  include '*/**'
+  archiveFileName = 'montigem3-training.zip'
+  destinationDirectory = buildDir
+  dependsOn transformTrainingFiles
+}
+
+publishing {
+  publications {
+    trainingZip(MavenPublication) {
+      groupId = 'de.monticore'
+      artifactId = 'montigem-training'
+
+      artifact(tasks.packTrainingAsZip) {
+        extension = 'zip'
+      }
+    }
+  }
+
+  repositories {
+    maven {
+      name = "SENexus"
+      credentials.username mavenUser
+      credentials.password mavenPassword
+
+      def releasesRepoUrl = "https://nexus.se.rwth-aachen.de/content/repositories/monticore-releases/"
+      def snapshotsRepoUrl = "https://nexus.se.rwth-aachen.de/content/repositories/monticore-snapshots/"
+      url = version.endsWith("SNAPSHOT") ? snapshotsRepoUrl : releasesRepoUrl
+    }
+  }
+}
+
+clean.dependsOn(subprojects.collect { it.getTasksByName("clean", false) })
+
+build.dependsOn(subprojects.collect { it.getTasksByName("build", false) })
+
+evaluationDependsOnChildren()

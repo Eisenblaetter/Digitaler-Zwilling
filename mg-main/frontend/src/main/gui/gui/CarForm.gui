@@ -1,0 +1,38 @@
+/*SOL start GUI Update objects*/
+package gui;
+
+import mc.fenix.input.GemTextInput;
+import mc.fenix.arrange.GemCard;
+import mc.fenix.arrange.GemColumn;
+
+import gui.navigation.NavContainer;
+
+import Carrental.Car;
+
+page CarForm(Car car, GUIViewElement button) {
+  @NavContainer(content = [
+    @GemCard(title = "Card form", component =
+      @GemColumn(width = "40ch", rowGap = "5px", components = [
+        @GemTextInput(
+          labelText = "Make:",
+          entry = car.make
+        ),
+        @GemTextInput(
+          labelText = "Model:",
+          entry = car.model
+        ),
+        @GemTextInput(
+          labelText = "Name:",
+          entry = car.name
+        ),
+        @GemTextInput(
+          labelText = "Cost per day:",
+          inputType = "number",
+          entry = car.costPerDay
+        ),
+        button
+      ])
+    )
+  ]);
+}
+/*SOL end GUI Update objects*/

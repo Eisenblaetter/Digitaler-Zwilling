@@ -1,0 +1,27 @@
+/*SOL start 02_GUIBasics.md*/
+package gui.navigation;
+
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemColumn;
+
+import mc.fenix.navigation.GemNavItem;
+import mc.fenix.navigation.GemNavList;
+
+component NavContainer(List<GUIViewElement> content) {
+  // row of components, from left to right: navigation bar, main content.
+  @GemRow(colGap = "25px", components = [
+    // navigation bar
+    @GemNavList(width = "40ch", height = "100vh", components = [
+      @GemNavItem(title = "Home", target = "/gui/Start"),
+
+      // TODO: Add missing navigations
+      @GemNavItem(title = "Simple car list", target = "/gui/SimpleCarList"),
+      @GemNavItem(title = "Car overview", target = "/gui/CarOverview"),
+      @GemNavItem(title = "Create car", target = "/gui/CarCreate"),
+      @GemNavItem(title = "Customer overview", target = "/gui/CustomerOverview")
+    ]),
+    // main content
+    @GemColumn(hAlign = "center", components = content)
+  ]);
+}
+/*SOL end 02_GUIBasics.md*/
