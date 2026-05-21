@@ -1,8 +1,19 @@
 // @formatter:off
 umlp DigitalTwin {
-    <<singleton>>
-    class MonitoringEngine{
-        void setupMqtt();
-        void handleMachineEvent(); // TODO: update params here
-    }
+  <<singleton>>
+  class MonitoringEngine{
+  void setupMqtt();
+  void handleMachineEvent();
+    // TODO: update params here
+  }
+
+  enum MachineStatus {
+    RUNNING,
+    STOPPED;
+  }
+
+  class Machine{
+    String name;
+    MachineStatus machineStatus;
+  }
 }
