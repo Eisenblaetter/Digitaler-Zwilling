@@ -1,0 +1,35 @@
+import java.time.LocalDateTime;
+
+classdiagram Monitoring {
+    class MQTTRecord {
+        String topicString;
+        String payloadValue;
+        LocalDateTime payloadTimestamp;
+        LocalDateTime receivedAt;
+        int duplicateDelivery;
+        boolean retainContent;
+        double latency;
+    }
+
+    enum Status {
+        RUNNING,
+        SUCCESS,
+        FAILURE,
+        PENDING;
+    }
+
+    class MonitoringLog {
+        String runId;
+        int invoker;
+        LocalDateTime startTimestamp;
+        LocalDateTime endTimestamp;
+    }
+
+    class MonitoringAction {
+        String destinationIp;
+        Status executionStatus = Status.PENDING;
+        // List<MQTTRecord> currentRecords; // To be added when using relations properly
+    }
+
+    association [1] MonitoringLog <-> MonitoringAction [1];
+}

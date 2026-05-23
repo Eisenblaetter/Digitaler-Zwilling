@@ -1,0 +1,23 @@
+classdiagram Machines {
+    enum MachineState {
+        UNINITIALIZED_IDLE,
+        INITIALIZED_IDLE,
+        UNINITIALIZED_ACTIVE,
+        INITIALIZED_ACTIVE,
+        RUNNING,
+        STOPPED,
+        ERROR;
+    }
+
+    class Machine {
+        String mqttTopic;
+        MachineState state;
+    }
+
+    // add specific properties for each machine
+    class ConveyorBelt extends Machine {}
+    class HighBay extends Machine {}
+    class MultiProcessing extends Machine {}
+    class SortingLine extends Machine {}
+    class VacuumGripper extends Machine {}
+}
