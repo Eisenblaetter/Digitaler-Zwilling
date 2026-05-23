@@ -12,3 +12,5 @@ gradle/
 **/.npmrc
 *.class
 **/bin/
+**/frontend/bin/
+**/backend/bin/
