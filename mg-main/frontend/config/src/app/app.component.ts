@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {DomainManagerClientImpl} from 'Domain/DomainManagerClientImpl';
+import {DomainManagerClientImpl} from 'domain/DomainManagerClientImpl';
 import {DomainComponentObserverManager} from 'DomainComponentObserverManager';
 import {GemLineChartTypesDeSer} from '@umlp/charts'
 import {
