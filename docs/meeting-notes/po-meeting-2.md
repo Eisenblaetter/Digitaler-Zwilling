@@ -43,6 +43,3 @@
 
 - Es gibt keine Erwartung, dass von Anfang an alles funktioniert, Einarbeitung ist eingeplant.
 - Kein Login mehr.
-
-
-
