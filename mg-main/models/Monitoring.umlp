@@ -1,6 +1,6 @@
 import java.time.LocalDateTime;
 
-classdiagram Monitoring {
+umlp Monitoring {
     class MQTTRecord {
         String topicString;
         String payloadValue;

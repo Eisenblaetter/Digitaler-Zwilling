@@ -9,12 +9,12 @@ import mc.fenix.arrange.GemGrid;
 import mc.fenix.arrange.GemCard;
 import gui.navigation.NavContainer;
 
-import DigitalTwin.Machine;
+import Domain.Machine;
+import Domain.MachineState;
 
 page MachineCard(List<Machine> machines) {
   @NavContainer(content = [
     @GemColumn(rowGap = "10px", width = "100%", hAlign = "center", components = [
-
       @GemText(value = "Machines", weight = "bold"),
        @GemGrid(
          x = ["1fr", "1fr", "1fr"],
@@ -24,13 +24,13 @@ page MachineCard(List<Machine> machines) {
             [
             @iterate(Machine m : machines) {
                 machineInfo@GemCard(
-                  titleComponent = @GemImage(width = "200px", source = "assets/images/" + m.name + ".jpg"),
+                  titleComponent = @GemImage(width = "200px", source = "assets/images/" + m.name + ".png"),
                   component = @GemRow(colGap = "20px", vAlign = "bottom", hAlign = "space-between",
                     components = [
 
                       @GemColumn(width = "40ch", rowGap = "10px", hAlign = "right", components = [
                         @GemText(value = m.name, size = "1.5rem"),
-                        @GemText(value = m.machineStatus, size = "1.5rem", color = m.machineStatus == MachineStatus.RUNNING ? "green" : "red"),
+                        @GemText(value = m.state, size = "1.5rem", color = m.state == MachineState.RUNNING ? "green" : "red"),
                         @GemButton(width = "calc(10ch + 10px)", label = "More information", leftClick = showMachineCardPopup(m))
                       ])
                     ]

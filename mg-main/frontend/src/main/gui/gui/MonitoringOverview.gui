@@ -2,10 +2,8 @@ package gui;
 
 import mc.fenix.basic.GemText;
 import gui.navigation.NavContainer;
+import gui.MachineCard;
 
 page MonitoringOverview() {
-    @NavContainer(content = [
-            @GemText(value="Overview -- Production Site", size="3rem"),
-            @GemText(value="TODO")
-    ]);
+    @MachineCard();
 }
