@@ -36,7 +36,7 @@ dependencies {
     api group: 'org.springframework.boot', name: 'spring-boot-starter-webflux', version: spring_version, withoutSpringLogging
     api group: 'org.springframework.shell', name: 'spring-shell-starter', version: spring_shell_version, withoutSpringLogging
 
-    implementation group: 'org.slf4j', name: 'slf4j-simple', version: "1.7.10"
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: "2.0.13"
 
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: spring_version, withoutSpringLogging
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1', withoutSpringLogging
