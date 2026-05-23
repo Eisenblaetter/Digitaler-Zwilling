@@ -25,7 +25,8 @@ public class MachineRegistry {
 
     public void initializeMachines() {
         Machine cv = DomainManager.conveyorBeltBuilder()
-                .mqttTopic("")
+                .name("Conveyor Belt")
+                .mqttTopic("PLC/Island 1/ConveyorBelt/ConveyorBelt01")
                 .state(MachineState.UNINITIALIZED_IDLE)
                 .build()
                 .get(); // TODO: check if exists
