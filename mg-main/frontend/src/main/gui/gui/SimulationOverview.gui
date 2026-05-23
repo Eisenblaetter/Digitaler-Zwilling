@@ -1,0 +1,23 @@
+package gui;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.navigation.GemNavItem;
+import mc.fenix.navigation.GemNavList;
+
+page SimulationOverview() {
+    @GemRow(colGap = "25px", components = [
+        @GemNavList(width = "30ch", height = "100vh", components = [
+              @GemNavItem(title = "Home", target = "/gui/Start"),
+              @GemNavItem(title = "Monitoring", target = "/gui/MonitoringOverview"),
+              @GemNavItem(title = "Simulation", target = "/gui/SimulationOverview"),
+              @GemNavItem(title = "Simulation Comparison", target = "/gui/SimulationComparison"),
+              @GemNavItem(title = "Scheduling", target = "/gui/SchedulingOverview")
+        ]),
+        @GemColumn(components=[
+            @GemText(value="Overview -- Simulations", size="3rem"),
+            @GemText(value="TODO")
+        ])
+      ]);
+}

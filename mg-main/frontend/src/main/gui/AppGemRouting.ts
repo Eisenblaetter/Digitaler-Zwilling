@@ -6,7 +6,7 @@ export const routes: Route[] = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: "gui/Start"
+    redirectTo: "gui/MonitoringOverview"
   },
   ...routesTOP
 ]

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DigitalTwinManagerClientImpl } from 'DigitalTwin/DigitalTwinManagerClientImpl';
+import { DigitalTwinManagerClientImpl } from 'digitaltwin/DigitalTwinManagerClientImpl';
 import { DigitalTwinComponentObserverManager } from 'DigitalTwinComponentObserverManager';
 import {GemLineChartTypesDeSer} from '@umlp/charts'
 import { ClientCommandManager,BaseClassObjectMapper , ClientCommandWebsocketCommunication, CommandManager } from '@umlp/commonj2ts';

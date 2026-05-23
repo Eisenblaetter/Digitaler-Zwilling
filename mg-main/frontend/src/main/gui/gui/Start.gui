@@ -15,18 +15,21 @@ import mc.fenix.basic.GemLink;
 import gui.navigation.NavContainer;
 
 page Start() {
-    @GemText(value="This is a tutorial application for developers learning to create a MontiGem app.");
-    @GemLink(
-      url = "https://monticore.pages.rwth-aachen.de/umlp/Tutorial.html",
-      text = "Visit the tutorial page to learn how to build a MontiGem app."
-    );
 
-    @GemCard(
-      titleComponent = @GemLink(
-        url = "https://monticore.pages.rwth-aachen.de/umlp/Tutorial.html",
-        text = "Visit the tutorial page to learn how to build a MontiGem app."
-      ),
-      title = "Info Text",
-    component = @GemText(value = "Some Text")
-    );
+    @NavContainer(content = [
+        @GemCard(
+            titleComponent = @GemText(value = "Nützliche Links"),
+            title = "Info Text",
+            component = @GemColumn(components = [
+                @GemLink(
+                    url = "https://monticore.pages.rwth-aachen.de/umlp/Tutorial.html",
+                    text = "tutorial page"
+                ),
+                @GemLink(
+                    url = "https://git.uni-regensburg.de/se-ur-teaching/programmierpraktika/26.praktikum1",
+                    text = "git"
+                )
+            ])
+        )
+    ]);
 }

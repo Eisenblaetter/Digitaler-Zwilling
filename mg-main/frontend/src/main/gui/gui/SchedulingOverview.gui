@@ -1,0 +1,11 @@
+package gui;
+
+import mc.fenix.basic.GemText;
+import gui.navigation.NavContainer;
+
+page SchedulingOverview() {
+    @NavContainer(content = [
+        @GemText(value="Overview -- Scheduling", size="3rem"),
+        @GemText(value="TODO")
+    ]);
+}
