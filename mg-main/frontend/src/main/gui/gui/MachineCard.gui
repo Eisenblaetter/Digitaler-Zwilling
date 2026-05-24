@@ -3,6 +3,7 @@ package gui;
 import mc.fenix.basic.GemText;
 import mc.fenix.basic.GemImage;
 import mc.fenix.basic.GemButton;
+import mc.fenix.basic.GemIcon;
 import mc.fenix.arrange.GemColumn;
 import mc.fenix.arrange.GemRow;
 import mc.fenix.arrange.GemGrid;
@@ -14,27 +15,30 @@ import Domain.MachineState;
 
 page MachineCard(List<Machine> machines) {
   @NavContainer(content = [
-    @GemColumn(rowGap = "10px", width = "100%", hAlign = "center", components = [
-      @GemText(value = "Machines", weight = "bold"),
+    @GemColumn(rowGap = "20px", width = "90%", hAlign = "center", components = [
+      @GemText(value = "Factory Monitoring - System Overview", size = "2rem", weight = "bold"),
        @GemGrid(
          x = ["1fr", "1fr", "1fr"],
-         colGap = "20px",
-         rowGap = "20px",
+         colGap = "30px",
+         rowGap = "30px",
          rows = [
             [
             @iterate(Machine m : machines) {
                 machineInfo@GemCard(
-                  titleComponent = @GemImage(width = "200px", source = "assets/images/" + m.name + ".png"),
-                  component = @GemRow(colGap = "20px", vAlign = "bottom", hAlign = "space-between",
-                    components = [
-
-                      @GemColumn(width = "40ch", rowGap = "10px", hAlign = "right", components = [
-                        @GemText(value = m.name, size = "1.5rem"),
-                        @GemText(value = m.state, size = "1.5rem", color = m.state == MachineState.RUNNING ? "green" : "red"),
-                        @GemButton(width = "calc(10ch + 10px)", label = "More information", leftClick = showMachineCardPopup(m))
-                      ])
-                    ]
-                  )
+                  titleComponent = @GemRow(colGap = "10px", vAlign = "center", components = [
+                    @GemIcon(name = "precision_manufacturing", size = "24px", color = m.state == MachineState.RUNNING ? "#4caf50" : "#f44336"),
+                    @GemText(value = m.name, size = "1.2rem", weight = "bold")
+                  ]),
+                  component = @GemColumn(rowGap = "15px", components = [
+                    @GemImage(width = "100%", height = "150px", source = "assets/images/" + m.name + ".png"),
+                    @GemRow(colGap = "10px", hAlign = "space-between", vAlign = "center", components = [
+                        @GemColumn(components = [
+                            @GemText(value = "Operational Status", size = "0.8rem", color = "grey"),
+                            @GemText(value = m.state, size = "1rem", weight = "bold", color = m.state == MachineState.RUNNING ? "#4caf50" : "#f44336")
+                        ]),
+                        @GemButton(label = "Details", leftClick = showMachineCardPopup(m))
+                    ])
+                  ])
                 );
               }
             ]
