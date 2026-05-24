@@ -1,0 +1,14 @@
+machines_config:
+    base_topic: "PLC/Island 1/"
+    machines:
+        "ConveyorBelt":
+            - "ConveyorBelt/ConveyorBelt01"
+        "HighBay":
+            - "HighBay/HighBay01"
+        "MultiProcessingwithOven":
+            - "MultiProcessing/MultiProcessing01"
+        "SortingLine":
+            - "SortingLine/SortingLine01"
+        "VacuumGripper":
+            - "VacuumGripper/VacuumGripper01"
+            - "VacuumGripper/VacuumGripper02"

@@ -1,14 +1,15 @@
 package domain.monitoring.machines;
 
-import domain.ConveyorBelt;
 import domain.DomainManager;
 import domain.Machine;
 import domain.MachineState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 
@@ -16,24 +17,69 @@ import java.util.Map;
 public class MachineRegistry {
 
     private static final Logger logger = LoggerFactory.getLogger(MachineRegistry.class);
+    private final MachineConfig machineConfig;
 
     private final Map<String, Machine> machines = new ConcurrentHashMap<>();
 
-    public MachineRegistry() {
+    @Autowired
+    public MachineRegistry(MachineConfig machineConfig) {
+        this.machineConfig = machineConfig;
         initializeMachines();
     }
 
     public void initializeMachines() {
-        Machine cv = DomainManager.conveyorBeltBuilder()
-                .name("Conveyor Belt")
-                .mqttTopic("PLC/Island 1/ConveyorBelt/ConveyorBelt01")
-                .state(MachineState.UNINITIALIZED_IDLE)
-                .build()
-                .get(); // TODO: check if exists
+        if (machineConfig.getMachines() == null) {
+            logger.warn("No machines configured in MachineConfig");
+            return;
+        }
 
-        machines.put("PLC/Island 1/ConveyorBelt/ConveyorBelt01", cv);
+        String baseTopic = machineConfig.getBaseTopic();
 
-        // TODO: extrapolate this for all available machines, read from config file
+        machineConfig.getMachines().forEach((name, topics) -> {
+            for (String topic : topics) {
+                String fullTopic = baseTopic + topic;
+                Optional<? extends Machine> machineOpt = createMachine(name, fullTopic);
+
+                machineOpt.ifPresent(machine -> {
+                    machines.put(fullTopic, machine);
+                    logger.info("Registered machine: {} with topic: {}", name, fullTopic);
+                });
+            }
+        });
+    }
+
+    private Optional<? extends Machine> createMachine(String name, String topic) {
+        return switch (name) {
+            case "ConveyorBelt" -> DomainManager.conveyorBeltBuilder()
+                    .name(name)
+                    .mqttTopic(topic)
+                    .state(MachineState.UNINITIALIZED_IDLE)
+                    .build();
+            case "HighBay" -> DomainManager.highBayBuilder()
+                    .name(name)
+                    .mqttTopic(topic)
+                    .state(MachineState.UNINITIALIZED_IDLE)
+                    .build();
+            case "MultiProcessingwithOven" -> DomainManager.multiProcessingBuilder()
+                    .name(name)
+                    .mqttTopic(topic)
+                    .state(MachineState.UNINITIALIZED_IDLE)
+                    .build();
+            case "SortingLine" -> DomainManager.sortingLineBuilder()
+                    .name(name)
+                    .mqttTopic(topic)
+                    .state(MachineState.UNINITIALIZED_IDLE)
+                    .build();
+            case "VacuumGripper" -> DomainManager.vacuumGripperBuilder()
+                    .name(name)
+                    .mqttTopic(topic)
+                    .state(MachineState.UNINITIALIZED_IDLE)
+                    .build();
+            default -> {
+                logger.warn("Unknown machine type: {}", name);
+                yield Optional.empty();
+            }
+        };
     }
 
     public void processMachineEvent(String machineType, String topic, String payload) {
@@ -47,13 +93,10 @@ public class MachineRegistry {
     }
 
     public Machine getMachineByTopic(String topic) {
-        // TODO: improve error handling and make more robust
-        String[] topicParts = topic.split("/");
-        if (topicParts.length > 4) {
-            topicParts = Arrays.copyOfRange(topicParts, 0, 4);
-        }
-        String shortTopic = String.join("/", topicParts);
-
-        return machines.get(shortTopic);
+        return machines.entrySet().stream()
+                .filter(entry -> topic.startsWith(entry.getKey()))
+                .max(java.util.Comparator.comparingInt(entry -> entry.getKey().length()))
+                .map(Map.Entry::getValue)
+                .orElse(null);
     }
 }

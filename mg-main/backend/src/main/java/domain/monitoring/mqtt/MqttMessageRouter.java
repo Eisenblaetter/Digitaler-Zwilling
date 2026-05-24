@@ -29,9 +29,32 @@ public class MqttMessageRouter {
             logger.debug("Routing message for machine type: {}", machineType);
 
             Machine machineObj = machineRegistry.getMachineByTopic(topic);
+            if (machineObj == null) {
+                logger.warn("No machine registered for topic: {}", topic);
+                return;
+            }
 
             switch (machineType) { // TODO: adjust for all machine types
-                case "ConveyorBelt" -> ((ConveyorBelt) machineObj).processEvent();
+                case "ConveyorBelt" -> {
+                    if (machineObj instanceof ConveyorBelt) {
+                        ((ConveyorBelt) machineObj).processEvent();
+                    }
+                }
+                case "HighBay" -> {
+
+                }
+                case "MultiProcessingwithOven" -> {
+
+                }
+                case "SortingLine" -> {
+
+                }
+                case "VacuumGripper" -> {
+
+                }
+                case "PunchingMachine" -> {
+
+                }
                 default -> {
 
                 }
