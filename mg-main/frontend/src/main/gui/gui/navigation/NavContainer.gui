@@ -12,18 +12,17 @@ import mc.fenix.navigation.GemNavList;
 component NavContainer(List<GUIViewElement> content) {
   @GemRow(colGap = "0px", components = [
     // navigation bar
-    @GemNavList(
+    sidebar@GemNavList(
       width = "300px", 
       height = "100vh", 
-      header = @GemColumn(hAlign = "top", height="100px", components = [
-          @GemIcon(name = "precision_manufacturing", size = "48px", color = "#1976d2"),
-          @GemText(value = "Digital Twin", size = "1.5rem", weight = "bold", color = "#1976d2"),
-          @GemRow(height = "2px", width = "80%", components = []) // simple divider
+      header = sidebarHeader@GemRow(hAlign = "center", vAlign = "middle", components = [
+          @GemIcon(name = "precision_manufacturing", size = "48px", color = "white"),
+          @GemText(value = "Digital Twin", size = "1.5rem", weight = "bold", color = "white")
       ]),
       components = [
-        @GemNavItem(title = "Home", target = "/gui/Start"),
-        @GemNavItem(title = "Monitoring", target = "/gui/MonitoringOverview"),
-        @GemTreeNode(
+        homeItem@GemNavItem(title = "Home", target = "/gui/Start"),
+        monitoringItem@GemNavItem(title = "Monitoring", target = "/gui/MonitoringOverview"),
+        simulationTree@GemTreeNode(
           isExpanded = true,
           content = @GemText(value = "Simulation", size = "1.1rem"),
           children = [
@@ -31,7 +30,7 @@ component NavContainer(List<GUIViewElement> content) {
             @GemNavItem(title = "Comparison", target = "/gui/SimulationComparison")
           ]
         ),
-        @GemNavItem(title = "Scheduling", target = "/gui/SchedulingOverview")
+        schedulingItem@GemNavItem(title = "Scheduling", target = "/gui/SchedulingOverview")
       ]
     ),
     // main content

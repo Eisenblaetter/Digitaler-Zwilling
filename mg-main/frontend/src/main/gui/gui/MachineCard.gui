@@ -16,7 +16,7 @@ import Domain.MachineState;
 page MachineCard(List<Machine> machines) {
   @NavContainer(content = [
     @GemColumn(rowGap = "20px", width = "90%", hAlign = "center", components = [
-      @GemText(value = "Factory Monitoring - System Overview", size = "2rem", weight = "bold"),
+      @GemText(value = "Monitoring — Machines Overview", size = "2rem", weight = "bold"),
        @GemGrid(
          x = ["1fr", "1fr", "1fr"],
          colGap = "30px",

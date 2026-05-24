@@ -1,3 +1,45 @@
 .primaryContent {
   padding: 2rem 2rem 0;
 }
+
+:host ::ng-deep {
+  .sidebar {
+    padding-top: 1rem;
+    background-color: #1976d2;
+    border: none !important;
+
+    nav {
+      background: transparent;
+      border: none !important;
+    }
+
+    .sidebarHeader {
+      padding: 0 16px;
+      display: flex;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 16px !important;
+      height: 64px !important;
+
+      gem-icon i {
+        color: white !important;
+      }
+
+      gem-text span {
+        color: white !important;
+      }
+
+      gem-text {
+        height: fit-content !important;
+      }
+    }
+
+    .gem-sub-tree-root {
+      padding: 0 !important;
+    }
+
+    .gem-tree-node {
+      background: #fafafa;
+    }
+  }
+}
