@@ -9,6 +9,8 @@ import umlp.jsweet.extension.annotation.BackendOnlyModes;
 
 public class Machine extends MachineTOP {
 
+    // TODO: refactor this mess
+
     @BackendOnly(BackendOnlyModes.THROW_ERROR)
     public void processEvent(String payload) {
         ObjectMapper mapper = new ObjectMapper();

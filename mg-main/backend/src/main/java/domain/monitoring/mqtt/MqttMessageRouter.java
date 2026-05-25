@@ -33,7 +33,7 @@ public class MqttMessageRouter {
                 logger.warn("No machine registered for topic: {}", topic);
                 return;
             }
-            machineObj.processEvent(payload);
+            machineObj.processEvent(payload); // TODO: also pass topic so we know what sensor etc.
 
             // add generic log for all actions
             machineRegistry.processMachineEvent(machineType, topic, payload);
