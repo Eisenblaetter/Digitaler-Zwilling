@@ -69,42 +69,46 @@ public class MachineRegistry {
      * MontiGem integration automatically saves successfully created objects to DB.
      */
     private Optional<? extends Machine> createMachine(String type, String displayName, String topic) {
-        return switch (type) {
-            case "ConveyorBelt" -> DomainManager.conveyorBeltBuilder()
-                    .name(type)
-                    .displayName(displayName)
-                    .mqttTopic(topic)
-                    .state(MachineState.UNINITIALIZED_IDLE)
-                    .build();
-            case "HighBay" -> DomainManager.highBayBuilder()
-                    .name(type)
-                    .displayName(displayName)
-                    .mqttTopic(topic)
-                    .state(MachineState.UNINITIALIZED_IDLE)
-                    .build();
-            case "MultiProcessingwithOven" -> DomainManager.multiProcessingBuilder()
-                    .name(type)
-                    .displayName(displayName)
-                    .mqttTopic(topic)
-                    .state(MachineState.UNINITIALIZED_IDLE)
-                    .build();
-            case "SortingLine" -> DomainManager.sortingLineBuilder()
-                    .name(type)
-                    .displayName(displayName)
-                    .mqttTopic(topic)
-                    .state(MachineState.UNINITIALIZED_IDLE)
-                    .build();
-            case "VacuumGripper" -> DomainManager.vacuumGripperBuilder()
-                    .name(type)
-                    .displayName(displayName)
-                    .mqttTopic(topic)
-                    .state(MachineState.UNINITIALIZED_IDLE)
-                    .build();
-            default -> {
+        switch (type) {
+            case "ConveyorBelt":
+                return DomainManager.conveyorBeltBuilder()
+                        .name(type)
+                        .displayName(displayName)
+                        .mqttTopic(topic)
+                        .state(MachineState.UNINITIALIZED_IDLE)
+                        .build();
+            case "HighBay":
+                return DomainManager.highBayBuilder()
+                        .name(type)
+                        .displayName(displayName)
+                        .mqttTopic(topic)
+                        .state(MachineState.UNINITIALIZED_IDLE)
+                        .build();
+            case "MultiProcessingwithOven":
+                return DomainManager.multiProcessingBuilder()
+                        .name(type)
+                        .displayName(displayName)
+                        .mqttTopic(topic)
+                        .state(MachineState.UNINITIALIZED_IDLE)
+                        .build();
+            case "SortingLine":
+                return DomainManager.sortingLineBuilder()
+                        .name(type)
+                        .displayName(displayName)
+                        .mqttTopic(topic)
+                        .state(MachineState.UNINITIALIZED_IDLE)
+                        .build();
+            case "VacuumGripper":
+                return DomainManager.vacuumGripperBuilder()
+                        .name(type)
+                        .displayName(displayName)
+                        .mqttTopic(topic)
+                        .state(MachineState.UNINITIALIZED_IDLE)
+                        .build();
+            default:
                 logger.warn("Unknown machine type: {}", type);
-                yield Optional.empty();
-            }
-        };
+                return Optional.empty();
+        }
     }
 
     public void processMachineEvent(String machineType, String topic, String payload) {
