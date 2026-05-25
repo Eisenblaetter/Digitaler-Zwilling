@@ -1,7 +1,8 @@
 package domain;
 
 public class ConveyorBelt extends ConveyorBeltTOP {
-    public void processEvent() {
+    @Override
+    public void processEvent(String payload) {
         System.out.println("Hello from conveyor belt!!");
 
         setState(MachineState.RUNNING);
