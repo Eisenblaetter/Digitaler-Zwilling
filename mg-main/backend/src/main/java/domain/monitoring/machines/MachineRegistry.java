@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import jakarta.annotation.PostConstruct;
+
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
@@ -23,10 +25,21 @@ public class MachineRegistry {
     @Autowired
     public MachineRegistry(MachineConfig machineConfig) {
         this.machineConfig = machineConfig;
+    }
+
+    @PostConstruct
+    public void init() {
         initializeMachines();
     }
 
     public void initializeMachines() {
+        // Load existing machines from DB to avoid duplicates
+        DomainManager.getMachineList().forEach(m -> {
+            if (m.getMqttTopic() != null) {
+                machines.put(m.getMqttTopic(), m);
+            }
+        });
+
         if (machineConfig.getMachines() == null) {
             logger.warn("No machines configured in MachineConfig");
             return;
@@ -58,6 +71,10 @@ public class MachineRegistry {
      * Registers a new machine instance with the (in-memory) registry.
      */
     private void registerMachine(String type, String displayName, String fullTopic) {
+        if (machines.containsKey(fullTopic)) {
+            logger.debug("Machine with topic {} already exists, skipping creation.", fullTopic);
+            return;
+        }
         createMachine(type, displayName, fullTopic).ifPresent(machine -> {
             machines.put(fullTopic, machine);
             logger.info("Registered machine: {} with topic: {}", displayName, fullTopic);
