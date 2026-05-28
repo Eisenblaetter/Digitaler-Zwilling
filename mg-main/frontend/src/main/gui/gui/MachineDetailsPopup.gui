@@ -1,0 +1,21 @@
+component MachineDetailsPopup {
+  property String name;
+  property Integer temperature;
+  property Integer rpm;
+  property Integer load;
+  property String lastMaintenance;
+
+  layout vertical {
+    label name {
+      fontSize 22;
+      fontWeight bold;
+    }
+
+    label "Temperature: " + temperature + "°C";
+    label "RPM: " + rpm;
+    label "Load: " + load + "%";
+    label "Last maintenance: " + lastMaintenance;
+
+    button closeBtn "Close";
+  }
+}

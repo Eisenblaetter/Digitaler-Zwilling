@@ -23,3 +23,13 @@ dependencies {
 test {
   useJUnitPlatform()
 }
+
+// Copy generated frontend into backend static resources
+task copyFrontendToBackend(type: Copy) {
+    from "$buildDir/app"
+    into "../backend/src/main/resources/static"
+}
+
+tasks.named("gui2java2ts") {
+    finalizedBy(copyFrontendToBackend)
+}
