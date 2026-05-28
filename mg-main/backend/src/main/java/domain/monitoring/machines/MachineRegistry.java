@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
@@ -36,47 +37,56 @@ public class MachineRegistry {
         String baseTopic = machineConfig.getBaseTopic();
 
         machineConfig.getMachines().forEach((name, topics) -> {
-            for (String topic : topics) {
+            for (int i = 0; i < topics.size(); i++) {
+                String topic = topics.get(i);
                 String fullTopic = baseTopic + topic;
-                Optional<? extends Machine> machineOpt = createMachine(name, fullTopic);
+
+                String displayName = (topics.size() > 1) ? name + " #" + (i + 1) : name;
+
+                Optional<? extends Machine> machineOpt = createMachine(name, displayName, fullTopic);
 
                 machineOpt.ifPresent(machine -> {
                     machines.put(fullTopic, machine);
-                    logger.info("Registered machine: {} with topic: {}", name, fullTopic);
+                    logger.info("Registered machine: {} with topic: {}", displayName, fullTopic);
                 });
             }
         });
     }
 
-    private Optional<? extends Machine> createMachine(String name, String topic) {
-        return switch (name) {
+    private Optional<? extends Machine> createMachine(String type, String displayName, String topic) {
+        return switch (type) {
             case "ConveyorBelt" -> DomainManager.conveyorBeltBuilder()
-                    .name(name)
+                    .name(type)
+                    .displayName(displayName)
                     .mqttTopic(topic)
                     .state(MachineState.UNINITIALIZED_IDLE)
                     .build();
             case "HighBay" -> DomainManager.highBayBuilder()
-                    .name(name)
+                    .name(type)
+                    .displayName(displayName)
                     .mqttTopic(topic)
                     .state(MachineState.UNINITIALIZED_IDLE)
                     .build();
             case "MultiProcessingwithOven" -> DomainManager.multiProcessingBuilder()
-                    .name(name)
+                    .name(type)
+                    .displayName(displayName)
                     .mqttTopic(topic)
                     .state(MachineState.UNINITIALIZED_IDLE)
                     .build();
             case "SortingLine" -> DomainManager.sortingLineBuilder()
-                    .name(name)
+                    .name(type)
+                    .displayName(displayName)
                     .mqttTopic(topic)
                     .state(MachineState.UNINITIALIZED_IDLE)
                     .build();
             case "VacuumGripper" -> DomainManager.vacuumGripperBuilder()
-                    .name(name)
+                    .name(type)
+                    .displayName(displayName)
                     .mqttTopic(topic)
                     .state(MachineState.UNINITIALIZED_IDLE)
                     .build();
             default -> {
-                logger.warn("Unknown machine type: {}", name);
+                logger.warn("Unknown machine type: {}", type);
                 yield Optional.empty();
             }
         };

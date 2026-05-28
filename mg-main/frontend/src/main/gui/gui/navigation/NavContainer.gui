@@ -2,21 +2,38 @@ package gui.navigation;
 
 import mc.fenix.arrange.GemRow;
 import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemTreeNode;
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemIcon;
 
 import mc.fenix.navigation.GemNavItem;
 import mc.fenix.navigation.GemNavList;
 
 component NavContainer(List<GUIViewElement> content) {
-  // row of components, from left to right: navigation bar, main content.
-  @GemRow(colGap = "25px", components = [
+  @GemRow(colGap = "0px", components = [
     // navigation bar
-    @GemNavList(width = "30ch", height = "100vh", components = [
-      @GemNavItem(title = "Home", target = "/gui/Start"),
-      @GemNavItem(title = "Monitoring", target = "/gui/MonitoringOverview"),
-      @GemNavItem(title = "Simulation", target = "/gui/SimulationOverview"),
-      @GemNavItem(title = "Scheduling", target = "/gui/SchedulingOverview")
-    ]),
+    sidebar@GemNavList(
+      width = "300px", 
+      height = "100vh", 
+      header = sidebarHeader@GemRow(hAlign = "center", vAlign = "middle", components = [
+          @GemIcon(name = "precision_manufacturing", size = "48px", color = "white"),
+          @GemText(value = "Digital Twin", size = "1.5rem", weight = "bold", color = "white")
+      ]),
+      components = [
+        homeItem@GemNavItem(title = "Home", target = "/gui/Start"),
+        monitoringItem@GemNavItem(title = "Monitoring", target = "/gui/MonitoringOverview"),
+        simulationTree@GemTreeNode(
+          isExpanded = true,
+          content = @GemText(value = "Simulation", size = "1.1rem"),
+          children = [
+            @GemNavItem(title = "Overview", target = "/gui/SimulationOverview"),
+            @GemNavItem(title = "Comparison", target = "/gui/SimulationComparison")
+          ]
+        ),
+        schedulingItem@GemNavItem(title = "Scheduling", target = "/gui/SchedulingOverview")
+      ]
+    ),
     // main content
-    @GemColumn(hAlign = "center", components = content)
+    primaryContent@GemColumn(width = "100%", components = content)
   ]);
 }
