@@ -14,9 +14,19 @@ import Domain.Machine;
 import Domain.MachineState;
 
 page MachineCard(List<Machine> machines) {
+
+  popup MachineDetailsPopup(
+      String name,
+      Integer temperature,
+      Integer rpm,
+      Integer load,
+      String lastMaintenance
+    );
+
   @NavContainer(content = [
     @GemColumn(rowGap = "20px", width = "90%", hAlign = "center", components = [
       @GemText(value = "Monitoring — Machines Overview", size = "2rem", weight = "bold"),
+
        @GemGrid(
          x = ["1fr", "1fr", "1fr"],
          colGap = "30px",
@@ -24,11 +34,13 @@ page MachineCard(List<Machine> machines) {
          rows = [
             [
             @iterate(Machine m : machines) {
+
                 machineInfo@GemCard(
                   titleComponent = @GemRow(colGap = "10px", vAlign = "center", components = [
                     @GemIcon(name = "precision_manufacturing", size = "24px", color = m.state == MachineState.RUNNING ? "#4caf50" : "#f44336"),
                     @GemText(value = m.displayName, size = "1.2rem", weight = "bold")
                   ]),
+
                   component = @GemColumn(rowGap = "15px", components = [
                     @GemImage(width = "100%", height = "150px", source = "assets/images/" + m.name + ".png"),
                     @GemRow(colGap = "10px", hAlign = "space-between", vAlign = "center", components = [
@@ -36,14 +48,26 @@ page MachineCard(List<Machine> machines) {
                             @GemText(value = "Operational Status", size = "0.8rem", color = "grey"),
                             @GemText(value = m.state, size = "1rem", weight = "bold", color = m.state == MachineState.RUNNING ? "#4caf50" : "#f44336")
                         ]),
-                        @GemButton(label = "Details", leftClick = showMachineCardPopup(m))
+
+                        //Popup-Aufruf
+                        @GemButton(
+                          label = "Details",
+                          leftClick = showMachineDetailsPopup(
+                            m.displayName,
+                            m.temperature,
+                            m.liveRpm,
+                            m.load,
+                            m.lastMaintenance
+                          )
+                        )
+                      ])
                     ])
-                  ])
-                );
-              }
+                  );
+                }
+              ]
             ]
+          )
         ])
-    ])
-  ]);
-}
+      ]);
+    }
 

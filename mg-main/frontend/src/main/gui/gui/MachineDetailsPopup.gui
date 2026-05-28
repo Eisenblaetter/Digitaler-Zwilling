@@ -1,21 +1,48 @@
-component MachineDetailsPopup {
-  property String name;
-  property Integer temperature;
-  property Integer rpm;
-  property Integer load;
-  property String lastMaintenance;
+package gui;
 
-  layout vertical {
-    label name {
-      fontSize 22;
-      fontWeight bold;
-    }
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemButton;
+import mc.fenix.arrange.GemCard;
 
-    label "Temperature: " + temperature + "°C";
-    label "RPM: " + rpm;
-    label "Load: " + load + "%";
-    label "Last maintenance: " + lastMaintenance;
+component MachineDetailsPopup(
+    String name,
+    Integer temperature,
+    Integer rpm,
+    Integer load,
+    String lastMaintenance
+) {
 
-    button closeBtn "Close";
-  }
+  @GemCard(
+    title = "Machine Details",
+    titleComponent = @GemText(value = name, size = "1.4rem", weight = "bold"),
+    component = @GemColumn(rowGap = "15px", components = [
+
+      @GemRow(colGap = "10px", components = [
+        @GemText(value = "Temperature: "),
+        @GemText(value = temperature.toString() + " °C")
+      ]),
+
+      @GemRow(colGap = "10px", components = [
+        @GemText(value = "RPM: "),
+        @GemText(value = rpm.toString())
+      ]),
+
+      @GemRow(colGap = "10px", components = [
+        @GemText(value = "Load: "),
+        @GemText(value = load.toString() + " %")
+      ]),
+
+      @GemRow(colGap = "10px", components = [
+        @GemText(value = "Last maintenance: "),
+        @GemText(value = lastMaintenance)
+      ]),
+
+      @GemButton(
+        label = "Close",
+        leftClick = closePopup()
+      )
+    ])
+  );
 }
