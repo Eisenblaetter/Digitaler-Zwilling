@@ -2,34 +2,24 @@
 import de.montigem.gradle.specific.GUI2Java2TSTask
 
 plugins {
-  id 'de.rwth.se.montigem-frontend'
+    id 'de.rwth.se.montigem-frontend'
 }
 
 java {
-  toolchain {
-    languageVersion = JavaLanguageVersion.of(21)
-  }
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 tasks.named("gui2java2ts", GUI2Java2TSTask) {
-  guiCreateModels = [] // TODO: figure out what this does
+    guiCreateModels = [] // TODO: figure out what this does
 }
 
 dependencies {
-  testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
-  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 test {
-  useJUnitPlatform()
-}
-
-// Copy generated frontend into backend static resources
-task copyFrontendToBackend(type: Copy) {
-    from "$buildDir/app"
-    into "../backend/src/main/resources/static"
-}
-
-tasks.named("gui2java2ts") {
-    finalizedBy(copyFrontendToBackend)
+    useJUnitPlatform()
 }
