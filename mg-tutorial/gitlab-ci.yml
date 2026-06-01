@@ -1,0 +1,36 @@
+# (c) https://github.com/MontiCore/monticore
+image: registry.git.rwth-aachen.de/monticore/container-registry/gradle:8-jdk21-chromium-installed
+
+variables:
+  GRADLE_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2"
+
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+cache:
+  paths:
+    - ".m2/"
+    - ".gradle/"
+    - "**/.gradle/**"
+    - "**/build/**"
+  key: ${CI_COMMIT_REF_SLUG}  # cache per branch
+
+stages:
+  - build
+
+build:
+  stage: build
+  variables:
+    PUPPETEER_SKIP_DOWNLOAD: "true"
+    CHROME_BIN: "/usr/bin/google-chrome-stable"
+    PUPPETEER_EXECUTABLE_PATH: "/usr/bin/google-chrome-stable"
+  script:
+    - "gradle build -x testApp --refresh-dependencies --stacktrace"
+  artifacts:
+    reports:
+      # Lets gitlab render infos about failed tests
+      junit: "**/test/**/TEST-*.xml"
+    expire_in: 1 week
+
+
+
