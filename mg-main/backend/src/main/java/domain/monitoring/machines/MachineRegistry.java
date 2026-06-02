@@ -47,6 +47,7 @@ public class MachineRegistry {
 
         String baseTopic = machineConfig.getBaseTopic();
 
+        // TODO: see if we can simplify saving logic to map
         machineConfig.getMachines().forEach((type, topics) -> {
             for (int i = 0; i < topics.size(); i++) {
                 String topic = topics.get(i);
@@ -126,16 +127,6 @@ public class MachineRegistry {
                 logger.warn("Unknown machine type: {}", type);
                 return Optional.empty();
         }
-    }
-
-    public void processMachineEvent(String machineType, String topic, String payload) {
-        logger.debug("Logged event for {}: {} to monitoring action log", machineType, payload);
-
-        // TODO: add generic log in MachineEventLogs or some class
-        // we can then filter this for individual machine cards to show an action log, and theoretically also display a complete action log for entire monitoring
-
-        // note: save everything inside an action log together with the corresponding machine id,
-        // do parsing of the payloads inside the extended individual machines
     }
 
     public Machine getMachineByTopic(String topic) {
