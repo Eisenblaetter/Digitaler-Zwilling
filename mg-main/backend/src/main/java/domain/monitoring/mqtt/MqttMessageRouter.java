@@ -2,6 +2,7 @@ package domain.monitoring.mqtt;
 
 import domain.ConveyorBelt;
 import domain.Machine;
+import domain.monitoring.machines.MachineTopicParts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,24 +22,18 @@ public class MqttMessageRouter {
     }
 
     public void routeMessage(String topic, String payload) {
-        String[] parts = topic.split("/");
-        if (parts.length >= 3) {
-            String machineType = parts[2]; // e.g. "HighBay"
+        MachineTopicParts topicParts = new MachineTopicParts(topic);
+        if (topicParts.isStandaloneEvent) return; // ignore standalone events for now
 
-            // give specific event handling to individual machine objects
-            logger.debug("Routing message for machine type: {}", machineType);
+        logger.debug("Routing message for machine: {}", topicParts.machineIdentifier);
 
-            Machine machineObj = machineRegistry.getMachineByTopic(topic);
-            if (machineObj == null) {
-                logger.warn("No machine registered for topic: {}", topic);
-                return;
-            }
-            machineObj.processEvent(payload); // TODO: also pass topic so we know what sensor etc.
-
-            // add generic log for all actions
-            machineRegistry.processMachineEvent(machineType, topic, payload);
-        } else {
-            logger.warn("Unrecognized topic format: {}", topic);
+        Machine machineObj = machineRegistry.getMachineByTopic(topic);
+        if (machineObj == null) {
+            logger.warn("No machine registered for topic: {}", topic);
+            return;
         }
+        machineObj.processMessage(topicParts, payload);
+
+        // TODO: see if we need to add calls to some action log here
     }
 }
