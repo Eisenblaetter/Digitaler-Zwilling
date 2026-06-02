@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.monitoring.machines.MachineTopicParts;
 import domain.monitoring.machines.TopicMessageType;
+import domain.monitoring.mqtt.payload.BooleanPayload;
+import domain.monitoring.mqtt.payload.PayloadDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import umlp.jsweet.extension.annotation.BackendOnly;
@@ -24,13 +26,24 @@ public class Machine extends MachineTOP {
     public void processEvent(MachineTopicParts topicParts, String payload) {
         // deserialize nested json payload and see what info we need and can further extract
 
-        // do general handling like status setting here
+        // do general handling like special status setting here
     }
 
     @BackendOnly(BackendOnlyModes.THROW_ERROR)
     public void processMeasurement(MachineTopicParts topicParts, String payload) {
-        // check if payload is bool or number payload, deserialize accordingly
-
         // check for internal/isExecuting to set running status, etc.
+        if (topicParts.remainingTopic.equals("internal/isExecuting")) {
+            // execution status is always json with boolean value, deserialize as such
+            BooleanPayload isExecuting = PayloadDeserializer.deserializeBooleanPayload(payload);
+            if (isExecuting == null) return;
+
+            if (isExecuting.value()) {
+                setState(MachineState.RUNNING);
+            } else {
+                setState(MachineState.INITIALIZED_IDLE); // set if we should actually set it to this or stopped
+            }
+        }
+
+        // TODO: see if we have other common things to handle here, otherwise handle everything else in sub-machines
     }
 }
