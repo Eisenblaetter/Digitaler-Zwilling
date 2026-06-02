@@ -8,13 +8,4 @@ import umlp.jsweet.extension.annotation.BackendOnlyModes;
 
 public class ConveyorBelt extends ConveyorBeltTOP {
 
-    @BackendOnly(BackendOnlyModes.THROW_ERROR)
-    @Override
-    protected void handleValue(Object value) {
-        JsonNode node = (JsonNode) value;
-        Logger logger = LoggerFactory.getLogger(ConveyorBelt.class);
-        logger.info("ConveyorBelt {} received sensor value: {}", getName(), node);
-
-        // Specific handling for ConveyorBelt sensors can go here
-    }
 }
