@@ -93,35 +93,35 @@ public class MachineRegistry {
                         .name(type)
                         .displayName(displayName)
                         .mqttTopic(topic)
-                        .state(MachineState.UNINITIALIZED_IDLE)
+                        .state(MachineState.STOPPED)
                         .build();
             case "HighBay":
                 return DomainManager.highBayBuilder()
                         .name(type)
                         .displayName(displayName)
                         .mqttTopic(topic)
-                        .state(MachineState.UNINITIALIZED_IDLE)
+                        .state(MachineState.STOPPED)
                         .build();
             case "MultiProcessingwithOven":
                 return DomainManager.multiProcessingBuilder()
                         .name(type)
                         .displayName(displayName)
                         .mqttTopic(topic)
-                        .state(MachineState.UNINITIALIZED_IDLE)
+                        .state(MachineState.STOPPED)
                         .build();
             case "SortingLine":
                 return DomainManager.sortingLineBuilder()
                         .name(type)
                         .displayName(displayName)
                         .mqttTopic(topic)
-                        .state(MachineState.UNINITIALIZED_IDLE)
+                        .state(MachineState.STOPPED)
                         .build();
             case "VacuumGripper":
                 return DomainManager.vacuumGripperBuilder()
                         .name(type)
                         .displayName(displayName)
                         .mqttTopic(topic)
-                        .state(MachineState.UNINITIALIZED_IDLE)
+                        .state(MachineState.STOPPED)
                         .build();
             default:
                 logger.warn("Unknown machine type: {}", type);
