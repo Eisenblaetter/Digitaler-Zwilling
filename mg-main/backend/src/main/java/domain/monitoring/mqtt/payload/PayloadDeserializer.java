@@ -1,5 +1,6 @@
 package domain.monitoring.mqtt.payload;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,5 +40,23 @@ public class PayloadDeserializer {
         }
     }
 
-    // TODO: also add string payload for events
+    @BackendOnly(BackendOnlyModes.THROW_ERROR)
+    public static MachineFeedbackPayload deserializeMachineFeedbackPayload(String payload) {
+        Logger logger = LoggerFactory.getLogger(PayloadDeserializer.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            JsonNode root = objectMapper.readTree(sanitizeTimestamp(payload));
+            String timestamp = root.has("timestamp") ? root.get("timestamp").asText() : null;
+            MachineFeedbackValue value = null;
+            if (root.has("value")) {
+                JsonNode valueNode = root.get("value");
+                String valueStr = valueNode.isTextual() ? valueNode.asText() : valueNode.toString();
+                value = objectMapper.readValue(valueStr, MachineFeedbackValue.class);
+            }
+            return new MachineFeedbackPayload(value, timestamp);
+        } catch (Exception e) {
+            logger.error("Failed to deserialize machine feedback payload: {}", payload, e);
+            return null;
+        }
+    }
 }
