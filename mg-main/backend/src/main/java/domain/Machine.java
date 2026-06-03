@@ -3,9 +3,12 @@ package domain;
 import domain.monitoring.machines.MachineTopicParts;
 import domain.monitoring.machines.TopicMessageType;
 import domain.monitoring.mqtt.payload.BooleanPayload;
-import domain.monitoring.mqtt.payload.PayloadDeserializer;
+import domain.monitoring.mqtt.payload.MachineFeedbackPayload;
 import umlp.jsweet.extension.annotation.BackendOnly;
 import umlp.jsweet.extension.annotation.BackendOnlyModes;
+
+import static domain.monitoring.mqtt.payload.PayloadDeserializer.deserializeBooleanPayload;
+import static domain.monitoring.mqtt.payload.PayloadDeserializer.deserializeMachineFeedbackPayload;
 
 public class Machine extends MachineTOP {
 
@@ -20,23 +23,32 @@ public class Machine extends MachineTOP {
 
     @BackendOnly(BackendOnlyModes.THROW_ERROR)
     public void processEvent(MachineTopicParts topicParts, String payload) {
-        // deserialize nested json payload and see what info we need and can further extract
+        if (topicParts.remainingTopic.equals("emitted/machine_feedback")) {
+            MachineFeedbackPayload feedbackPayload = deserializeMachineFeedbackPayload(payload);
+            if (feedbackPayload != null) {
+                try {
+                    MachineState newState = MachineState.valueOf(feedbackPayload.value().status());
+                    if (newState == MachineState.INITIALIZED_ACTIVE
+                            || newState == MachineState.UNINITIALIZED_ACTIVE) return;
 
-        // do general handling like special status setting here
+                    setState(newState);
+                } catch (IllegalArgumentException ignored) {
+                }
+            }
+        }
+
+        // see if we need to handle more special events/commands for all machines here
     }
 
     @BackendOnly(BackendOnlyModes.THROW_ERROR)
     public void processMeasurement(MachineTopicParts topicParts, String payload) {
-        // check for internal/isExecuting to set running status, etc.
         if (topicParts.remainingTopic.equals("internal/isExecuting")) {
             // execution status is always json with boolean value, deserialize as such
-            BooleanPayload isExecuting = PayloadDeserializer.deserializeBooleanPayload(payload);
+            BooleanPayload isExecuting = deserializeBooleanPayload(payload);
             if (isExecuting == null) return;
 
             if (isExecuting.value()) {
                 setState(MachineState.RUNNING);
-            } else {
-                setState(MachineState.INITIALIZED_IDLE); // set if we should actually set it to this or stopped
             }
         }
 
