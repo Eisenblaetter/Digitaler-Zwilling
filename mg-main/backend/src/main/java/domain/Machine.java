@@ -1,13 +1,9 @@
 package domain;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.monitoring.machines.MachineTopicParts;
 import domain.monitoring.machines.TopicMessageType;
 import domain.monitoring.mqtt.payload.BooleanPayload;
 import domain.monitoring.mqtt.payload.PayloadDeserializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import umlp.jsweet.extension.annotation.BackendOnly;
 import umlp.jsweet.extension.annotation.BackendOnlyModes;
 
