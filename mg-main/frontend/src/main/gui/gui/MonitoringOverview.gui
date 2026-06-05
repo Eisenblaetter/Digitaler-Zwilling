@@ -5,5 +5,18 @@ import gui.navigation.NavContainer;
 import gui.MachineCard;
 
 page MonitoringOverview() {
-    @MachineCard();
+
+  model MachinesModel {
+    machines: Machine[];
+  }
+
+  onInit {
+    loadMachinesCmd() -> MachinesModel.machines;
+  }
+
+  layout vertical {
+    for m in MachinesModel.machines {
+      component MachineCard(machine: m);
+    }
+  }
 }

@@ -47,7 +47,6 @@ public class MachineRegistry {
 
         String baseTopic = machineConfig.getBaseTopic();
 
-        // TODO: see if we can simplify saving logic to map
         machineConfig.getMachines().forEach((type, topics) -> {
             for (int i = 0; i < topics.size(); i++) {
                 String topic = topics.get(i);
@@ -63,14 +62,11 @@ public class MachineRegistry {
         if (machineNumber.matches("\\d+")) {
             return type + " #" + Integer.parseInt(machineNumber);
         } else if (totalCount > 1) {
-            return type + " #" + (index + 1); // fallback to count if no number found in topic
+            return type + " #" + (index + 1);
         }
         return type;
     }
 
-    /**
-     * Registers a new machine instance with the (in-memory) registry.
-     */
     private void registerMachine(String type, String displayName, String fullTopic) {
         if (machines.containsKey(fullTopic)) {
             logger.debug("Machine with topic {} already exists, skipping creation.", fullTopic);
@@ -82,10 +78,6 @@ public class MachineRegistry {
         });
     }
 
-    /**
-     * Creates a new machine instance based on the provided type and topic.
-     * MontiGem integration automatically saves successfully created objects to DB.
-     */
     private Optional<? extends Machine> createMachine(String type, String displayName, String topic) {
         switch (type) {
             case "ConveyorBelt":
@@ -135,5 +127,9 @@ public class MachineRegistry {
                 .max(java.util.Comparator.comparingInt(entry -> entry.getKey().length()))
                 .map(Map.Entry::getValue)
                 .orElse(null);
+    }
+
+    public Map<String, Machine> getMachines() {
+        return machines;
     }
 }
