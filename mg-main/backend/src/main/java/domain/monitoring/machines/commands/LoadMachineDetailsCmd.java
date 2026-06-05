@@ -1,26 +1,19 @@
 package domain.monitoring.machines.commands;
 
-import de.montigem.be.command.rte.general.Command;
-import domain.monitoring.machines.Machine;
-import domain.monitoring.machines.MachineDetails;
 import domain.monitoring.machines.MachineRegistry;
-import org.springframework.beans.factory.annotation.Autowired;
+import domain.monitoring.machines.MachineDetails;
 
-public class LoadMachineDetailsCmd extends Command<MachineDetails> {
+public class LoadMachineDetailsCmd {
 
-    private String machineTopic;
+    private final String machineTopic;
+    private final MachineRegistry registry;
 
-    public LoadMachineDetailsCmd(String machineTopic) {
+    public LoadMachineDetailsCmd(String machineTopic, MachineRegistry registry) {
         this.machineTopic = machineTopic;
+        this.registry = registry;
     }
 
-    @Autowired
-    MachineRegistry registry;
-
-    @Override
     public MachineDetails execute() {
-        Machine m = registry.getByTopic(machineTopic);
-        if (m == null) return null;
-        return MachineDetails.from(m);
+        return MachineDetails.from(registry.getMachineByTopic(machineTopic));
     }
 }
