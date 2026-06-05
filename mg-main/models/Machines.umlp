@@ -14,6 +14,22 @@ umlp Machines {
         String displayName;
         String mqttTopic;
         MachineState state;
+
+        // Monitoring
+        Double temperature;
+        Double load;
+        Double throughput;
+        Double energyConsumption;
+
+        // Maintenance
+        String maintenanceDue;
+
+        // Logs
+        List<String> errors;
+
+        // Allgemein gültig
+        String imageName;
+        String lastUpdate;
     }
 
     // add specific properties for each machine
