@@ -97,7 +97,7 @@ page MachineCard(List<Machine> machines)
                                       intermediate = true,
                                       label = "Loading ..."
                                       ),
-                                   @GemText(value = load.toString()) + " %")
+                                   @GemText(value = m.load.toString()) + " %")
                                  ]),
 
                                  @GemRow(colGap = "10px", components = [
