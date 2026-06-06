@@ -97,8 +97,8 @@ page MachineCard(List<Machine> machines)
                                       intermediate = true,
                                       label = "Loading ..."
                                       ),
-                                   @GemText(value = m.load.toString()) + " %")
-                                 ]),
+                                   @GemText(value = load.toString() + " %")
+                                  ]),
 
                                  @GemRow(colGap = "10px", components = [
                                    @GemText(value = "Last maintenance: "),
@@ -129,11 +129,12 @@ page MachineCard(List<Machine> machines)
                     )
                   ])
                 ])
-              )
-            }
-          ]
+              )}]
+            ]
+          )
         ]
       )
-    ])
-  ])
+    ]
+  )
+
 }
