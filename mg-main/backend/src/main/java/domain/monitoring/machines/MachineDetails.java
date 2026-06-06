@@ -34,7 +34,6 @@ public class MachineDetails {
         for (int i = 0; i < m.sizeErrors(); i++) {
             d.errors.add(m.getErrors(i));
         }
-        d.imageName = m.getImageName();
         d.lastUpdate = m.getLastUpdate();
         return d;
     }

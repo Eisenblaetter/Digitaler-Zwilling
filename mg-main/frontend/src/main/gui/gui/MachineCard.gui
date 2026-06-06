@@ -66,14 +66,14 @@ page MachineCard(List<Machine> machines)
                               titleComponent = @GemText(value = name, size = "1.4rem", weight = "bold"),
                               component = @GemRow(colGap = "30px", components = [
 
-                               //links Bild
+                               //Bild
                                @GemImage(
+                                 width = "20px",
+                                 height = "40px",
                                  source = "assets/images/" + m.name + ".png"
-                                 width = "320px",
-                                 height = "240px",
                                ),
 
-                               //rechts details
+                               //Details
                                @GemColumn(rowGap = "15px", components = [
 
                                  @GemRow(colGap = "10px", components = [
