@@ -17,7 +17,6 @@ public class MachineDetails {
     public Double energyConsumption;
     public String maintenanceDue;
     public List<String> errors;
-    public String imageName;
     public String lastUpdate;
 
     public static MachineDetails from(Machine m) {
