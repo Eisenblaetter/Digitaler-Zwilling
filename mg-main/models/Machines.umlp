@@ -35,6 +35,15 @@ umlp Machines {
     class ConveyorBelt extends Machine {}
     class HighBay extends Machine {}
     class MultiProcessing extends Machine {}
-    class SortingLine extends Machine {}
+    class SortingLine extends Machine {
+        //String machineName
+        //LocalDateTime timestamp;
+        String colorPresent;
+        boolean conveyorRunning;
+        boolean compressorRunning;
+        boolean actRedEjector;
+        boolean dirty;
+        String ejectedToBranch;
+    }
     class VacuumGripper extends Machine {}
 }

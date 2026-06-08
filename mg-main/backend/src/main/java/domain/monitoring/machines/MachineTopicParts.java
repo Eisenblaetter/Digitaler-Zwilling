@@ -11,6 +11,7 @@ public class MachineTopicParts {
     public String machineIdentifier;
 
     public TopicMessageType messageType;
+    public MeasurementType measurement;
     public String remainingTopic;
 
     public boolean isStandaloneEvent;
@@ -53,5 +54,19 @@ public class MachineTopicParts {
         remainingTopic = Stream.of(parts)
                 .filter(s -> s != null && !s.isEmpty())
                 .collect(Collectors.joining("/"));
+    }
+
+    public TopicMessageType getMessageType() {
+        return messageType;
+    }
+
+    public enum MeasurementType {
+        CONVEYOR_RUNNING,
+        COMPRESSOR_RUNNING,
+        ACT_RED_EJECTOR,
+    }
+
+    public MeasurementType getMeasurement() {
+        return measurement;
     }
 }
