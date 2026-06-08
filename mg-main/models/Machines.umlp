@@ -17,11 +17,13 @@ umlp Machines {
 
         // Monitoring
         Double temperature;
+        Integer rpm; //Rotation per Minute
         Double load;
         Double throughput;
         Double energyConsumption;
 
         // Maintenance
+        String lastMaintenance;
         String maintenanceDue;
 
         // Logs
