@@ -3,6 +3,8 @@ package gui;
 import mc.fenix.basic.GemText;
 import gui.navigation.NavContainer;
 import mc.fenix.arrange.GemColumn;
+import mc.fenix.navigation.GemNavItem;
+import mc.fenix.navigation.GemNavList;
 
 page SimulationOverview() {
     @NavContainer(content = [
