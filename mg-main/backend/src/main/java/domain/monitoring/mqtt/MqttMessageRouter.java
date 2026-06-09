@@ -27,9 +27,9 @@ public class MqttMessageRouter {
 
         logger.debug("Routing message for machine: {}", topicParts.machineIdentifier);
 
-        Machine machineObj = machineRegistry.getMachineByTopic(topic);
+        Machine machineObj = machineRegistry.getMachineByTopic(topicParts.getIdentifyingTopic());
         if (machineObj == null) {
-            logger.warn("No machine registered for topic: {}", topic);
+            logger.warn("No machine registered for topic: {}", topicParts.getIdentifyingTopic());
             return;
         }
         machineObj.processMessage(topicParts, payload);

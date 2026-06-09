@@ -56,6 +56,10 @@ public class MachineTopicParts {
                 .collect(Collectors.joining("/"));
     }
 
+    public String getIdentifyingTopic() {
+        return String.format("%s/Island %d/%s/%s", baseTopic, islandNumber, machineType, machineIdentifier);
+    }
+
     public TopicMessageType getMessageType() {
         return messageType;
     }

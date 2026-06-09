@@ -130,11 +130,7 @@ public class MachineRegistry {
     }
 
     public Machine getMachineByTopic(String topic) {
-        return machines.entrySet().stream()
-                .filter(entry -> topic.startsWith(entry.getKey()))
-                .max(java.util.Comparator.comparingInt(entry -> entry.getKey().length()))
-                .map(Map.Entry::getValue)
-                .orElse(null);
+        return machines.get(topic);
     }
 
     public Map<String, Machine> getMachines() {
