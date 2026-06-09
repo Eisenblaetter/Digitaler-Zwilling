@@ -73,9 +73,10 @@ public class MachineRegistry {
      */
     private void registerMachine(String type, String displayName, String fullTopic) {
         if (machines.containsKey(fullTopic)) {
-            logger.debug("Machine with topic {} already exists, skipping creation.", fullTopic);
+            logger.warn("Machine with topic {} already exists, skipping creation.", fullTopic);
             return;
         }
+
         createMachine(type, displayName, fullTopic).ifPresent(machine -> {
             machines.put(fullTopic, machine);
             logger.info("Registered machine: {} with topic: {}", displayName, fullTopic);
@@ -94,6 +95,14 @@ public class MachineRegistry {
                         .displayName(displayName)
                         .mqttTopic(topic)
                         .state(MachineState.STOPPED)
+                        .temperature(0.0)
+                        .rpm(0)
+                        .load(0.0)
+                        .throughput(0.0)
+                        .energyConsumption(0.0)
+                        .lastMaintenance("Never")
+                        .maintenanceDue("Unknown")
+                        .lastUpdate("Never")
                         .build();
             case "HighBay":
                 return DomainManager.highBayBuilder()
@@ -101,6 +110,14 @@ public class MachineRegistry {
                         .displayName(displayName)
                         .mqttTopic(topic)
                         .state(MachineState.STOPPED)
+                        .temperature(0.0)
+                        .rpm(0)
+                        .load(0.0)
+                        .throughput(0.0)
+                        .energyConsumption(0.0)
+                        .lastMaintenance("Never")
+                        .maintenanceDue("Unknown")
+                        .lastUpdate("Never")
                         .build();
             case "MultiProcessingwithOven":
                 return DomainManager.multiProcessingBuilder()
@@ -108,6 +125,14 @@ public class MachineRegistry {
                         .displayName(displayName)
                         .mqttTopic(topic)
                         .state(MachineState.STOPPED)
+                        .temperature(0.0)
+                        .rpm(0)
+                        .load(0.0)
+                        .throughput(0.0)
+                        .energyConsumption(0.0)
+                        .lastMaintenance("Never")
+                        .maintenanceDue("Unknown")
+                        .lastUpdate("Never")
                         .build();
             case "SortingLine":
                 return DomainManager.sortingLineBuilder()
@@ -115,6 +140,20 @@ public class MachineRegistry {
                         .displayName(displayName)
                         .mqttTopic(topic)
                         .state(MachineState.STOPPED)
+                        .temperature(0.0)
+                        .rpm(0)
+                        .load(0.0)
+                        .throughput(0.0)
+                        .energyConsumption(0.0)
+                        .lastMaintenance("Never")
+                        .maintenanceDue("Unknown")
+                        .lastUpdate("Never")
+                        .colorPresent("None")
+                        .conveyorRunning(false)
+                        .compressorRunning(false)
+                        .actRedEjector(false)
+                        .dirty(false)
+                        .ejectedToBranch("None")
                         .build();
             case "VacuumGripper":
                 return DomainManager.vacuumGripperBuilder()
@@ -122,6 +161,14 @@ public class MachineRegistry {
                         .displayName(displayName)
                         .mqttTopic(topic)
                         .state(MachineState.STOPPED)
+                        .temperature(0.0)
+                        .rpm(0)
+                        .load(0.0)
+                        .throughput(0.0)
+                        .energyConsumption(0.0)
+                        .lastMaintenance("Never")
+                        .maintenanceDue("Unknown")
+                        .lastUpdate("Never")
                         .build();
             default:
                 logger.warn("Unknown machine type: {}", type);
