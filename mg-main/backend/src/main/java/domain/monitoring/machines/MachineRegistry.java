@@ -77,10 +77,14 @@ public class MachineRegistry {
             return;
         }
 
-        createMachine(type, displayName, fullTopic).ifPresent(machine -> {
+        Optional<? extends Machine> machineOpt = createMachine(type, displayName, fullTopic);
+        if (machineOpt.isPresent()) {
+            Machine machine = machineOpt.get();
             machines.put(fullTopic, machine);
             logger.info("Registered machine: {} with topic: {}", displayName, fullTopic);
-        });
+        } else {
+            logger.error("Failed to create machine: {} (type: {}) with topic: {}. Check if all required attributes are set in the builder.", displayName, type, fullTopic);
+        }
     }
 
     /**
