@@ -57,7 +57,7 @@ public class MachineTopicParts {
     }
 
     public String getIdentifyingTopic() {
-        return String.format("%s/Island %d/%s/%s", baseTopic, islandNumber, machineType, machineIdentifier);
+        return baseTopic + "/Island " + islandNumber + "/" + machineType + "/" + machineIdentifier;
     }
 
     public TopicMessageType getMessageType() {
