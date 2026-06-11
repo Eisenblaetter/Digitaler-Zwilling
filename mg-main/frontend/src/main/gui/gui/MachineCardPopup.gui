@@ -1,0 +1,76 @@
+package gui;
+
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemButton;
+import mc.fenix.basic.GemImage;
+import mc.fenix.arrange.GemCard;
+import mc.fenix.basic.GemLoadingSpinner;
+import domain.Machine;
+
+page MachineCardPopup(Machine m){
+  @GemCard(
+      title = "Machine Details",
+      titleComponent = @GemText(
+        value = m.displayName,
+        size = "1.4rem",
+        weight = "bold"
+      ),
+
+      component = @GemRow(colGap = "30px",
+        components = [
+
+          //links Bild
+          @GemImage(
+            width = "320px",
+            height = "240px",
+            source = "assets/images/" + m.name + ".png"
+          ),
+
+          //rechts Details
+          @GemColumn(rowGap = "15px", components = [
+
+            @GemRow(colGap = "10px", components = [
+              @GemText(value = "Status: "),
+              @GemText(value = m.state)
+            ]),
+
+            @GemRow(colGap = "10px", components = [
+              @GemText(value = "Temperature: "),
+              @GemText(value = m.temperature + " °C")
+            ]),
+
+            @GemRow(colGap = "10px", components = [
+              @GemText(value = "Rotation per Minute (RPM): "),
+              @GemText(value = m.rpm)
+            ]),
+
+            @GemRow(colGap = "10px", components = [
+              @GemLoadingSpinner(
+                 size = "10px",
+                 intermediate = true,
+                 label = "Loading ..."
+              ),
+              @GemText(value = m.load + " %")
+            ]),
+
+            @GemRow(colGap = "10px", components = [
+              @GemText(value = "Last maintenance: "),
+              @GemText(value = m.lastMaintenance)
+            ]),
+
+            @GemRow(colGap = "10px", components = [
+              @GemText(value = "Due maintenance: "),
+              @GemText(value = m.maintenanceDue)
+            ]),
+
+            @GemButton(
+              label = "Close",
+              leftClick = closePopup()
+            )
+          ])
+        ]
+      )
+  );
+}

@@ -24,8 +24,7 @@ page MachineCard(List<Machine> machines) {
          rows = [
             [
             @iterate(Machine m : machines) {
-                machineInfo@GemCard(
-                  titleComponent = @GemRow(colGap = "10px", vAlign = "center",
+                machineInfo@GemCard(titleComponent = @GemRow(colGap = "10px", vAlign = "center",
                   components = [
                     @GemIcon(name = "precision_manufacturing", size = "24px", color = m.state == MachineState.RUNNING ? "#4caf50" : "#f44336"),
                     @GemText(value = m.displayName, size = "1.2rem", weight = "bold")
@@ -39,7 +38,14 @@ page MachineCard(List<Machine> machines) {
                             @GemText(value = "Operational Status", size = "0.8rem", color = "grey"),
                             @GemText(value = m.state, size = "1rem", weight = "bold", color = m.state == MachineState.RUNNING ? "#4caf50" : "#f44336")
                         ]),
-                        @GemButton(label = "Details", leftClick = showMachineCardPopup(m))
+                        @GemButton(label = "Details", leftClick = showMachineCardPopup(
+                            m.displayName,
+                            m.state,
+                            m.temperature,
+                            m.rpm,
+                            m.load,
+                            m.lastMaintenance
+                        ))
                     ])
                   ])
                 );
