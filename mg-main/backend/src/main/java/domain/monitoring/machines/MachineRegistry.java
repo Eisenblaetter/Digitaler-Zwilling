@@ -107,6 +107,8 @@ public class MachineRegistry {
                         .lastMaintenance("Never")
                         .maintenanceDue("Unknown")
                         .lastUpdate("Never")
+                        .conveyorRunning(false)
+                        .forward(false)
                         .build();
             case "HighBay":
                 return DomainManager.highBayBuilder()
