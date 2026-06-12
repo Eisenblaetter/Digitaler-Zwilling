@@ -16,7 +16,7 @@ import Domain.MachineState;
 page MachineCard(Machine m) {
     machineInfo@GemCard(titleComponent = @GemRow(colGap = "10px", vAlign = "center",
       components = [
-        @GemIcon(name = "precision_manufacturing", size = "24px", color = m.state == MachineState.RUNNING ? "#4caf50" : "#f44336"),
+        @GemIcon(name = "precision_manufacturing", size = "24px", color = getStatusTextColor(m.state)),
         @GemText(value = m.displayName, size = "1.2rem", weight = "bold")
       ]),
       component = @GemColumn(rowGap = "15px", components = [
@@ -26,7 +26,7 @@ page MachineCard(Machine m) {
             @GemColumn(
             components = [
                 @GemText(value = "Operational Status", size = "0.8rem", color = "grey"),
-                @GemText(value = m.state, size = "1rem", weight = "bold", color = m.state == MachineState.RUNNING ? "#4caf50" : "#f44336")
+                @GemText(value = m.state, size = "1rem", weight = "bold", color = getStatusTextColor(m.state))
             ]),
             @GemButton(label = "Details", leftClick = showMachineCardPopup(
                 m.displayName,
