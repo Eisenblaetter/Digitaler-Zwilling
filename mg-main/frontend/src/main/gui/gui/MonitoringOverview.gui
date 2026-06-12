@@ -8,28 +8,15 @@ import mc.fenix.arrange.GemColumn;
 import mc.fenix.arrange.GemRow;
 import mc.fenix.arrange.GemGrid;
 import mc.fenix.arrange.GemCard;
+import mc.fenix.arrange.GemDialog;
 
 import Domain.Machine;
 
 import gui.navigation.NavContainer;
 import gui.MachineCard;
 
-page MonitoringOverview(List<Machine> machines) {
+page MonitoringOverview() {
     @NavContainer(content = [
-        @GemColumn(rowGap = "20px", width = "90%", hAlign = "center", components = [
-            @GemText(value = "Monitoring — Machines Overview", size = "2rem", weight = "bold"),
-            @GemGrid(
-                x = ["1fr", "1fr", "1fr"],
-                colGap = "30px",
-                rowGap = "30px",
-                rows = [
-                  [
-                      @iterate(Machine m : machines) {
-                        @MachineCard(m = m);
-                      }
-                  ]
-                ]
-            )
-        ])
+        @MachineCard()
     ]);
 }
