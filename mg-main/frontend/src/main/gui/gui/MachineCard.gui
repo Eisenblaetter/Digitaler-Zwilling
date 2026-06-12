@@ -16,7 +16,13 @@ import Domain.MachineState;
 component MachineCard(List<Machine> machines, ?boolean showDialog, ?long currentlySelectedMachine) {
     @GemColumn(rowGap = "20px", width = "90%", hAlign = "center", components = [
         @GemDialog(isOpen = showDialog, component =
-            @MachineCardPopup(m = getMachine(currentlySelectedMachine))
+            machineCardDialog@GemColumn(rowGap = "16px", width = "100%", components = [
+                dialogHeader@GemRow(hAlign = "space-between", vAlign = "center", width = "100%", components = [
+                    @GemText(value = getCurrentMachineDisplayName(), size = "1.4rem", weight = "bold"),
+                    closeBtn@GemButton(label = "Close", leftClick = closeDialog())
+                ]),
+                @MachineCardPopup(m = getMachine())
+            ])
         ),
 
         @GemText(value = "Monitoring — Machines Overview", size = "2rem", weight = "bold"),

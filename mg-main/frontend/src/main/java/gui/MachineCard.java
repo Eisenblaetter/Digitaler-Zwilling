@@ -29,13 +29,26 @@ public class MachineCard extends MachineCardTOP {
         };
     }
 
-    public Machine getMachine(long currentlySelectedMachine) {
+    @Override
+    public Consumer<Void> closeDialog() {
+        return x -> {
+            this.setShowDialog(false);
+            this.setCurrentlySelectedMachine(null);
+        };
+    }
+
+    public Machine getMachine() {
         List<Machine> machines = this.getMachines();
         for (int i = 0; i < machines.size(); i++) {
-            if (machines.get(i).getGemId() == currentlySelectedMachine) {
+            if (machines.get(i).getGemId() == this.getCurrentlySelectedMachine()) {
                 return machines.get(i);
             }
         }
         return null;
+    }
+
+    public String getCurrentMachineDisplayName() {
+        Machine m = this.getMachine();
+        return m == null ? "" : m.getDisplayName();
     }
 }
