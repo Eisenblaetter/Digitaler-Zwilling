@@ -41,17 +41,25 @@ umlp Machines {
             public boolean forward;
             public boolean conveyorRunning;
         }
-    class HighBay extends Machine {}
+    class HighBay extends Machine {
+        //public LocalDateTime timestamp;
+        public boolean dirty;
+        public String ejectedToBranch;
+        public boolean actDown;
+        public boolean actUp;
+        public boolean actCantileverForward;
+        public boolean actCantileverBackward;
+    }
     class MultiProcessing extends Machine {}
     class SortingLine extends Machine {
-        //String machineName
-        //LocalDateTime timestamp;
-        String colorPresent;
-        boolean conveyorRunning;
-        boolean compressorRunning;
-        boolean actRedEjector;
-        boolean dirty;
-        String ejectedToBranch;
+        //public String machineName
+        //public LocalDateTime timestamp;
+        public String colorPresent;
+        public boolean conveyorRunning;
+        public boolean compressorRunning;
+        public boolean actRedEjector;
+        public boolean dirty;
+        public String ejectedToBranch;
     }
     class VacuumGripper extends Machine {}
 }

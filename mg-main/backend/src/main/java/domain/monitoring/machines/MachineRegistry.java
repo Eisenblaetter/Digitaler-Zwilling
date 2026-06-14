@@ -124,6 +124,8 @@ public class MachineRegistry {
                         .lastMaintenance("Never")
                         .maintenanceDue("Unknown")
                         .lastUpdate("Never")
+                        .dirty(false)
+                        .ejectedToBranch("None")
                         .build();
             case "MultiProcessingwithOven":
                 return DomainManager.multiProcessingBuilder()
