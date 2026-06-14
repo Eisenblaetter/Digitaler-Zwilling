@@ -4,7 +4,7 @@
 
 - Darius: Klassendiagramme aufgeteilt, Backend angefangen (MQTT Client implementiert, Anlegen von Maschinen-Objekten und Speichern in Machine Registry, Routing von Nachrichten an verschiedene Maschinen-Objekte)
 - Miriam: Machine Cards vollständig implementiert, Issue abgeschlossen; neue kleine Aufgabe bis Ende des Sprints: Sequenzdiagramm zeichnen
-- Theresa: Grundgerüst UI fertig, Issue abgeschlossen
+- Theresa: Grundgerüst UI fertig, Issue abgeschlossen;neue kleine Aufgabe mit Miriam: Sequenzdiagramm zeichnen
 - Samuel: Requirements noch etwas unklar, im Meeting konkretisiert, relativ komplexe Aufgabe als noch in Arbeit
 - Anna: heute oder morgen push der UI, Machine Card mit Platzhaltern
 
