@@ -1,14 +1,86 @@
 package gui;
 
 import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemButton;
 import gui.navigation.NavContainer;
 import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemCard;
+import mc.fenix.arrange.GemDialog;
 
-page SimulationOverview() {
+page SimulationOverview(?long selectedSimulationId, ?boolean showDialog) {
     @NavContainer(content = [
         @GemColumn(components=[
+            @GemDialog(isOpen = showDialog, component =
+                        @GemColumn(
+                                components = [
+                                            @GemText(value = getSimulationName(selectedSimulationId)),
+
+                                            @GemButton(label = "View Logs", leftClick = viewLogs(selectedSimulationId)),
+                                            @GemButton(label = "Compare", leftClick = compare(selectedSimulationId)),
+                                            @GemButton(label = "Restart", leftClick = restart(selectedSimulationId)),
+                                            @GemButton(label = "Stop", leftClick = stop(selectedSimulationId)),
+                                            @GemButton(label = "Close", leftClick = closeDialog())
+                                        ]
+                            )
+                        ),
             @GemText(value="Overview -- Simulations", size="3rem"),
-            @GemText(value="TODO")
+            @GemRow(hAlign = "right", components=[
+                                    @GemButton(label="New simulation", leftClick= openNewSimulationConfig())
+                                ]),
+            @GemRow(colGap = "15px", components=[
+                        @GemButton(label="Filter: All", leftClick= openFilter()),
+                        @GemButton(label="Sort by: Status", leftClick= openSort())
+                    ]),
+            @GemColumn(
+                rowGap = 10,
+                components = [
+
+                    @GemCard(
+                        titleComponent =
+                            @GemRow(
+                                hAlign = "space-between",
+                                components = [
+                                    @GemText(value = "Simulation A"),
+                                    @GemButton(label = "...", leftClick = showSimulationPopup(1))
+                                    ]
+                                ),
+                        component =
+                            @GemRow(
+                                hAlign = "space-between",
+                                components = [
+                                    @GemColumn(
+                                        components = [
+                                            @GemText(value = "Status: RUNNING")
+                                        ]
+                                    )
+                                ]
+                            )
+                    ),
+
+                    @GemCard(
+                        titleComponent =
+                            @GemRow(
+                                hAlign = "space-between",
+                                components = [
+                                    @GemText(value = "Simulation B"),
+                                    @GemButton(label = "...", leftClick = showSimulationPopup(2))
+                                ]
+                            ),
+                        component =
+                            @GemRow(
+                                hAlign = "space-between",
+                                components = [
+                                    @GemColumn(
+                                        components = [
+                                            @GemText(value = "Status: FINISHED")
+                                        ]
+                                    )
+                                ]
+                            )
+                    )
+                ]
+            )
         ])
     ]);
 }
