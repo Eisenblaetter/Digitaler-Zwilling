@@ -126,6 +126,10 @@ public class MachineRegistry {
                         .lastUpdate("Never")
                         .dirty(false)
                         .ejectedToBranch("None")
+                        .actDown(false)
+                        .actUp(false)
+                        .actCantileverForward(false)
+                        .actCantileverBackward(false)
                         .build();
             case "MultiProcessingwithOven":
                 return DomainManager.multiProcessingBuilder()
