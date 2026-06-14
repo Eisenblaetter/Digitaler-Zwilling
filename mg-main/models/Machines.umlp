@@ -50,7 +50,23 @@ umlp Machines {
         public boolean actCantileverForward;
         public boolean actCantileverBackward;
     }
-    class MultiProcessing extends Machine {}
+    class MultiProcessing extends Machine {
+        //LocalDateTime timestamp;
+        public String colorPresent;
+        public boolean conveyorRunning;
+        public boolean dirty;
+        public String ejectedToBranch;
+        public boolean actOvenInward;
+        public boolean sensOven;
+        public boolean ovenLight;
+        public boolean actGripperToOven;
+        public boolean sensTurntablePosVacuum;
+        public boolean actRotClockwise;
+        public boolean sensTurntablePosSaw;
+        public boolean actSaw;
+        public boolean conveyorForward;
+        public boolean compressor;
+    }
     class SortingLine extends Machine {
         //public String machineName
         //public LocalDateTime timestamp;
