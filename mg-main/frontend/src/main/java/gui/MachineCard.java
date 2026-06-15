@@ -38,13 +38,8 @@ public class MachineCard extends MachineCardTOP {
     }
 
     public Machine getMachine() {
-        List<Machine> machines = this.getMachines();
-        for (int i = 0; i < machines.size(); i++) {
-            if (machines.get(i).getGemId() == this.getCurrentlySelectedMachine()) {
-                return machines.get(i);
-            }
-        }
-        return null;
+        // TODO: add error handling
+        return DomainManager.getMachineSure(this.getCurrentlySelectedMachine());
     }
 
     public String getCurrentMachineDisplayName() {
