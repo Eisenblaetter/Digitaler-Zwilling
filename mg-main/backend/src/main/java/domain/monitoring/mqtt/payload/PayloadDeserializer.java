@@ -2,12 +2,15 @@ package domain.monitoring.mqtt.payload;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jsweet.lang.Erased;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import umlp.jsweet.extension.annotation.BackendOnly;
-import umlp.jsweet.extension.annotation.BackendOnlyModes;
 
+@Erased
 public class PayloadDeserializer {
+    private static final Logger logger = LoggerFactory.getLogger(PayloadDeserializer.class);
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
     /**
      * Sanitizes malformed timestamps that contain both a UTC offset and a trailing 'Z',
      * e.g. "+00:00Z" → "+00:00".
@@ -16,10 +19,7 @@ public class PayloadDeserializer {
         return payload.replaceAll("(\\+\\d{2}:\\d{2})Z\"", "$1\"");
     }
 
-    @BackendOnly(BackendOnlyModes.THROW_ERROR)
     public static IntegerPayload deserializeIntegerPayload(String payload) {
-        Logger logger = LoggerFactory.getLogger(PayloadDeserializer.class);
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.readValue(sanitizeTimestamp(payload), IntegerPayload.class);
         } catch (Exception e) {
@@ -28,10 +28,7 @@ public class PayloadDeserializer {
         }
     }
 
-    @BackendOnly(BackendOnlyModes.THROW_ERROR)
     public static BooleanPayload deserializeBooleanPayload(String payload) {
-        Logger logger = LoggerFactory.getLogger(PayloadDeserializer.class);
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.readValue(sanitizeTimestamp(payload), BooleanPayload.class);
         } catch (Exception e) {
@@ -40,10 +37,7 @@ public class PayloadDeserializer {
         }
     }
 
-    @BackendOnly(BackendOnlyModes.THROW_ERROR)
     public static MachineFeedbackPayload deserializeMachineFeedbackPayload(String payload) {
-        Logger logger = LoggerFactory.getLogger(PayloadDeserializer.class);
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             JsonNode root = objectMapper.readTree(sanitizeTimestamp(payload));
             String timestamp = root.has("timestamp") ? root.get("timestamp").asText() : null;
