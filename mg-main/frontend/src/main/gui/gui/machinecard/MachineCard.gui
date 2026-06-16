@@ -1,0 +1,33 @@
+package gui.machinecard;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemImage;
+import mc.fenix.basic.GemButton;
+import mc.fenix.basic.GemIcon;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemCard;
+
+import Domain.Machine;
+import Domain.MachineState;
+
+component MachineCard(Machine m, Event<Void> detailsButtonClick) {
+    machineInfo@GemCard(titleComponent = @GemRow(colGap = "10px", vAlign = "center",
+      components = [
+        @GemIcon(name = "precision_manufacturing", size = "24px", color = getStatusTextColor(m.state)),
+        @GemText(value = m.displayName, size = "1.2rem", weight = "bold")
+      ]),
+      component = @GemColumn(rowGap = "15px", components = [
+        @GemImage(width = "100%", height = "150px", source = "assets/images/" + m.name + ".png"),
+        @GemRow(colGap = "10px", hAlign = "space-between", vAlign = "center",
+        components = [
+            @GemColumn(
+            components = [
+                @GemText(value = "Operational Status", size = "0.8rem", color = "grey"),
+                @GemText(value = m.state, size = "1rem", weight = "bold", color = getStatusTextColor(m.state))
+            ]),
+            @GemButton(label = "Details", leftClick = detailsButtonClick)
+        ])
+      ])
+    );
+}

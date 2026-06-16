@@ -1,0 +1,17 @@
+:host ::ng-deep {
+  .detailsList {
+    gem-row {
+      padding: 8px 12px;
+      background-color: #fafafa;
+      border-radius: 6px;
+      min-width: 400px;
+    }
+  }
+
+  .machineImage {
+    img {
+      object-fit: contain !important;
+      border-radius: 8px;
+    }
+  }
+}

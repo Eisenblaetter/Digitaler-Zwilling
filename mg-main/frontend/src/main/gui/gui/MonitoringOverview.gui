@@ -13,10 +13,31 @@ import mc.fenix.arrange.GemDialog;
 import Domain.Machine;
 
 import gui.navigation.NavContainer;
-import gui.MachineCard;
+import gui.machinecard.MachineCard;
+import gui.machinecard.MachineCardPopup;
 
-page MonitoringOverview() {
+page MonitoringOverview(List<Machine> machines, ?boolean machineCardPopupVisible, ?long popupMachineId) {
     @NavContainer(content = [
-        @MachineCard()
+        @GemText(value = "Monitoring — Machines Overview", size = "2rem", weight = "bold"),
+        @MachineCardPopup(
+            showPopup = machineCardPopupVisible,
+            machineGemId = popupMachineId,
+            closeButtonClick = closeMachineCardPopup()
+        ),
+        machineCardGrid@GemGrid(
+            x = ["1fr", "1fr", "1fr"],
+            colGap = "30px",
+            rowGap = "30px",
+            rows = [
+                [
+                    @iterate(Machine m : machines) {
+                        @MachineCard(
+                            m = m,
+                            detailsButtonClick = showMachineCardPopup(m)
+                        );
+                    }
+                ]
+            ]
+        )
     ]);
 }

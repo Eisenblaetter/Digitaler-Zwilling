@@ -1,4 +1,4 @@
-package gui;
+package gui.machinecard;
 
 import mc.fenix.arrange.GemColumn;
 import mc.fenix.arrange.GemRow;
@@ -7,9 +7,8 @@ import mc.fenix.basic.GemImage;
 import mc.fenix.basic.GemIcon;
 import Domain.Machine;
 
-component MachineCardPopup(Machine m) {
+component MachineCardPopupContent(Machine m) {
   popupContent@GemColumn(rowGap = "24px", width = "100%", hAlign = "center", components = [
-
     machineImage@GemImage(
       width = "220px",
       height = "160px",
@@ -18,31 +17,26 @@ component MachineCardPopup(Machine m) {
     ),
 
     detailsList@GemColumn(rowGap = "14px", width = "100%", components = [
-
       @GemRow(colGap = "8px", vAlign = "center", components = [
         @GemIcon(name = "info", size = "20px", color = "#1976d2"),
         @GemText(value = "Status:", weight = "bold"),
         @GemText(value = m.state)
       ]),
-
       @GemRow(colGap = "8px", vAlign = "center", components = [
         @GemIcon(name = "thermostat", size = "20px", color = "#1976d2"),
         @GemText(value = "Temperature:", weight = "bold"),
         @GemText(value = m.temperature + " °C")
       ]),
-
       @GemRow(colGap = "8px", vAlign = "center", components = [
         @GemIcon(name = "speed", size = "20px", color = "#1976d2"),
         @GemText(value = "RPM:", weight = "bold"),
         @GemText(value = m.rpm)
       ]),
-
       @GemRow(colGap = "8px", vAlign = "center", components = [
         @GemIcon(name = "build", size = "20px", color = "#1976d2"),
         @GemText(value = "Last Maintenance:", weight = "bold"),
         @GemText(value = m.lastMaintenance)
       ]),
-
       @GemRow(colGap = "8px", vAlign = "center", components = [
         @GemIcon(name = "event", size = "20px", color = "#1976d2"),
         @GemText(value = "Due Maintenance:", weight = "bold"),
