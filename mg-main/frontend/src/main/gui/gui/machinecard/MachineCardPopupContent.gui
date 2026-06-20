@@ -5,6 +5,8 @@ import mc.fenix.arrange.GemRow;
 import mc.fenix.basic.GemText;
 import mc.fenix.basic.GemImage;
 import mc.fenix.basic.GemIcon;
+import gui.machinecard.machinedisplay.ConveyorBeltStatus;
+import gui.machinecard.machinedisplay.MultiProcessingStatus;
 import Domain.Machine;
 
 component MachineCardPopupContent(Machine m) {
@@ -42,6 +44,15 @@ component MachineCardPopupContent(Machine m) {
         @GemText(value = "Due Maintenance:", weight = "bold"),
         @GemText(value = m.maintenanceDue)
       ])
+    ]),
+
+    @GemColumn(components = [
+        @guard(isConveyorBelt()) {
+            @ConveyorBeltStatus(belt = getConveyorBelt());
+        },
+        @guard(isMultiProcessing()) {
+            @MultiProcessingStatus(mp = getMultiProcessing());
+        }
     ])
   ]);
 }

@@ -1,0 +1,10 @@
+package gui.machinecard.machinedisplay;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.arrange.GemColumn;
+
+component ConveyorBeltStatus(ConveyorBelt belt) {
+    @GemColumn(components = [
+        @GemText(value = getBeltDirection())
+    ]);
+}
