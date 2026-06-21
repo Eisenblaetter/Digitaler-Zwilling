@@ -4,6 +4,7 @@ import domain.ConveyorBelt;
 import domain.HighBay;
 import domain.MultiProcessing;
 import domain.SortingLine;
+import domain.VacuumGripper;
 
 public class MachineCardPopupContent extends MachineCardPopupContentTOP {
     public Boolean isConveyorBelt() {
@@ -36,5 +37,13 @@ public class MachineCardPopupContent extends MachineCardPopupContentTOP {
 
     public HighBay getHighBay() {
         return (HighBay) getM();
+    }
+
+    public Boolean isVacuumGripper() {
+        return getM() instanceof VacuumGripper;
+    }
+
+    public VacuumGripper getVacuumGripper() {
+        return (VacuumGripper) getM();
     }
 }

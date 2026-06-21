@@ -1,0 +1,10 @@
+package gui.machinecard.machinedisplay;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.arrange.GemColumn;
+
+component VacuumGripperStatus(VacuumGripper vg) {
+    @GemColumn(components = [
+        @GemText(value = "No specific attributes")
+    ]);
+}

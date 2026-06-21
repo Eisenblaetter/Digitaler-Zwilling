@@ -5,6 +5,19 @@ import mc.fenix.arrange.GemColumn;
 
 component MultiProcessingStatus(MultiProcessing mp) {
     @GemColumn(components = [
-        @GemText(value = getOvenLightStatus())
+        @GemText(value = "Color Present: " + mp.colorPresent),
+        @GemText(value = "Conveyor Running: " + (mp.conveyorRunning ? "Yes" : "No")),
+        @GemText(value = "Dirty: " + (mp.dirty ? "Yes" : "No")),
+        @GemText(value = "Ejected to Branch: " + mp.ejectedToBranch),
+        @GemText(value = "Act Oven Inward: " + (mp.actOvenInward ? "Yes" : "No")),
+        @GemText(value = "Sens Oven: " + (mp.sensOven ? "Yes" : "No")),
+        @GemText(value = "Oven Light: " + (mp.ovenLight ? "Yes" : "No")),
+        @GemText(value = "Act Gripper to Oven: " + (mp.actGripperToOven ? "Yes" : "No")),
+        @GemText(value = "Sens Turntable Pos Vacuum: " + (mp.sensTurntablePosVacuum ? "Yes" : "No")),
+        @GemText(value = "Act Rot Clockwise: " + (mp.actRotClockwise ? "Yes" : "No")),
+        @GemText(value = "Sens Turntable Pos Saw: " + (mp.sensTurntablePosSaw ? "Yes" : "No")),
+        @GemText(value = "Act Saw: " + (mp.actSaw ? "Yes" : "No")),
+        @GemText(value = "Conveyor Direction: " + (mp.conveyorForward ? "Forward" : "Backward")),
+        @GemText(value = "Compressor: " + (mp.compressor ? "Yes" : "No"))
     ]);
 }

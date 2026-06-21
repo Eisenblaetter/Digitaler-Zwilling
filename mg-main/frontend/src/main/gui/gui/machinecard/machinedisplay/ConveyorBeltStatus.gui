@@ -5,6 +5,7 @@ import mc.fenix.arrange.GemColumn;
 
 component ConveyorBeltStatus(ConveyorBelt belt) {
     @GemColumn(components = [
-        @GemText(value = getBeltDirection())
+        @GemText(value = "Direction: " + (belt.forward ? "Forward" : "Backward")),
+        @GemText(value = "Conveyor Running: " + (belt.conveyorRunning ? "Yes" : "No"))
     ]);
 }

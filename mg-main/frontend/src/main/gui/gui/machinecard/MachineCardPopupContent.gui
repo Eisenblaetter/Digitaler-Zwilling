@@ -7,6 +7,9 @@ import mc.fenix.basic.GemImage;
 import mc.fenix.basic.GemIcon;
 import gui.machinecard.machinedisplay.ConveyorBeltStatus;
 import gui.machinecard.machinedisplay.MultiProcessingStatus;
+import gui.machinecard.machinedisplay.HighBayStatus;
+import gui.machinecard.machinedisplay.SortingLineStatus;
+import gui.machinecard.machinedisplay.VacuumGripperStatus;
 import Domain.Machine;
 
 component MachineCardPopupContent(Machine m) {
@@ -52,6 +55,15 @@ component MachineCardPopupContent(Machine m) {
         },
         @guard(isMultiProcessing()) {
             @MultiProcessingStatus(mp = getMultiProcessing());
+        },
+        @guard(isHighBay()) {
+            @HighBayStatus(bay = getHighBay());
+        },
+        @guard(isSortingLine()) {
+            @SortingLineStatus(sl = getSortingLine());
+        },
+        @guard(isVacuumGripper()) {
+            @VacuumGripperStatus(vg = getVacuumGripper());
         }
     ])
   ]);

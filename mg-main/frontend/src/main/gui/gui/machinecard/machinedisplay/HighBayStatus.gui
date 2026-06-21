@@ -1,0 +1,15 @@
+package gui.machinecard.machinedisplay;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.arrange.GemColumn;
+
+component HighBayStatus(HighBay bay) {
+    @GemColumn(components = [
+        @GemText(value = "Dirty: " + (bay.dirty ? "Yes" : "No")),
+        @GemText(value = "Ejected to Branch: " + bay.ejectedToBranch),
+        @GemText(value = "Act Down: " + (bay.actDown ? "Yes" : "No")),
+        @GemText(value = "Act Up: " + (bay.actUp ? "Yes" : "No")),
+        @GemText(value = "Act Cantilever Forward: " + (bay.actCantileverForward ? "Yes" : "No")),
+        @GemText(value = "Act Cantilever Backward: " + (bay.actCantileverBackward ? "Yes" : "No"))
+    ]);
+}

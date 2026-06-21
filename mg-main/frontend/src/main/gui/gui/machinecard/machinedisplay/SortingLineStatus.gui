@@ -1,0 +1,15 @@
+package gui.machinecard.machinedisplay;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.arrange.GemColumn;
+
+component SortingLineStatus(SortingLine sl) {
+    @GemColumn(components = [
+        @GemText(value = "Color Present: " + sl.colorPresent),
+        @GemText(value = "Conveyor Running: " + (sl.conveyorRunning ? "Yes" : "No")),
+        @GemText(value = "Compressor Running: " + (sl.compressorRunning ? "Yes" : "No")),
+        @GemText(value = "Act Red Ejector: " + (sl.actRedEjector ? "Yes" : "No")),
+        @GemText(value = "Dirty: " + (sl.dirty ? "Yes" : "No")),
+        @GemText(value = "Ejected to Branch: " + sl.ejectedToBranch)
+    ]);
+}
