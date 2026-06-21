@@ -2,14 +2,33 @@ package gui.machinecard.machinedisplay;
 
 import mc.fenix.basic.GemText;
 import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
 
 component HighBayStatus(HighBay bay) {
-    @GemColumn(components = [
-        @GemText(value = "Dirty: " + (bay.dirty ? "Yes" : "No")),
-        @GemText(value = "Ejected to Branch: " + bay.ejectedToBranch),
-        @GemText(value = "Act Down: " + (bay.actDown ? "Yes" : "No")),
-        @GemText(value = "Act Up: " + (bay.actUp ? "Yes" : "No")),
-        @GemText(value = "Act Cantilever Forward: " + (bay.actCantileverForward ? "Yes" : "No")),
-        @GemText(value = "Act Cantilever Backward: " + (bay.actCantileverBackward ? "Yes" : "No"))
+    @GemColumn(rowGap = "0px", components = [
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Dirty:", weight = "bold"),
+            @GemText(value = (bay.dirty ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Ejected to Branch:", weight = "bold"),
+            @GemText(value = bay.ejectedToBranch)
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Act Down:", weight = "bold"),
+            @GemText(value = (bay.actDown ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Act Up:", weight = "bold"),
+            @GemText(value = (bay.actUp ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Act Cantilever Forward:", weight = "bold"),
+            @GemText(value = (bay.actCantileverForward ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Act Cantilever Backward:", weight = "bold"),
+            @GemText(value = (bay.actCantileverBackward ? "Yes" : "No"))
+        ])
     ]);
 }

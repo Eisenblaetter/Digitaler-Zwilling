@@ -49,7 +49,9 @@ component MachineCardPopupContent(Machine m) {
       ])
     ]),
 
-    @GemColumn(components = [
+    separator@GemRow(width = "100%"),
+
+    machineSpecificAttributes@GemColumn(rowGap = "0px", components = [
         @guard(isConveyorBelt()) {
             @ConveyorBeltStatus(belt = getConveyorBelt());
         },

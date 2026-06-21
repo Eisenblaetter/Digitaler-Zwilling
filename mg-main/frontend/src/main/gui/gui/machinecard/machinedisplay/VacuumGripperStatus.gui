@@ -2,9 +2,12 @@ package gui.machinecard.machinedisplay;
 
 import mc.fenix.basic.GemText;
 import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
 
 component VacuumGripperStatus(VacuumGripper vg) {
-    @GemColumn(components = [
-        @GemText(value = "No specific attributes")
+    @GemColumn(rowGap = "0px", components = [
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "No specific attributes")
+        ])
     ]);
 }
