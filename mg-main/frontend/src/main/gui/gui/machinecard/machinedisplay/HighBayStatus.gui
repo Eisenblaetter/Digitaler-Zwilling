@@ -7,14 +7,6 @@ import mc.fenix.arrange.GemRow;
 component HighBayStatus(HighBay bay) {
     @GemColumn(rowGap = "0px", components = [
         @GemRow(colGap = "8px", vAlign = "center", components = [
-            @GemText(value = "Dirty:", weight = "bold"),
-            @GemText(value = (bay.dirty ? "Yes" : "No"))
-        ]),
-        @GemRow(colGap = "8px", vAlign = "center", components = [
-            @GemText(value = "Ejected to Branch:", weight = "bold"),
-            @GemText(value = bay.ejectedToBranch)
-        ]),
-        @GemRow(colGap = "8px", vAlign = "center", components = [
             @GemText(value = "Act Down:", weight = "bold"),
             @GemText(value = (bay.actDown ? "Yes" : "No"))
         ]),

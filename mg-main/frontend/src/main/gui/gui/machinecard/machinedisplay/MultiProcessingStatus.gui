@@ -15,14 +15,6 @@ component MultiProcessingStatus(MultiProcessing mp) {
             @GemText(value = (mp.conveyorRunning ? "Yes" : "No"))
         ]),
         @GemRow(colGap = "8px", vAlign = "center", components = [
-            @GemText(value = "Dirty:", weight = "bold"),
-            @GemText(value = (mp.dirty ? "Yes" : "No"))
-        ]),
-        @GemRow(colGap = "8px", vAlign = "center", components = [
-            @GemText(value = "Ejected to Branch:", weight = "bold"),
-            @GemText(value = mp.ejectedToBranch)
-        ]),
-        @GemRow(colGap = "8px", vAlign = "center", components = [
             @GemText(value = "Act Oven Inward:", weight = "bold"),
             @GemText(value = (mp.actOvenInward ? "Yes" : "No"))
         ]),

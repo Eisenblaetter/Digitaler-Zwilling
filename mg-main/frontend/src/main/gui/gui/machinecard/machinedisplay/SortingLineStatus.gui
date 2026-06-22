@@ -21,14 +21,6 @@ component SortingLineStatus(SortingLine sl) {
         @GemRow(colGap = "8px", vAlign = "center", components = [
             @GemText(value = "Act Red Ejector:", weight = "bold"),
             @GemText(value = (sl.actRedEjector ? "Yes" : "No"))
-        ]),
-        @GemRow(colGap = "8px", vAlign = "center", components = [
-            @GemText(value = "Dirty:", weight = "bold"),
-            @GemText(value = (sl.dirty ? "Yes" : "No"))
-        ]),
-        @GemRow(colGap = "8px", vAlign = "center", components = [
-            @GemText(value = "Ejected to Branch:", weight = "bold"),
-            @GemText(value = sl.ejectedToBranch)
         ])
     ]);
 }
