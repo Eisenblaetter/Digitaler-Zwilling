@@ -1,0 +1,36 @@
+package gui.simulationcard;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemImage;
+import mc.fenix.basic.GemButton;
+import mc.fenix.basic.GemIcon;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemCard;
+
+import domain.Simulation;
+import domain.SimulationState;
+
+component SimulationCard(Simulation s, Event<Void> detailsButtonClick) {
+    @GemCard(
+        titleComponent =
+            @GemRow(
+                hAlign = "space-between",
+                components = [
+                    @GemText(value = s.name),
+                    @GemButton(label = "...", leftClick = detailsButtonClick)
+                ]
+            ),
+        component =
+            @GemRow(
+            hAlign = "space-between",
+            components = [
+                @GemColumn(
+                    components = [
+                        @GemText(value = s.state)
+                    ]
+                )
+            ]
+        )
+    );
+}

@@ -1,0 +1,15 @@
+umlp Simulations {
+
+  enum SimulationState {
+    RUNNING,
+    FINISHED,
+    FAILED;
+  }
+
+  class Simulation {
+    int simulationId;
+    String name;
+    SimulationState state;
+  }
+
+}

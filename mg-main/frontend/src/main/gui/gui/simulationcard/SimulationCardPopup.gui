@@ -1,0 +1,23 @@
+package gui.simulationcard;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemButton;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemDialog;
+
+import domain.Simulation;
+
+import gui.simulationcard.SimulationCardPopupContent;
+
+page SimulationCardPopup(?long selectedSimulationId, ?boolean showDialog, Event<Void> closeButtonClick) {
+    @GemDialog(isOpen = showDialog, component =
+        @GemColumn(rowGap = "16px", width = "100%", components = [
+            @GemRow(hAlign = "space-between", vAlign = "center", width = "100%", components = [
+                @GemText(value = "Test", size = "1.4rem", weight = "bold"),
+                closeBtn@GemButton(label = "Close", leftClick = closeButtonClick)
+            ]),
+            @SimulationCardPopupContent(s = loadSimulation(selectedSimulationId))
+        ])
+    );
+}
