@@ -1,0 +1,10 @@
+:host ::ng-deep {
+  img {
+    max-height: 150px !important;
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain;
+    display: block;
+  }
+}
