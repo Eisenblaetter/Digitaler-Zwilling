@@ -4,12 +4,111 @@ import mc.fenix.basic.GemText;
 import mc.fenix.arrange.GemRow;
 import mc.fenix.arrange.GemColumn;
 import gui.navigation.NavContainer;
+import mc.fenix.table.GemTable;
+import mc.fenix.table.GemTableHeader;
+import mc.fenix.table.GemTableHeaderCell;
+import mc.fenix.table.GemTableRow;
+import mc.fenix.table.GemTableRowCell;
+import mc.fenix.input.GemDropdownInput;
+import mc.fenix.input.GemDropdownInputTypes.Option;
+import mc.fenix.arrange.GemTreeNode;
 
-page SimulationComparison() {
+import Domain.Simulation;
+import Domain.SimulationState;
+
+page SimulationComparison(
+    List<Simulation> simulations,
+    ?String selectedSimId1,
+    ?String selectedSimId2
+) {
+
     @NavContainer(content = [
-        @GemColumn(components=[
-            @GemText(value="Comparison -- Simulations", size="3rem"),
-            @GemText(value="TODO")
+        @GemColumn(rowGap = "20px", components = [
+            @GemText(value = "Comparison -- Simulations", size = "3rem"),
+
+            @GemTable(
+                layout = "fixed",
+                width = "100%",
+                headers = [
+                    @GemTableHeader(cells = [
+                        @GemTableHeaderCell(content = @GemText(value = "")),
+                        @GemTableHeaderCell(content = @GemDropdownInput(
+                            labelText = "Simulation 1",
+                            entry = selectedSimId1,
+                            options = getSimulationOptions(simulations),
+                            searchEnabled = true,
+                            width = "99%"
+                        )),
+                        @GemTableHeaderCell(content = @GemDropdownInput(
+                            labelText = "Simulation 2",
+                            entry = selectedSimId2,
+                            options = getSimulationOptions(simulations),
+                            searchEnabled = true,
+                            width = "99%"
+                        ))
+                    ])
+                ],
+                body = [
+
+                    @GemTableRow(cells = [
+                        @GemTableRowCell(content = @GemText(value = "Status", weight = "bold")),
+                        @GemTableRowCell(content = @GemText(
+                            value = getSimulationState(selectedSimId1, simulations),
+                            color = getStatusColor(selectedSimId1, simulations),
+                            weight = "bold"
+                        )),
+                        @GemTableRowCell(content = @GemText(
+                            value = getSimulationState(selectedSimId2, simulations),
+                            color = getStatusColor(selectedSimId2, simulations),
+                            weight = "bold"
+                        ))
+                    ]),
+
+                    @GemTableRow(cells = [
+                        @GemTableRowCell(content = @GemText(value = "Duration", weight = "bold")),
+                        @GemTableRowCell(content = @GemText(value = getSimulationDuration(selectedSimId1, simulations))),
+                        @GemTableRowCell(content = @GemText(value = getSimulationDuration(selectedSimId2, simulations) ))
+                    ]),
+
+                    @GemTableRow(cells = [
+                        @GemTableRowCell(content = @GemText(value = "Total Consumption", weight = "bold")),
+                        @GemTableRowCell(content = @GemText(value = getTotalConsumption(selectedSimId1, simulations) )),
+                        @GemTableRowCell(content = @GemText(value = getTotalConsumption(selectedSimId2, simulations) ))
+                    ]),
+
+                    @GemTableRow(cells = [
+                        @GemTableRowCell(content = @GemText(value = "Average Consumption", weight = "bold")),
+                        @GemTableRowCell(content = @GemText(value = getAvgConsumption(selectedSimId1, simulations) )),
+                        @GemTableRowCell(content = @GemText(value = getAvgConsumption(selectedSimId2, simulations) ))
+                    ]),
+
+                    @GemTableRow(cells = [
+                        @GemTableRowCell(content = @GemText(value = "Simulated Machines", weight = "bold")),
+                        @GemTableRowCell(content = @GemTreeNode(
+                            isExpanded = false,
+                            content = @GemText(value = getSimulatedMachinesCount(selectedSimId1, simulations)),
+                            children = [
+                                @GemColumn(rowGap = "4px", components = [
+                                    @iterate(String machineName : getSimulatedMachinesList(selectedSimId1)) {
+                                        @GemText(value = machineName);
+                                    }
+                                ])
+                            ]
+                        )),
+                        @GemTableRowCell(content = @GemTreeNode(
+                            isExpanded = false,
+                            content = @GemText(value = getSimulatedMachinesCount(selectedSimId2, simulations)),
+                            children = [
+                                @GemColumn(rowGap = "4px", components = [
+                                    @iterate(String machineName : getSimulatedMachinesList(selectedSimId2)) {
+                                        @GemText(value = machineName);
+                                    }
+                                ])
+                            ]
+                        ))
+                    ])
+                ]
+            )
         ])
     ]);
 }

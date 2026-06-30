@@ -10,6 +10,10 @@ umlp Simulations {
     int simulationId;
     String name;
     SimulationState state;
+    int duration;
+    int totalConsumption;
+    int avgConsumption;
+    int countMachines;
   }
 
 }
