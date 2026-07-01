@@ -16,6 +16,7 @@ umlp Machines {
         String displayName;
         String mqttTopic;
         MachineState state;
+        boolean selected;
 
         // Monitoring
         Double temperature;

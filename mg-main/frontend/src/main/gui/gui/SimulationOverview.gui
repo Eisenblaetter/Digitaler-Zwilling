@@ -12,19 +12,38 @@ import mc.fenix.input.GemDropdownInputTypes.Option;
 
 import gui.simulationcard.SimulationCard;
 import gui.simulationcard.SimulationCardPopup;
+import gui.NewSimulationPopup;
 
-import domain.Simulation;
+import Domain.Simulation;
+import Domain.Machine;
 import java.util.List;
-import domain.SimulationService;
 import gui.simulationcard.SimulationCardPopupContent;
 
 
-page SimulationOverview(List<Simulation> simulations, ?boolean simulationCardPopupVisible, ?long popupSimulationId, ?String filterSelection, ?String sortSelection) {
+page SimulationOverview(
+    List<Simulation> simulations,
+    ?boolean simulationCardPopupVisible,
+    ?long popupSimulationId,
+    ?String filterSelection,
+    ?String sortSelection,
+    ?boolean newSimulationPopupVisible,
+    ?String newSimulationName,
+    ?Integer newSimulationSpeed,
+    List<Machine> machines
+) {
     @NavContainer(content = [
         @SimulationCardPopup(
             selectedSimulationId = popupSimulationId,
             showDialog = simulationCardPopupVisible,
             closeButtonClick = closeSimulationCardPopup()
+        ),
+        @NewSimulationPopup(
+            showDialog = newSimulationPopupVisible,
+            closeButtonClick = closeNewSimulationPopup(),
+            startSimulationClick = startSimulation(),
+            simName = newSimulationName,
+            simSpeed = newSimulationSpeed,
+            machines = machines
         ),
         @GemColumn(rowGap = "30px",components=[
             @GemText(value="Overview - Simulations", size="2rem", weight="bold"),

@@ -1,0 +1,62 @@
+package gui;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemButton;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemDialog;
+
+import mc.fenix.input.GemTextInput;
+import mc.fenix.input.GemRangeInput;
+import mc.fenix.input.GemCheckBoxInput;
+
+import Domain.Machine;
+
+component NewSimulationPopup(
+    ?boolean showDialog,
+    Event<Void> closeButtonClick,
+    Event<Void> startSimulationClick,
+    ?String simName,
+    ?Integer simSpeed,
+    List<Machine> machines
+) {
+    @GemDialog(isOpen = showDialog, component =
+        newSimulationDialogContent@GemColumn(rowGap = "16px", width = "500px", components = [
+            @GemRow(hAlign = "space-between", vAlign = "center", width = "100%", components = [
+                @GemText(value = "Configure New Simulation", size = "1.4rem", weight = "bold"),
+                @GemButton(label = "Close", leftClick = closeButtonClick)
+            ]),
+            @GemColumn(rowGap = "12px", width = "100%", components = [
+                @GemTextInput(
+                    id = "simName",
+                    labelText = "Simulation Name:",
+                    entry = simName,
+                    placeholder = "Enter simulation name..."
+                ),
+                rangeInput@GemRangeInput(
+                    id = "simSpeed",
+                    labelText = "Simulation Speed:",
+                    value = simSpeed,
+                    minValue = 1,
+                    maxValue = 100,
+                    step = 1,
+                    size = "420px"
+                ),
+                @GemText(value = "Select Machines to include:", weight = "bold"),
+                @GemColumn(rowGap = "8px", width = "100%", components = [
+                    // TODO: add machine config options
+                    @iterate(Machine m : machines) {
+                        @GemCheckBoxInput(
+                            id = "check_" + m.name,
+                            labelText = m.displayName,
+                            checked = m.selected
+                        );
+                    }
+                ])
+            ]),
+            @GemRow(hAlign = "right", width = "100%", components = [
+                @GemButton(label = "Start Simulation", leftClick = startSimulationClick)
+            ])
+        ])
+    );
+}
