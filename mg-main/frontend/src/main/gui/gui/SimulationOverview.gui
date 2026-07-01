@@ -27,7 +27,7 @@ page SimulationOverview(List<Simulation> simulations, ?boolean simulationCardPop
             closeButtonClick = closeSimulationCardPopup()
         ),
         @GemColumn(rowGap = "30px",components=[
-            @GemText(value="Overview -- Simulations", size="3rem"),
+            @GemText(value="Overview - Simulations", size="2rem", weight="bold"),
             @GemRow(hAlign = "right", components=[
                 @GemButton(label="New simulation", leftClick= openNewSimulationConfig())
             ]),
@@ -37,7 +37,6 @@ page SimulationOverview(List<Simulation> simulations, ?boolean simulationCardPop
                     labelText = "Filter",
                     width = "180px",
                     options = [
-                        Option("all", "Alle"),
                         Option("running", "Running"),
                         Option("finished", "Finished"),
                         Option("failed", "Failed")
@@ -45,7 +44,7 @@ page SimulationOverview(List<Simulation> simulations, ?boolean simulationCardPop
                 ),
                 @GemDropdownInput(
                     entry = sortSelection,
-                    labelText = "Sortieren",
+                    labelText = "Sort by",
                     width = "180px",
                     options = [
                         Option("status", "Status"),
