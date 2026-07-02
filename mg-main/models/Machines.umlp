@@ -39,44 +39,57 @@ umlp Machines {
     // add specific properties for each machine
     class ConveyorBelt extends Machine {
             //public LocalDateTime timestamp;
-            public boolean forward;
-            public boolean conveyorRunning;
+            boolean forward;
+            boolean conveyorRunning;
         }
     class HighBay extends Machine {
         //public LocalDateTime timestamp;
-        public boolean dirty;
-        public String ejectedToBranch;
-        public boolean actDown;
-        public boolean actUp;
-        public boolean actCantileverForward;
-        public boolean actCantileverBackward;
+        boolean dirty;
+        String ejectedToBranch;
+        boolean actDown;
+        boolean actUp;
+        boolean actCantileverForward;
+        boolean actCantileverBackward;
     }
     class MultiProcessing extends Machine {
         //LocalDateTime timestamp;
-        public String colorPresent;
-        public boolean conveyorRunning;
-        public boolean dirty;
-        public String ejectedToBranch;
-        public boolean actOvenInward;
-        public boolean sensOven;
-        public boolean ovenLight;
-        public boolean actGripperToOven;
-        public boolean sensTurntablePosVacuum;
-        public boolean actRotClockwise;
-        public boolean sensTurntablePosSaw;
-        public boolean actSaw;
-        public boolean conveyorForward;
-        public boolean compressor;
+        String colorPresent;
+        boolean conveyorRunning;
+        boolean dirty;
+        String ejectedToBranch;
+        boolean actOvenInward;
+        boolean sensOven;
+        boolean ovenLight;
+        boolean actGripperToOven;
+        boolean sensTurntablePosVacuum;
+        boolean actRotClockwise;
+        boolean sensTurntablePosSaw;
+        boolean actSaw;
+        boolean conveyorForward;
+        boolean compressor;
     }
     class SortingLine extends Machine {
         //public String machineName
         //public LocalDateTime timestamp;
-        public String colorPresent;
-        public boolean conveyorRunning;
-        public boolean compressorRunning;
-        public boolean actRedEjector;
-        public boolean dirty;
-        public String ejectedToBranch;
+        String colorPresent;
+        boolean conveyorRunning;
+        boolean compressorRunning; //publics weg
+        boolean actRedEjector;
+        boolean dirty;
+        String ejectedToBranch;
     }
-    class VacuumGripper extends Machine {}
+    class VacuumGripper extends Machine {
+
+           boolean dirty;
+           String ejectedToBranch;
+           boolean actVerticalUp;
+           boolean actVerticalDown;
+           boolean actRotRight;
+           boolean actRotLeft;
+           boolean actArmOut;
+           boolean actArmIn;
+           boolean compressorOn;
+           boolean valve;
+    }
+
 }

@@ -181,7 +181,8 @@ public class MachineRegistry {
                         .dirty(false)
                         .ejectedToBranch("None")
                         .build();
-            case "VacuumGripper":
+            case "VacuumGripper01":
+            case "VacuumGripper02":
                 return DomainManager.vacuumGripperBuilder()
                         .name(type)
                         .displayName(displayName)
@@ -194,8 +195,19 @@ public class MachineRegistry {
                         .energyConsumption(0.0)
                         .lastMaintenance("Never")
                         .maintenanceDue("Unknown")
-                        .lastUpdate("Never")
+                        .lastUpdate("Never") //set initial value fo
+                        .actVerticalUp(false)
+                        .actVerticalDown(false)
+                        .actRotRight(false)
+                        .actRotLeft(false)
+                        .actArmOut(false)
+                        .actArmIn(false)
+                        .compressorOn(false)
+                        .valve(false)
+                        .dirty(false)
+                        .ejectedToBranch("None")
                         .build();
+
             default:
                 logger.warn("Unknown machine type: {}", type);
                 return Optional.empty();
