@@ -12,13 +12,13 @@ import Domain.Machine;
 import Domain.MachineState;
 
 component MachineCard(Machine m, Event<Void> detailsButtonClick) {
-    machineInfo@GemCard(titleComponent = @GemRow(colGap = "10px", vAlign = "center", components = [
+    machineInfo@GemCard(titleComponent = @GemRow(colGap = "10px", vAlign = "center", hAlign = "center", components = [
         @GemIcon(name = "precision_manufacturing", size = "24px", color = getStatusTextColor(m.state)),
         @GemText(value = m.displayName, size = "1.2rem", weight = "bold")
       ]),
       component = @GemColumn(rowGap = "15px", components = [
         @GemImage(height = "150px", source = "assets/images/" + m.name + ".png"),
-        @GemRow(colGap = "10px", hAlign = "space-between", vAlign = "center", components = [
+        @GemRow(colGap = "10px", height = "40px", hAlign = "space-between", vAlign = "center", components = [
             @GemColumn(components = [
                 @GemText(value = "Operational Status", size = "0.8rem", color = "grey"),
                 @GemText(value = m.state, size = "1rem", weight = "bold", color = getStatusTextColor(m.state))
