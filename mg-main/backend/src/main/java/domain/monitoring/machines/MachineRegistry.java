@@ -181,8 +181,7 @@ public class MachineRegistry {
                         .dirty(false)
                         .ejectedToBranch("None")
                         .build();
-            case "VacuumGripper01":
-            case "VacuumGripper02":
+            case "VacuumGripper":
                 return DomainManager.vacuumGripperBuilder()
                         .name(type)
                         .displayName(displayName)
