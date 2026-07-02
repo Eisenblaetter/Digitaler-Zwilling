@@ -11,13 +11,43 @@ import mc.fenix.navigation.GemNavList;
 
 component NavContainer(List<GUIViewElement> content) {
   @GemRow(colGap = "0px", components = [
-    // navigation bar
-    sidebar@GemNavList(
-      width = "300px", 
-      height = "100vh", 
-      header = sidebarHeader@GemRow(hAlign = "center", vAlign = "middle", components = [
-          @GemIcon(name = "precision_manufacturing", size = "48px", color = "white"),
-          @GemText(value = "Digital Twin", size = "1.5rem", weight = "bold", color = "white")
+    iconRail@GemColumn(
+      width = "48px",
+      height = "100vh",
+      components = [
+        railHeader@GemColumn(
+          components = [
+            @GemIcon(name = "precision_manufacturing", size = "24px", color = "white")
+          ]
+        ),
+        railHome@GemColumn(
+          components = [
+            @GemIcon(name = "home", size = "20px", color = "white")
+          ]
+        ),
+        railMonitoring@GemColumn(
+          components = [
+            @GemIcon(name = "monitor_heart", size = "20px", color = "white")
+          ]
+        ),
+        railSimulation@GemColumn(
+          components = [
+            @GemIcon(name = "science", size = "20px", color = "white")
+          ]
+        ),
+        railScheduling@GemColumn(
+          components = [
+            @GemIcon(name = "calendar_month", size = "20px", color = "white")
+          ]
+        )
+      ]
+    ),
+
+    secondaryNav@GemNavList(
+      width = "200px",
+      height = "100vh",
+      header = secondaryNavHeader@GemRow(hAlign = "left", vAlign = "middle", components = [
+        @GemText(value = "Digital Twin", size = "0.875rem", weight = "bold", color = "white")
       ]),
       components = [
         homeItem@GemNavItem(title = "Home", target = "/gui/Start"),
@@ -33,7 +63,19 @@ component NavContainer(List<GUIViewElement> content) {
         schedulingItem@GemNavItem(title = "Scheduling", target = "/gui/SchedulingOverview")
       ]
     ),
-    // main content
-    primaryContent@GemColumn(width = "100%", components = content)
+
+    mainArea@GemColumn(
+      width = "100%",
+      components = [
+        topHeader@GemRow(
+          width = "100%",
+          height = "48px",
+          hAlign = "right",
+          vAlign = "middle",
+          components = []
+        ),
+        primaryContent@GemColumn(width = "100%", components = content)
+      ]
+    )
   ]);
 }
