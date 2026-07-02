@@ -18,7 +18,7 @@ import gui.machinecard.MachineCardPopup;
 
 page MonitoringOverview(List<Machine> machines, ?boolean machineCardPopupVisible, ?long popupMachineId) {
     @NavContainer(content = [
-        @GemText(value = "Monitoring — Machines Overview", size = "2rem", weight = "bold"),
+        pageHeader@GemText(value = "Machines Overview", size = "1.4rem", weight = "bold"),
         @MachineCardPopup(
             showPopup = machineCardPopupVisible,
             machineGemId = popupMachineId,
