@@ -26,8 +26,8 @@ page MonitoringOverview(List<Machine> machines, ?boolean machineCardPopupVisible
         ),
         machineCardGrid@GemGrid(
             x = ["1fr", "1fr", "1fr"],
-            colGap = "30px",
-            rowGap = "30px",
+            colGap = "12px",
+            rowGap = "12px",
             rows = [
                 [
                     @iterate(Machine m : machines) {
