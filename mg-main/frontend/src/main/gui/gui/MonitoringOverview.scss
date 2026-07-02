@@ -3,3 +3,18 @@
     margin-top: 8px;
   }
 }
+
+:host ::ng-deep {
+  .machineCardGrid {
+    align-items: start;
+    align-content: start !important;
+  }
+
+  .gem-card {
+    margin: 0 !important;
+  }
+
+  gem-column {
+    height: auto !important;
+  }
+}
