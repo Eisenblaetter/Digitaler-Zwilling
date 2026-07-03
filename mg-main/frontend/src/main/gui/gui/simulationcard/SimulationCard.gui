@@ -27,7 +27,7 @@ component SimulationCard(Simulation s, Event<Void> detailsButtonClick) {
             durationCell@GemText(value = s.duration + " min", size = "0.875rem", width = "80px"),
             machinesCell@GemText(value = s.countMachines + " machine(s)", size = "0.875rem", width = "110px"),
             consumptionCell@GemText(value = s.totalConsumption + " W", size = "0.875rem", width = "90px"),
-            @GemButton(label = "Details", leftClick = detailsButtonClick)
+            @GemButton(label = "Details", leftClick = detailsButtonClick, width = "88px")
         ]
     );
 }

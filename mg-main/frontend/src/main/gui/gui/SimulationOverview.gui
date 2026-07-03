@@ -76,10 +76,10 @@ page SimulationOverview(
                 vAlign = "center",
                 colGap = "0px",
                 components = [
-                    @GemText(value = "Status",       size = "0.75rem", weight = "bold", width = "120px", color = "#525252"),
-                    @GemText(value = "Name",         size = "0.75rem", weight = "bold", width = "auto",  color = "#525252"),
-                    @GemText(value = "Duration",     size = "0.75rem", weight = "bold", width = "80px",  color = "#525252"),
-                    @GemText(value = "Machines",     size = "0.75rem", weight = "bold", width = "110px", color = "#525252"),
+                    @GemText(value = "Status",       size = "0.75rem", weight = "bold", width = "110px", color = "#525252"),
+                    @GemText(value = "Name",         size = "0.75rem", weight = "bold", width = "80px",  color = "#525252"),
+                    @GemText(value = "Duration",     size = "0.75rem", weight = "bold", width = "75px",  color = "#525252"),
+                    @GemText(value = "Machines",     size = "0.75rem", weight = "bold", width = "100px", color = "#525252"),
                     @GemText(value = "Total (W)",    size = "0.75rem", weight = "bold", width = "90px",  color = "#525252"),
                     @GemText(value = "",             size = "0.75rem", weight = "bold", width = "88px")
                 ]
