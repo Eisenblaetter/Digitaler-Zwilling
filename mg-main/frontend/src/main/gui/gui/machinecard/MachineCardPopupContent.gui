@@ -13,7 +13,7 @@ import gui.machinecard.machinedisplay.VacuumGripperStatus;
 import Domain.Machine;
 
 component MachineCardPopupContent(Machine m) {
-  popupContent@GemColumn(rowGap = "24px", width = "100%", hAlign = "center", components = [
+  popupContent@GemColumn(rowGap = "16px", width = "100%", hAlign = "center", components = [
     machineImage@GemImage(
       width = "220px",
       height = "160px",
@@ -21,7 +21,7 @@ component MachineCardPopupContent(Machine m) {
       source = "assets/images/" + m.name + ".png"
     ),
 
-    detailsList@GemColumn(rowGap = "14px", width = "100%", components = [
+    detailsList@GemColumn(rowGap = "8px", width = "100%", components = [
       @GemRow(colGap = "8px", vAlign = "center", components = [
         @GemIcon(name = "info", size = "20px", color = "#1976d2"),
         @GemText(value = "Status:", weight = "bold"),
@@ -48,8 +48,6 @@ component MachineCardPopupContent(Machine m) {
         @GemText(value = m.maintenanceDue)
       ])
     ]),
-
-    separator@GemRow(width = "100%"),
 
     machineSpecificAttributes@GemColumn(rowGap = "0px", components = [
         @guard(isConveyorBelt()) {
