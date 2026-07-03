@@ -45,12 +45,12 @@ page SimulationOverview(
             simSpeed = newSimulationSpeed,
             machines = machines
         ),
-        @GemColumn(rowGap = "30px",components=[
-            @GemText(value="Overview - Simulations", size="2rem", weight="bold"),
-            @GemRow(hAlign = "right", components=[
-                @GemButton(label="New simulation", leftClick= openNewSimulationConfig())
+        @GemColumn(rowGap = "0px",components=[
+            @GemRow(hAlign = "space-between", vAlign="top", components=[
+                @GemText(value="Simulation Overview", size="1.4rem", weight="bold"),
+                newSimButton@GemButton(label="New simulation", leftClick= openNewSimulationConfig())
             ]),
-            @GemRow(colGap = "15px", components=[
+            filterDropdowns@GemRow(colGap = "12px", components=[
                 @GemDropdownInput(
                     entry = filterSelection,
                     labelText = "Filter",
@@ -72,7 +72,7 @@ page SimulationOverview(
                 )
             ]),
             @GemColumn(
-                rowGap = "30px",
+                rowGap = "12px",
                 components = [
                     @iterate(Simulation s : simulations) {
                         @SimulationCard(

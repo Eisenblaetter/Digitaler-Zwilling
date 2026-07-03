@@ -1,0 +1,13 @@
+.newSimButton {
+  text-wrap: nowrap;
+}
+
+.filterDropdowns {
+  margin: 12px 0 24px;
+}
+
+:host {
+  gem-row {
+    height: auto !important;
+  }
+}
