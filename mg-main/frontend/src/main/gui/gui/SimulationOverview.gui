@@ -45,7 +45,7 @@ page SimulationOverview(
             simSpeed = newSimulationSpeed,
             machines = machines
         ),
-        @GemColumn(rowGap = "0px",components=[
+        @GemColumn(rowGap = "0px", components=[
             @GemRow(hAlign = "space-between", vAlign="top", components=[
                 @GemText(value="Simulation Overview", size="1.4rem", weight="bold"),
                 newSimButton@GemButton(label="New simulation", leftClick= openNewSimulationConfig())
@@ -71,8 +71,21 @@ page SimulationOverview(
                     ]
                 )
             ]),
-            @GemColumn(
-                rowGap = "12px",
+            tableHeader@GemRow(
+                hAlign = "space-between",
+                vAlign = "center",
+                colGap = "0px",
+                components = [
+                    @GemText(value = "Status",       size = "0.75rem", weight = "bold", width = "120px", color = "#525252"),
+                    @GemText(value = "Name",         size = "0.75rem", weight = "bold", width = "auto",  color = "#525252"),
+                    @GemText(value = "Duration",     size = "0.75rem", weight = "bold", width = "80px",  color = "#525252"),
+                    @GemText(value = "Machines",     size = "0.75rem", weight = "bold", width = "110px", color = "#525252"),
+                    @GemText(value = "Total (W)",    size = "0.75rem", weight = "bold", width = "90px",  color = "#525252"),
+                    @GemText(value = "",             size = "0.75rem", weight = "bold", width = "88px")
+                ]
+            ),
+            tableBody@GemColumn(
+                rowGap = "0px",
                 components = [
                     @iterate(Simulation s : simulations) {
                         @SimulationCard(
@@ -81,34 +94,6 @@ page SimulationOverview(
                         );
                     }
                 ]
-            ),
-            @GemCard(
-                titleComponent = @GemRow(
-                    colGap = "20px",
-                    components = [
-                        @GemText(
-                            value = "Simulation A",
-                            size = "2rem"
-                        ),
-                        @GemButton(label = "...")
-                    ]
-                ),
-                component =
-                    @GemRow(
-                        width = "auto",
-                        hAlign = "left",
-                        colGap = "5px",
-                        components = [
-                            @GemText(
-                                value = "🟡",
-                                width = "15px"
-                            ),
-                            @GemText(
-                                value = "running for 15m...",
-                                width = "auto"
-                            )
-                        ]
-                    )
             )
         ])
     ]);
