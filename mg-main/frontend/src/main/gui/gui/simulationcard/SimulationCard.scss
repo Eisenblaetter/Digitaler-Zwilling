@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  border-bottom: 1px solid #e0e0e0;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+:host ::ng-deep {
+  .simRow {
+    padding: 12px 0;
+    min-height: 48px;
+
+    &:hover {
+      background-color: #f4f4f4;
+    }
+  }
+
+  .statusDot gem-text {
+    line-height: 1;
+  }
+
+  gem-button {
+    height: 32px !important;
+    min-width: 80px;
+  }
+}
