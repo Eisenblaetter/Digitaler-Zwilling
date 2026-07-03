@@ -30,11 +30,9 @@ public class SimulationRegistry {
 
 
         if (simulations.isEmpty()) {
-            registerSimulation(1, "Full Production Run – Batch 42",   SimulationState.RUNNING,  37,  820, 137, 5);
-            registerSimulation(2, "Baseline Throughput – Q2 2025",    SimulationState.FINISHED, 180, 4320, 144, 6);
-            registerSimulation(3, "High-Speed Stress Test",            SimulationState.FINISHED, 60,  1980, 165, 4);
-            registerSimulation(4, "Reduced-Machine Efficiency Check",  SimulationState.FAILED,   22,  310,  78, 2);
-            registerSimulation(5, "Night-Shift Minimal Load",          SimulationState.FINISHED, 240, 5040, 140, 6);
+            registerSimulation(1, "Simulation abc", SimulationState.RUNNING, 45, 350, 350, 1);
+            registerSimulation(2, "Simulation xxx", SimulationState.FINISHED, 120, 1500, 750, 2);
+            registerSimulation(3, "Simulation xyz", SimulationState.FAILED, 100, 100, 70, 3);
         }
     }
 
