@@ -24,7 +24,7 @@ page SimulationComparison(
 
     @NavContainer(content = [
         @GemColumn(rowGap = "20px", components = [
-            @GemText(value = "Comparison -- Simulations", size = "3rem"),
+            @GemText(value = "Results Comparison", size = "1.4rem", weight = "bold"),
 
             @GemTable(
                 layout = "fixed",
@@ -49,7 +49,6 @@ page SimulationComparison(
                     ])
                 ],
                 body = [
-
                     @GemTableRow(cells = [
                         @GemTableRowCell(content = @GemText(value = "Status", weight = "bold")),
                         @GemTableRowCell(content = @GemText(
