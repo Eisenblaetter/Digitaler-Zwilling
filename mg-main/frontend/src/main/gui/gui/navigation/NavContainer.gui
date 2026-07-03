@@ -9,6 +9,8 @@ import mc.fenix.basic.GemIcon;
 import mc.fenix.navigation.GemNavItem;
 import mc.fenix.navigation.GemNavList;
 
+import gui.navigation.IconButton;
+
 component NavContainer(List<GUIViewElement> content) {
   @GemRow(colGap = "0px", components = [
     iconRail@GemColumn(
@@ -20,25 +22,21 @@ component NavContainer(List<GUIViewElement> content) {
             @GemIcon(name = "precision_manufacturing", size = "24px", color = "white")
           ]
         ),
-        railHome@GemColumn(
-          components = [
-            @GemIcon(name = "home", size = "20px", color = "white")
-          ]
+        railHome@IconButton(
+          iconName = "home",
+          routerLink = "/gui/Start"
         ),
-        railMonitoring@GemColumn(
-          components = [
-            @GemIcon(name = "monitor_heart", size = "20px", color = "white")
-          ]
+        railMonitoring@IconButton(
+          iconName = "monitor_heart",
+          routerLink = "/gui/MonitoringOverview"
         ),
-        railSimulation@GemColumn(
-          components = [
-            @GemIcon(name = "science", size = "20px", color = "white")
-          ]
+        railSimulation@IconButton(
+          iconName = "science",
+          routerLink = "/gui/SimulationOverview"
         ),
-        railScheduling@GemColumn(
-          components = [
-            @GemIcon(name = "calendar_month", size = "20px", color = "white")
-          ]
+        railScheduling@IconButton(
+          iconName = "schedule",
+          routerLink = "/gui/SchedulingOverview"
         )
       ]
     ),
@@ -72,7 +70,14 @@ component NavContainer(List<GUIViewElement> content) {
           height = "48px",
           hAlign = "right",
           vAlign = "middle",
-          components = []
+          components = [
+            @IconButton(
+                iconName = "help"
+            ),
+            @IconButton(
+                iconName = "settings"
+            )
+          ]
         ),
         primaryContent@GemColumn(width = "100%", components = content)
       ]
