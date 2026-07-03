@@ -1,0 +1,32 @@
+:host ::ng-deep {
+  *:hover {
+    background-color: unset !important;
+    fill: unset !important;
+  }
+
+  .gem-button {
+    background-color: transparent !important;
+    height: 100%;
+    width: 100%;
+    margin: 0 !important;
+  }
+
+  .gem-button:hover {
+    background-color: unset !important;
+    color: unset !important;
+  }
+
+  .mat-icon {
+    fill: unset !important;
+    color: white !important;
+  }
+
+  .mat-icon:hover {
+    fill: unset !important;
+    color: white !important;
+  }
+}
+
+.mat-icon {
+  color: white !important;
+}
