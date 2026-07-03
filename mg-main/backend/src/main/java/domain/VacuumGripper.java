@@ -30,7 +30,7 @@ public class VacuumGripper extends VacuumGripperTOP  {
             }
         }
 
-        if (topicParts.remainingTopic.equals("/output/vacuumActVerticalUp")){
+        if (topicParts.remainingTopic.equals("output/vacuumActVerticalUp")){
             BooleanPayload verticalUpPayload = deserializeBooleanPayload(payload);
 
             if (verticalUpPayload != null){
@@ -38,7 +38,7 @@ public class VacuumGripper extends VacuumGripperTOP  {
             }
         }
 
-        if (topicParts.remainingTopic.equals("/output/vacuumActVerticalDown")){
+        if (topicParts.remainingTopic.equals("output/vacuumActVerticalDown")){
             BooleanPayload verticalDownPayload = deserializeBooleanPayload(payload);
 
             if (verticalDownPayload != null){
@@ -46,7 +46,7 @@ public class VacuumGripper extends VacuumGripperTOP  {
             }
         }
 
-        if (topicParts.remainingTopic.equals("/output/vacuumActRotRight")){
+        if (topicParts.remainingTopic.equals("output/vacuumActRotRight")){
             BooleanPayload rotRightPayload = deserializeBooleanPayload(payload);
 
             if (rotRightPayload != null){
@@ -54,7 +54,7 @@ public class VacuumGripper extends VacuumGripperTOP  {
             }
         }
 
-        if (topicParts.remainingTopic.equals("/output/vacuumActRotLeft")){
+        if (topicParts.remainingTopic.equals("output/vacuumActRotLeft")){
             BooleanPayload rotLeftPayload = deserializeBooleanPayload(payload);
 
             if (rotLeftPayload != null){
@@ -62,7 +62,7 @@ public class VacuumGripper extends VacuumGripperTOP  {
             }
         }
 
-        if (topicParts.remainingTopic.equals("/output/vacuumActArmOut")){
+        if (topicParts.remainingTopic.equals("output/vacuumActArmOut")){
             BooleanPayload armOutPayload = deserializeBooleanPayload(payload);
 
             if (armOutPayload != null){
@@ -70,7 +70,7 @@ public class VacuumGripper extends VacuumGripperTOP  {
             }
         }
 
-        if (topicParts.remainingTopic.equals("/output/vacuumActArmIn")){
+        if (topicParts.remainingTopic.equals("output/vacuumActArmIn")){
             BooleanPayload armInPayload = deserializeBooleanPayload(payload);
 
             if (armInPayload != null){
@@ -78,7 +78,7 @@ public class VacuumGripper extends VacuumGripperTOP  {
             }
         }
 
-        if (topicParts.remainingTopic.equals("/output/vacuumActCompressorOn")){
+        if (topicParts.remainingTopic.equals("output/vacuumActCompressorOn")){
             BooleanPayload compressorOnPayload = deserializeBooleanPayload(payload);
 
             if (compressorOnPayload != null){
@@ -86,7 +86,7 @@ public class VacuumGripper extends VacuumGripperTOP  {
             }
         }
 
-        if (topicParts.remainingTopic.equals("/output/vacuumActValve")){
+        if (topicParts.remainingTopic.equals("output/vacuumActValve")){
             BooleanPayload valvePayload = deserializeBooleanPayload(payload);
 
             if (valvePayload != null){
