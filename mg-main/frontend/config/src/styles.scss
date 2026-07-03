@@ -13,11 +13,6 @@
   font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
-// Import css variables in root
-html {
-  @include styles.theme(styles.$white);
-}
-
 html body {
   font-family: 'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
