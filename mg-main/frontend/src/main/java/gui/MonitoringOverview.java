@@ -19,9 +19,15 @@ public class MonitoringOverview extends MonitoringOverviewTOP {
         };
     }
 
-    public Consumer<Void> toggleView() {
+    public Consumer<Void> showRowView() {
         return x -> {
-            this.setRowView(!this.isRowView());
+            this.setRowView(true);
+        };
+    }
+
+    public Consumer<Void> showGridView() {
+        return x -> {
+            this.setRowView(false);
         };
     }
 }

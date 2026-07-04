@@ -13,14 +13,28 @@ import mc.fenix.arrange.GemDialog;
 import Domain.Machine;
 
 import gui.navigation.NavContainer;
+import gui.navigation.IconButton;
 import gui.machinecard.MachineCard;
 import gui.machinecard.MachineRow;
 import gui.machinecard.MachineCardPopup;
 
 page MonitoringOverview(List<Machine> machines, ?boolean machineCardPopupVisible, ?long popupMachineId, ?boolean rowView) {
     @NavContainer(content = [
-        pageHeader@GemText(value = "Machines Overview", size = "1.4rem", weight = "bold"),
-        viewButton@GemButton(label = rowView ? "Grid View" : "List View", leftClick = toggleView()),
+        headerRow@GemRow(hAlign = "space-between", vAlign = "top", height="32px", components = [
+            pageHeader@GemText(value = "Machines Overview", size = "1.4rem", weight = "bold"),
+            viewToggleRow@GemRow(colGap = "4px", components = [
+                rowViewButton@IconButton(
+                    iconName = "view_list",
+                    iconColor = (rowView ? "#0f62fe" : "#161616"),
+                    onClick = showRowView()
+                ),
+                gridViewButton@IconButton(
+                    iconName = "grid_view",
+                    iconColor = (rowView ? "#161616" : "#0f62fe"),
+                    onClick = showGridView()
+                )
+            ])
+        ]),
         @MachineCardPopup(
             showPopup = machineCardPopupVisible,
             machineGemId = popupMachineId,

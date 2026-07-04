@@ -3,7 +3,7 @@
     margin-top: 8px;
   }
 
-  .pageHeader {
+  .headerRow {
     margin-bottom: 12px;
   }
 }
@@ -20,5 +20,23 @@
 
   gem-column {
     height: auto !important;
+  }
+
+  icon-button {
+    width: 42px !important;
+  }
+
+  .viewToggleRow {
+    width: auto !important;
+  }
+
+  .viewButton {
+    width: 32px !important;
+    height: 32px !important;
+
+    gem-icon i {
+      color: #525252 !important;
+      font-size: 20px !important;
+    }
   }
 }
