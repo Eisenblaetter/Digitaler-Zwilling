@@ -18,4 +18,10 @@ public class MonitoringOverview extends MonitoringOverviewTOP {
             this.setPopupMachineId(null);
         };
     }
+
+    public Consumer<Void> toggleView() {
+        return x -> {
+            this.setRowView(!this.isRowView());
+        };
+    }
 }

@@ -14,30 +14,46 @@ import Domain.Machine;
 
 import gui.navigation.NavContainer;
 import gui.machinecard.MachineCard;
+import gui.machinecard.MachineRow;
 import gui.machinecard.MachineCardPopup;
 
-page MonitoringOverview(List<Machine> machines, ?boolean machineCardPopupVisible, ?long popupMachineId) {
+page MonitoringOverview(List<Machine> machines, ?boolean machineCardPopupVisible, ?long popupMachineId, ?boolean rowView) {
     @NavContainer(content = [
         pageHeader@GemText(value = "Machines Overview", size = "1.4rem", weight = "bold"),
+        viewButton@GemButton(label = rowView ? "Grid View" : "List View", leftClick = toggleView()),
         @MachineCardPopup(
             showPopup = machineCardPopupVisible,
             machineGemId = popupMachineId,
             closeButtonClick = closeMachineCardPopup()
         ),
-        machineCardGrid@GemGrid(
-            x = ["1fr", "1fr", "1fr"],
-            colGap = "12px",
-            rowGap = "12px",
-            rows = [
-                [
+        @guard(rowView) {
+            machineList@GemColumn(
+                rowGap = "10px",
+                components = [
                     @iterate(Machine m : machines) {
-                        @MachineCard(
+                        @MachineRow(
                             m = m,
                             detailsButtonClick = showMachineCardPopup(m)
                         );
                     }
                 ]
-            ]
-        )
+            );
+        } else {
+            machineCardGrid@GemGrid(
+                x = ["1fr", "1fr", "1fr"],
+                colGap = "12px",
+                rowGap = "12px",
+                rows = [
+                    [
+                        @iterate(Machine m : machines) {
+                            @MachineCard(
+                                m = m,
+                                detailsButtonClick = showMachineCardPopup(m)
+                            );
+                        }
+                      ]
+                ]
+            );
+        }
     ]);
 }
