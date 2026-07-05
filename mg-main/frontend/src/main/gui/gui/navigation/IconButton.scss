@@ -21,6 +21,10 @@
     color: white;
   }
 
+  .buttonLabel {
+    color: var(--cds-text-primary, #161616);
+  }
+
   .mat-icon:hover {
     fill: unset !important;
     color: white;
