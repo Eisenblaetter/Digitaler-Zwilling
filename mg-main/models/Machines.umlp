@@ -20,10 +20,9 @@ umlp Machines {
 
         // Monitoring
         Double temperature;
-        Integer rpm; //Rotation per Minute
-        Double load;
-        Double throughput;
-        Double energyConsumption;
+        Integer rpm;
+        Double co2PerEvent;
+        Double electricityKwhPerEvent;
 
         // Maintenance
         String lastMaintenance;
