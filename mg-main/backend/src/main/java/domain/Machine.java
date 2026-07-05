@@ -11,13 +11,28 @@ import static domain.monitoring.mqtt.payload.PayloadDeserializer.deserializeBool
 import static domain.monitoring.mqtt.payload.PayloadDeserializer.deserializeMachineFeedbackPayload;
 
 public class Machine extends MachineTOP {
+    private static final int STATS_UPDATE_INTERVAL = 100;
+    private int debounceCounter = 0;
 
     @BackendOnly(BackendOnlyModes.THROW_ERROR)
-    public void processMessage(MachineTopicParts topicParts, String payload) {
+    public void processMessage(MachineTopicParts topicParts, String payload, GlobalStats globalStats) {
+        updateStats(globalStats);
+
         if (topicParts.messageType == TopicMessageType.EVENT) {
             processEvent(topicParts, payload);
         } else if (topicParts.messageType == TopicMessageType.MEASUREMENT) {
             processMeasurement(topicParts, payload);
+        }
+    }
+
+    @BackendOnly(BackendOnlyModes.THROW_ERROR)
+    private void updateStats(GlobalStats globalStats) {
+        debounceCounter++;
+
+        if (debounceCounter >= STATS_UPDATE_INTERVAL) {
+            globalStats.setTotalCo2Emissions(globalStats.getTotalCo2Emissions() + getCo2PerEvent() * STATS_UPDATE_INTERVAL);
+            globalStats.setTotalEnergyConsumption(globalStats.getTotalEnergyConsumption() + getElectricityKwhPerEvent() * STATS_UPDATE_INTERVAL);
+            debounceCounter = 0;
         }
     }
 

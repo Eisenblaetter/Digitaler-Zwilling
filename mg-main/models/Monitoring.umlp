@@ -1,35 +1,13 @@
 import java.time.LocalDateTime;
 
 umlp Monitoring {
-    class MQTTRecord {
-        String topicString;
-        String payloadValue;
-        LocalDateTime payloadTimestamp;
-        LocalDateTime receivedAt;
-        int duplicateDelivery;
-        boolean retainContent;
-        double latency;
-    }
+    class GlobalStats {
+        int executionTimeMs;
+        int processedEventsCount;
+        int efficiency;
+        int healthScore;
 
-    enum Status {
-        RUNNING,
-        SUCCESS,
-        FAILURE,
-        PENDING;
+        Double totalCo2Emissions;
+        Double totalEnergyConsumption;
     }
-
-    class MonitoringLog {
-        String runId;
-        int invoker;
-        LocalDateTime startTimestamp;
-        LocalDateTime endTimestamp;
-    }
-
-    class MonitoringAction {
-        String destinationIp;
-        Status executionStatus = Status.PENDING;
-        // List<MQTTRecord> currentRecords; // To be added when using relations properly
-    }
-
-    association [1] MonitoringLog <-> MonitoringAction [1];
 }

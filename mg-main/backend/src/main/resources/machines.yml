@@ -4,30 +4,30 @@ machines_config:
         "ConveyorBelt":
             instances:
                 - "ConveyorBelt/ConveyorBelt01"
-            co2PerEvent: 10
+            co2PerEvent: 0.8
             electricityKwhPerEvent: 0.001
 
         "HighBay":
             instances:
                 - "HighBay/HighBay01"
-            co2PerEvent: 18
+            co2PerEvent: 1.4
             electricityKwhPerEvent: 0.006
 
         "MultiProcessingwithOven":
             instances:
                 - "MultiProcessing/MultiProcessing01"
-            co2PerEvent: 25
+            co2PerEvent: 2.2
             electricityKwhPerEvent: 0.015
 
         "SortingLine":
             instances:
                 - "SortingLine/SortingLine01"
-            co2PerEvent: 12
+            co2PerEvent: 1.0
             electricityKwhPerEvent: 0.0015
 
         "VacuumGripper":
             instances:
                 - "VacuumGripper/VacuumGripper01"
                 - "VacuumGripper/VacuumGripper02"
-            co2PerEvent: 14
+            co2PerEvent: 1.2
             electricityKwhPerEvent: 0.0012
