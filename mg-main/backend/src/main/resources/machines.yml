@@ -2,13 +2,32 @@ machines_config:
     base_topic: "PLC/Island 1/"
     machines:
         "ConveyorBelt":
-            - "ConveyorBelt/ConveyorBelt01"
+            instances:
+                - "ConveyorBelt/ConveyorBelt01"
+            co2PerEvent: 0.8
+            electricityKwhPerEvent: 0.001
+
         "HighBay":
-            - "HighBay/HighBay01"
+            instances:
+                - "HighBay/HighBay01"
+            co2PerEvent: 1.4
+            electricityKwhPerEvent: 0.006
+
         "MultiProcessingwithOven":
-            - "MultiProcessing/MultiProcessing01"
+            instances:
+                - "MultiProcessing/MultiProcessing01"
+            co2PerEvent: 2.2
+            electricityKwhPerEvent: 0.015
+
         "SortingLine":
-            - "SortingLine/SortingLine01"
+            instances:
+                - "SortingLine/SortingLine01"
+            co2PerEvent: 1.0
+            electricityKwhPerEvent: 0.0015
+
         "VacuumGripper":
-            - "VacuumGripper/VacuumGripper01"
-            - "VacuumGripper/VacuumGripper02"
+            instances:
+                - "VacuumGripper/VacuumGripper01"
+                - "VacuumGripper/VacuumGripper02"
+            co2PerEvent: 1.2
+            electricityKwhPerEvent: 0.0012

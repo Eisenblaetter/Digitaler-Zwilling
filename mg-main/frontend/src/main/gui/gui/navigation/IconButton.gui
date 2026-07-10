@@ -1,0 +1,26 @@
+package gui.navigation;
+
+import mc.fenix.basic.GemButton;
+import mc.fenix.basic.GemIcon;
+import mc.fenix.basic.GemText;
+import mc.fenix.arrange.GemRow;
+
+component IconButton(
+    String iconName,
+    String iconSize = "20px",
+    String iconColor = "white",
+    String label = "",
+    String routerLink = null,
+    Event<Void> onClick = null
+) {
+    iconButton@GemButton(
+        label = "",
+        leftClick = handleClick(),
+        content = [
+            @GemRow(vAlign = "center", components = [
+                @GemIcon(name = iconName, size = iconSize, color = iconColor),
+                buttonLabel@GemText(value = label)
+            ])
+        ]
+    );
+}

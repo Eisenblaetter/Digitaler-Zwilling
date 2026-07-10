@@ -4,8 +4,8 @@ End of Sprint 4
 
 ## Sprint Review:
 - Darius: Backend refactored, Serialization Logic für Payloads, besseres Routing an Einzelmaschinen über Topics; besseres Error Handling bei Init-Bug in MachineRegistry
-- Miriam:
-- Theresa:
+- Miriam: Backend Logik für die Maschine SortingLine implementiert
+- Theresa: Backend Logik für die Maschine ConveyorBelt implementiert
 - Anna:
 - Samuel:
 

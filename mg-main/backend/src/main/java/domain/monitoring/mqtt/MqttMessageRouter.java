@@ -1,8 +1,10 @@
 package domain.monitoring.mqtt;
 
 import domain.ConveyorBelt;
+import domain.GlobalStats;
 import domain.Machine;
 import domain.monitoring.machines.MachineTopicParts;
+import domain.monitoring.stats.GlobalStatsRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,12 @@ public class MqttMessageRouter {
     private static final Logger logger = LoggerFactory.getLogger(MqttMessageRouter.class);
 
     private final MachineRegistry machineRegistry;
+    private final GlobalStatsRegistry globalStatsRegistry;
 
     @Autowired
-    public MqttMessageRouter(MachineRegistry machineRegistry) {
+    public MqttMessageRouter(MachineRegistry machineRegistry, GlobalStatsRegistry globalStatsRegistry) {
         this.machineRegistry = machineRegistry;
+        this.globalStatsRegistry = globalStatsRegistry;
     }
 
     public void routeMessage(String topic, String payload) {
@@ -32,7 +36,9 @@ public class MqttMessageRouter {
             logger.warn("No machine registered for topic: {}", topicParts.getIdentifyingTopic());
             return;
         }
-        machineObj.processMessage(topicParts, payload);
+
+        GlobalStats globalStats = globalStatsRegistry.getInstance();
+        machineObj.processMessage(topicParts, payload, globalStats);
 
         // TODO: see if we need to add calls to some action log here
     }

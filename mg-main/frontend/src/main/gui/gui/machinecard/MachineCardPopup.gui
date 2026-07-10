@@ -1,0 +1,23 @@
+package gui.machinecard;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemButton;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemDialog;
+
+import Domain.Machine;
+
+import gui.machinecard.MachineCardPopupContent;
+
+component MachineCardPopup(?long machineGemId, ?boolean showPopup, Event<Void> closeButtonClick) {
+    @GemDialog(isOpen = showPopup, component =
+        machineCardDialog@GemColumn(rowGap = "16px", width = "100%", components = [
+            dialogHeader@GemRow(hAlign = "space-between", vAlign = "center", width = "100%", components = [
+                @GemText(value = getCurrentMachineDisplayName(), size = "1.4rem", weight = "bold"),
+                closeBtn@GemButton(label = "Close", leftClick = closeButtonClick)
+            ]),
+            @MachineCardPopupContent(m = loadMachine(machineGemId))
+        ])
+    );
+}

@@ -1,0 +1,30 @@
+package gui.machinecard.machinedisplay;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+
+component VacuumGripperStatus(VacuumGripper vg) {
+    @GemColumn(rowGap = "0px", components = [
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Act Vertical:", weight = "bold"),
+            @GemText(value = (vg.actVerticalUp ? "Up" : (vg.actVerticalDown ? "Down" : "None")))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Act Rot:", weight = "bold"),
+            @GemText(value = (vg.actRotRight ? "Right" : (vg.actRotLeft ? "Left" : "None")))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Act Arm:", weight = "bold"),
+            @GemText(value = (vg.actArmOut ? "Out" : (vg.actArmIn ? "In" : "None")))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Compressor On:", weight = "bold"),
+            @GemText(value = (vg.compressorOn ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Valve:", weight = "bold"),
+            @GemText(value = (vg.valve ? "Yes" : "No"))
+        ])
+    ]);
+}

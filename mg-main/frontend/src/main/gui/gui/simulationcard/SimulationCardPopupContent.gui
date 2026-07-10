@@ -1,0 +1,21 @@
+package gui.simulationcard;
+
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemImage;
+import mc.fenix.basic.GemIcon;
+import domain.Simulation;
+
+component SimulationCardPopupContent(Simulation s) {
+  popupContent@GemColumn(rowGap = "24px", width = "100%", hAlign = "center", components = [
+
+    @GemColumn(rowGap = "14px", width = "100%", components = [
+      @GemRow(colGap = "8px", vAlign = "center", components = [
+        @GemText(value = "Status:", weight = "bold"),
+        @GemText(value = "test")
+      ])
+    ])
+  ]);
+}
+

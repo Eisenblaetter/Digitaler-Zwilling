@@ -1,32 +1,90 @@
-.primaryContent {
-  padding: 2rem 2rem 0;
+:host {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
 }
 
 :host ::ng-deep {
-  .sidebar {
-    padding-top: 1rem;
-    background-color: #1976d2;
+  .gem-row {
+    height: 100vh !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+  }
+
+  .iconRail {
+    width: 48px !important;
+    min-width: 48px !important;
+    max-width: 48px !important;
+    height: 100vh !important;
+    background-color: #161616 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+
+    .railHeader,
+    .railHome,
+    .railMonitoring,
+    .railSimulation,
+    .railScheduling {
+      width: 48px !important;
+      height: 48px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer;
+      transition: background-color 0.1s;
+
+      &:hover {
+        background-color: #393939 !important;
+      }
+
+      gem-icon i {
+        color: #f4f4f4 !important;
+        font-size: 20px !important;
+      }
+    }
+
+    .railHeader {
+      height: 48px !important;
+      background-color: #0f62fe !important;
+
+      &:hover {
+        background-color: #0353e9 !important;
+      }
+    }
+  }
+
+  .secondaryNav {
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+    height: 100vh !important;
+    background-color: #262626 !important;
     border: none !important;
+    flex-shrink: 0 !important;
 
     nav {
-      background: transparent;
+      background: transparent !important;
       border: none !important;
     }
 
-    .sidebarHeader {
-      padding: 0 16px;
-      display: flex;
+    .secondaryNavHeader {
+      height: 48px !important;
+      padding: 0 16px !important;
+      display: flex !important;
       align-items: center !important;
-      justify-content: center !important;
-      gap: 16px !important;
-      height: 64px !important;
-
-      gem-icon i {
-        color: white !important;
-      }
+      border-bottom: 1px solid #393939 !important;
+      background-color: #161616 !important;
 
       gem-text span {
-        color: white !important;
+        color: #f4f4f4 !important;
+        font-size: 0.875rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.01em;
       }
 
       gem-text {
@@ -34,12 +92,109 @@
       }
     }
 
-    .gem-sub-tree-root {
-      padding: 0 !important;
+    .gem-nav-item a,
+    .gem-nav-item {
+      color: #c6c6c6 !important;
+      font-size: 0.875rem !important;
+      padding: 0 16px !important;
+      height: 40px !important;
+      display: flex !important;
+      align-items: center !important;
+      background: transparent !important;
+      border-left: 3px solid transparent !important;
+      text-decoration: none !important;
+      transition: background-color 0.1s, border-color 0.1s;
+
+      &:hover {
+        background-color: #353535 !important;
+        color: #f4f4f4 !important;
+      }
+
+      &.active,
+      &.gem-nav-item-active {
+        background-color: #393939 !important;
+        border-left-color: #0f62fe !important;
+        color: #f4f4f4 !important;
+      }
     }
 
     .gem-tree-node {
-      background: #fafafa;
+      background: transparent !important;
+      padding: 10px 0 !important;
+    }
+
+    .gem-tree-node {
+      gem-text,
+      mat-icon {
+        color: #bbbbbb !important;
+      }
+
+      gem-text {
+        font-size: 0.875rem !important;
+      }
+
+      mat-icon {
+        font-size: 1.32rem !important;
+      }
+    }
+
+    .gem-sub-tree-root {
+      padding: 0 !important;
+      background: transparent !important;
+
+      .gem-nav-item a,
+      .gem-nav-item {
+        padding-left: 32px !important;
+      }
+    }
+  }
+
+  .mainArea {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background-color: #f4f4f4 !important;
+    overflow: hidden !important;
+
+    .topHeader {
+      width: 100% !important;
+      height: 48px !important;
+      min-height: 48px !important;
+      background-color: #161616 !important;
+      border-bottom: 1px solid #393939 !important;
+      padding: 0 16px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      flex-shrink: 0 !important;
+
+      gem-icon i {
+        color: #161616 !important;
+        font-size: 20px !important;
+      }
+
+      gem-text span {
+        color: #161616 !important;
+        font-size: 0.875rem !important;
+        font-weight: 600 !important;
+      }
+
+      gem-text {
+        height: fit-content !important;
+      }
+
+      icon-button {
+        margin-top: 3px !important;
+        width: 42px !important;
+      }
+    }
+
+    .primaryContent {
+      flex: 1 1 0 !important;
+      overflow-y: auto !important;
+      padding: 2rem !important;
     }
   }
 }

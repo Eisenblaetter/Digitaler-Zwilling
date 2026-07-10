@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @SpringBootApplication(
         exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class},
-        scanBasePackages = {"umlp.backendrte.service.websocket", "umlp.backendrte.service.rest", "domain.monitoring"}
+        scanBasePackages = {"umlp.backendrte.service.websocket", "umlp.backendrte.service.rest", "domain.monitoring", "domain.simulation"}
 )
 public class DomainServerApplication extends DomainServerApplicationTOP {
     public static void main(String[] args) {

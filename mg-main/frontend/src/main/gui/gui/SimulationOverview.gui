@@ -1,14 +1,100 @@
 package gui;
 
 import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemButton;
 import gui.navigation.NavContainer;
 import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemCard;
+import mc.fenix.arrange.GemDialog;
+import mc.fenix.input.GemDropdownInput;
+import mc.fenix.input.GemDropdownInputTypes.Option;
 
-page SimulationOverview() {
+import gui.simulationcard.SimulationCard;
+import gui.simulationcard.SimulationCardPopup;
+import gui.NewSimulationPopup;
+
+import Domain.Simulation;
+import Domain.Machine;
+import java.util.List;
+import gui.simulationcard.SimulationCardPopupContent;
+
+
+page SimulationOverview(
+    List<Simulation> simulations,
+    ?boolean simulationCardPopupVisible,
+    ?long popupSimulationId,
+    ?String filterSelection,
+    ?String sortSelection,
+    ?boolean newSimulationPopupVisible,
+    ?String newSimulationName,
+    ?Integer newSimulationSpeed,
+    List<Machine> machines
+) {
     @NavContainer(content = [
-        @GemColumn(components=[
-            @GemText(value="Overview -- Simulations", size="3rem"),
-            @GemText(value="TODO")
+        @SimulationCardPopup(
+            selectedSimulationId = popupSimulationId,
+            showDialog = simulationCardPopupVisible,
+            closeButtonClick = closeSimulationCardPopup()
+        ),
+        @NewSimulationPopup(
+            showDialog = newSimulationPopupVisible,
+            closeButtonClick = closeNewSimulationPopup(),
+            startSimulationClick = startSimulation(),
+            simName = newSimulationName,
+            simSpeed = newSimulationSpeed,
+            machines = machines
+        ),
+        @GemColumn(rowGap = "0px", components=[
+            @GemRow(hAlign = "space-between", vAlign="top", components=[
+                @GemText(value="Simulation Overview", size="1.4rem", weight="bold"),
+                newSimButton@GemButton(label="New simulation", leftClick= openNewSimulationConfig())
+            ]),
+            filterDropdowns@GemRow(colGap = "12px", components=[
+                @GemDropdownInput(
+                    entry = filterSelection,
+                    labelText = "Filter",
+                    width = "180px",
+                    options = [
+                        Option("running", "Running"),
+                        Option("finished", "Finished"),
+                        Option("failed", "Failed")
+                    ]
+                ),
+                @GemDropdownInput(
+                    entry = sortSelection,
+                    labelText = "Sort by",
+                    width = "180px",
+                    options = [
+                        Option("status", "Status"),
+                        Option("name", "Name")
+                    ]
+                )
+            ]),
+            tableHeader@GemRow(
+                hAlign = "space-between",
+                vAlign = "center",
+                colGap = "0px",
+                components = [
+                    @GemText(value = "Status",       size = "0.75rem", weight = "bold", width = "110px", color = "#525252"),
+                    @GemText(value = "Name",         size = "0.75rem", weight = "bold", width = "80px",  color = "#525252"),
+                    @GemText(value = "Duration",     size = "0.75rem", weight = "bold", width = "75px",  color = "#525252"),
+                    @GemText(value = "Machines",     size = "0.75rem", weight = "bold", width = "100px", color = "#525252"),
+                    @GemText(value = "Total (W)",    size = "0.75rem", weight = "bold", width = "90px",  color = "#525252"),
+                    @GemText(value = "",             size = "0.75rem", weight = "bold", width = "88px")
+                ]
+            ),
+            tableBody@GemColumn(
+                rowGap = "0px",
+                components = [
+                    @iterate(Simulation s : simulations) {
+                        @SimulationCard(
+                            s = s,
+                            detailsButtonClick = showSimulationCardPopup(s)
+                        );
+                    }
+                ]
+            )
         ])
     ]);
 }

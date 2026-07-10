@@ -1,0 +1,22 @@
+.statsGrid {
+  max-height: 140px;
+  margin-top: 16px;
+}
+
+:host ::ng-deep {
+  gem-grid.statsGrid {
+    align-items: start !important;
+    align-content: start !important; // stops the auto row-track from stretching to fill 570px
+  }
+
+  gem-card {
+    margin: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  gem-column {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+}

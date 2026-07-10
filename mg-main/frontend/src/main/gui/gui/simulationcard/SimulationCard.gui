@@ -1,0 +1,33 @@
+package gui.simulationcard;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemButton;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+
+import domain.Simulation;
+import domain.SimulationState;
+
+component SimulationCard(Simulation s, Event<Void> detailsButtonClick) {
+    simRow@GemRow(
+        hAlign = "space-between",
+        vAlign = "center",
+        colGap = "0px",
+        components = [
+            statusCell@GemRow(
+                width = "120px",
+                vAlign = "center",
+                colGap = "8px",
+                components = [
+                    statusDot@GemText(value = "●", color = getStatusColor(s.state), size = "0.85rem"),
+                    @GemText(value = getStatusLabel(s.state), size = "0.875rem", color = getStatusColor(s.state))
+                ]
+            ),
+            nameCell@GemText(value = s.name, size = "0.875rem", weight = "normal", width = "auto"),
+            durationCell@GemText(value = s.duration + " min", size = "0.875rem", width = "80px"),
+            machinesCell@GemText(value = s.countMachines + " machine(s)", size = "0.875rem", width = "110px"),
+            consumptionCell@GemText(value = s.totalConsumption + " W", size = "0.875rem", width = "90px"),
+            @GemButton(label = "Details", leftClick = detailsButtonClick, width = "88px")
+        ]
+    );
+}

@@ -1,4 +1,4 @@
-# Team Meeting (28th May)
+# Team Meeting (28th May & 1th June)
 
 Ziele für heute: Sprint Review, Sprint Retrospective, Sprint Planning für Sprint 3
 
@@ -7,8 +7,8 @@ Ziele für heute: Sprint Review, Sprint Retrospective, Sprint Planning für Spri
 Endergebnisse:
 
 - Darius:
-- Miriam:
-- Theresa:
+- Miriam: 
+- Theresa: Sequenzdiagramm fürs Monitoring zeichnen
 - Samuel:
 - Anna:
 

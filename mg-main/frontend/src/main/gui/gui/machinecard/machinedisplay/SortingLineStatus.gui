@@ -1,0 +1,26 @@
+package gui.machinecard.machinedisplay;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+
+component SortingLineStatus(SortingLine sl) {
+    @GemColumn(rowGap = "0px", components = [
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Color Present:", weight = "bold"),
+            @GemText(value = sl.colorPresent)
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Conveyor Running:", weight = "bold"),
+            @GemText(value = (sl.conveyorRunning ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Compressor Running:", weight = "bold"),
+            @GemText(value = (sl.compressorRunning ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Act Red Ejector:", weight = "bold"),
+            @GemText(value = (sl.actRedEjector ? "Yes" : "No"))
+        ])
+    ]);
+}

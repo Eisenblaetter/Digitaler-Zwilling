@@ -1,0 +1,43 @@
+:host ::ng-deep {
+  .popupContent {
+    gap: 8px !important;
+  }
+
+  .detailsList {
+    gem-row {
+      padding: 8px 12px;
+      background-color: #fafafa;
+      border-radius: 6px;
+      min-width: 400px;
+    }
+  }
+
+  .machineSpecificAttributes {
+    background-color: #fafafa;
+    border-radius: 6px;
+    padding: 4px 0;
+    margin-top: 16px;
+    min-width: 400px;
+
+    max-height: 200px !important;
+    overflow-y: auto;
+
+    gem-row {
+      padding: 6px 12px;
+    }
+  }
+
+  .separator {
+    height: 1px !important;
+    background-color: #e0e0e0;
+    width: 100%;
+    margin: 4px 0;
+  }
+
+  .machineImage {
+    img {
+      object-fit: contain !important;
+      border-radius: 8px;
+    }
+  }
+}

@@ -5,30 +5,83 @@ import mc.fenix.arrange.GemColumn;
 import mc.fenix.arrange.GemGrid;
 import mc.fenix.arrange.GemCard;
 import mc.fenix.basic.GemButton;
-import mc.fenix.input.GemTextareaInput;
-import mc.fenix.input.GemCheckBoxInput;
-import mc.fenix.input.GemRadioInput;
+import mc.fenix.basic.GemIcon;
 import mc.fenix.basic.GemImage;
 import mc.fenix.basic.GemText;
 import mc.fenix.basic.GemLink;
 
-import gui.navigation.NavContainer;
+import Domain.Machine;
+import Domain.GlobalStats;
 
-page Start() {
+import gui.navigation.NavContainer;
+import gui.navigation.IconButton;
+
+page Start(List<Machine> machines, List<GlobalStats> globalStatsList) {
 
     @NavContainer(content = [
-        @GemCard(
-            titleComponent = @GemText(value = "Nützliche Links"),
-            title = "Info Text",
-            component = @GemColumn(components = [
-                @GemLink(
-                    url = "https://monticore.pages.rwth-aachen.de/umlp/Tutorial.html",
-                    text = "tutorial page"
-                ),
-                @GemLink(
-                    url = "https://git.uni-regensburg.de/se-ur-teaching/programmierpraktika/26.praktikum1",
-                    text = "git"
-                )
+        pageHeader@GemText(value = "Dashboard", size = "1.4rem", weight = "bold"),
+
+        statsGrid@GemGrid(
+            x = ["1fr", "1fr", "1fr"],
+            colGap = "16px",
+            rowGap = "16px",
+            rows = [
+                [
+                    healthCard@GemCard(
+                        titleComponent = @GemRow(colGap = "8px", vAlign = "center", components = [
+                            @GemIcon(name = "monitor_heart", size = "20px", color = getHealthScoreColor(globalStatsList)),
+                            @GemText(value = "System Health", size = "1rem", weight = "bold")
+                        ]),
+                        component = @GemColumn(rowGap = "4px", height="72px", components = [
+                            @GemText(value = getHealthScoreText(globalStatsList), size = "2rem", weight = "bold", color = getHealthScoreColor(globalStatsList)),
+                            @GemText(value = "Overall equipment health", size = "0.8rem", color = "grey")
+                        ])
+                    ),
+                    co2Card@GemCard(
+                        titleComponent = @GemRow(colGap = "8px", vAlign = "center", components = [
+                            @GemIcon(name = "eco", size = "20px", color = "#43a047"),
+                            @GemText(value = "CO2 Emissions", size = "1rem", weight = "bold")
+                        ]),
+                        component = @GemColumn(rowGap = "4px", height="72px", components = [
+                            @GemText(value = getCo2Text(globalStatsList), size = "2rem", weight = "bold"),
+                            @GemText(value = "Total emitted", size = "0.8rem", color = "grey")
+                        ])
+                    ),
+                    electricityCard@GemCard(
+                        titleComponent = @GemRow(colGap = "8px", vAlign = "center", components = [
+                            @GemIcon(name = "bolt", size = "20px", color = "#fbc02d"),
+                            @GemText(value = "Energy Consumption", size = "1rem", weight = "bold")
+                        ]),
+                        component = @GemColumn(rowGap = "4px", height="72px", components = [
+                            @GemText(value = getElectricityText(globalStatsList), size = "2rem", weight = "bold"),
+                            @GemText(value = "Total consumed", size = "0.8rem", color = "grey")
+                        ])
+                    )
+                ]
+            ]
+        ),
+
+        machinesCard@GemCard(
+            titleComponent = @GemText(value = "Machines", size = "1rem", weight = "bold"),
+            component = @GemColumn(rowGap = "12px", width = "100%", components = [
+                machineList@GemColumn(rowGap = "10px", width = "100%", components = [
+                    @iterate(Machine m : getTopMachines(machines)) {
+                        @GemRow(hAlign = "space-between", vAlign = "center", width = "100%", components = [
+                            @GemText(value = m.displayName),
+                            @GemText(value = m.state, weight = "bold", color = getStatusTextColor(m.state))
+                        ]);
+                    }
+                ]),
+                @guard(hasMoreMachines(machines)) {
+                    showMoreRow@GemRow(hAlign = "right", width = "100%", components = [
+                        showMoreButton@IconButton(
+                            iconName = "arrow_forward",
+                            iconColor = "#0f62fe",
+                            label = "Show more",
+                            routerLink = "/gui/MonitoringOverview"
+                        )
+                    ]);
+                }
             ])
         )
     ]);

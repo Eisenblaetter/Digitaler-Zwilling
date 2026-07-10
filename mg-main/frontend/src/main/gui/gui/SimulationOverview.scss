@@ -1,0 +1,24 @@
+.newSimButton {
+  text-wrap: nowrap;
+}
+
+.filterDropdowns {
+  margin: 12px 0 16px;
+}
+
+.tableHeader {
+  padding: 0 0 8px;
+  border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 0;
+  margin-top: 16px;
+}
+
+.tableBody {
+  overflow: hidden;
+}
+
+:host {
+  gem-row {
+    height: auto !important;
+  }
+}

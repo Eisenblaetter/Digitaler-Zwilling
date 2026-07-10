@@ -48,12 +48,12 @@ public class MachineRegistry {
         String baseTopic = machineConfig.getBaseTopic();
 
         // TODO: see if we can simplify saving logic to map
-        machineConfig.getMachines().forEach((type, topics) -> {
-            for (int i = 0; i < topics.size(); i++) {
-                String topic = topics.get(i);
+        machineConfig.getMachines().forEach((type, definition) -> {
+            for (int i = 0; i < definition.getInstances().size(); i++) {
+                String topic = definition.getInstances().get(i);
                 String fullTopic = baseTopic + topic;
-                String displayName = determineDisplayName(type, topic, i, topics.size());
-                registerMachine(type, displayName, fullTopic);
+                String displayName = determineDisplayName(type, topic, i, definition.getInstances().size());
+                registerMachine(type, displayName, fullTopic, definition.getCo2PerEvent(), definition.getElectricityKwhPerEvent());
             }
         });
     }
@@ -71,13 +71,13 @@ public class MachineRegistry {
     /**
      * Registers a new machine instance with the (in-memory) registry.
      */
-    private void registerMachine(String type, String displayName, String fullTopic) {
+    private void registerMachine(String type, String displayName, String fullTopic, double co2PerEvent, double electricityKwhPerEvent) {
         if (machines.containsKey(fullTopic)) {
             logger.warn("Machine with topic {} already exists, skipping creation.", fullTopic);
             return;
         }
 
-        Optional<? extends Machine> machineOpt = createMachine(type, displayName, fullTopic);
+        Optional<? extends Machine> machineOpt = createMachine(type, displayName, fullTopic, co2PerEvent, electricityKwhPerEvent);
         if (machineOpt.isPresent()) {
             Machine machine = machineOpt.get();
             machines.put(fullTopic, machine);
@@ -91,7 +91,7 @@ public class MachineRegistry {
      * Creates a new machine instance based on the provided type and topic.
      * MontiGem integration automatically saves successfully created objects to DB.
      */
-    private Optional<? extends Machine> createMachine(String type, String displayName, String topic) {
+    private Optional<? extends Machine> createMachine(String type, String displayName, String topic, double co2PerEvent, double electricityKwhPerEvent) {
         switch (type) {
             case "ConveyorBelt":
                 return DomainManager.conveyorBeltBuilder()
@@ -99,11 +99,10 @@ public class MachineRegistry {
                         .displayName(displayName)
                         .mqttTopic(topic)
                         .state(MachineState.STOPPED)
-                        .temperature(0.0)
                         .rpm(0)
-                        .load(0.0)
-                        .throughput(0.0)
-                        .energyConsumption(0.0)
+                        .temperature(0.0)
+                        .co2PerEvent(co2PerEvent)
+                        .electricityKwhPerEvent(electricityKwhPerEvent)
                         .lastMaintenance("Never")
                         .maintenanceDue("Unknown")
                         .lastUpdate("Never")
@@ -116,14 +115,19 @@ public class MachineRegistry {
                         .displayName(displayName)
                         .mqttTopic(topic)
                         .state(MachineState.STOPPED)
-                        .temperature(0.0)
                         .rpm(0)
-                        .load(0.0)
-                        .throughput(0.0)
-                        .energyConsumption(0.0)
+                        .temperature(0.0)
+                        .co2PerEvent(co2PerEvent)
+                        .electricityKwhPerEvent(electricityKwhPerEvent)
                         .lastMaintenance("Never")
                         .maintenanceDue("Unknown")
                         .lastUpdate("Never")
+                        .dirty(false)
+                        .ejectedToBranch("None")
+                        .actDown(false)
+                        .actUp(false)
+                        .actCantileverForward(false)
+                        .actCantileverBackward(false)
                         .build();
             case "MultiProcessingwithOven":
                 return DomainManager.multiProcessingBuilder()
@@ -131,14 +135,27 @@ public class MachineRegistry {
                         .displayName(displayName)
                         .mqttTopic(topic)
                         .state(MachineState.STOPPED)
-                        .temperature(0.0)
                         .rpm(0)
-                        .load(0.0)
-                        .throughput(0.0)
-                        .energyConsumption(0.0)
+                        .temperature(0.0)
+                        .co2PerEvent(co2PerEvent)
+                        .electricityKwhPerEvent(electricityKwhPerEvent)
                         .lastMaintenance("Never")
                         .maintenanceDue("Unknown")
                         .lastUpdate("Never")
+                        .colorPresent("None")
+                        .conveyorRunning(false)
+                        .dirty(false)
+                        .ejectedToBranch("None")
+                        .actOvenInward(false)
+                        .sensOven(false)
+                        .ovenLight(false)
+                        .actGripperToOven(false)
+                        .sensTurntablePosVacuum(false)
+                        .actRotClockwise(false)
+                        .sensTurntablePosSaw(false)
+                        .actSaw(false)
+                        .conveyorForward(false)
+                        .compressor(false)
                         .build();
             case "SortingLine":
                 return DomainManager.sortingLineBuilder()
@@ -146,11 +163,10 @@ public class MachineRegistry {
                         .displayName(displayName)
                         .mqttTopic(topic)
                         .state(MachineState.STOPPED)
-                        .temperature(0.0)
                         .rpm(0)
-                        .load(0.0)
-                        .throughput(0.0)
-                        .energyConsumption(0.0)
+                        .temperature(0.0)
+                        .co2PerEvent(co2PerEvent)
+                        .electricityKwhPerEvent(electricityKwhPerEvent)
                         .lastMaintenance("Never")
                         .maintenanceDue("Unknown")
                         .lastUpdate("Never")
@@ -167,15 +183,25 @@ public class MachineRegistry {
                         .displayName(displayName)
                         .mqttTopic(topic)
                         .state(MachineState.STOPPED)
-                        .temperature(0.0)
                         .rpm(0)
-                        .load(0.0)
-                        .throughput(0.0)
-                        .energyConsumption(0.0)
+                        .temperature(0.0)
+                        .co2PerEvent(co2PerEvent)
+                        .electricityKwhPerEvent(electricityKwhPerEvent)
                         .lastMaintenance("Never")
                         .maintenanceDue("Unknown")
                         .lastUpdate("Never")
+                        .actVerticalUp(false)
+                        .actVerticalDown(false)
+                        .actRotRight(false)
+                        .actRotLeft(false)
+                        .actArmOut(false)
+                        .actArmIn(false)
+                        .compressorOn(false)
+                        .valve(false)
+                        .dirty(false)
+                        .ejectedToBranch("None")
                         .build();
+
             default:
                 logger.warn("Unknown machine type: {}", type);
                 return Optional.empty();

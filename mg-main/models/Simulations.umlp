@@ -1,0 +1,19 @@
+umlp Simulations {
+
+  enum SimulationState {
+    RUNNING,
+    FINISHED,
+    FAILED;
+  }
+
+  class Simulation {
+    int simulationId;
+    String name;
+    SimulationState state;
+    int duration;
+    int totalConsumption;
+    int avgConsumption;
+    int countMachines;
+  }
+
+}

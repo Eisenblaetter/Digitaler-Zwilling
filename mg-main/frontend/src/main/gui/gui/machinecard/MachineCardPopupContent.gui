@@ -1,0 +1,70 @@
+package gui.machinecard;
+
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.basic.GemText;
+import mc.fenix.basic.GemImage;
+import mc.fenix.basic.GemIcon;
+import gui.machinecard.machinedisplay.ConveyorBeltStatus;
+import gui.machinecard.machinedisplay.MultiProcessingStatus;
+import gui.machinecard.machinedisplay.HighBayStatus;
+import gui.machinecard.machinedisplay.SortingLineStatus;
+import gui.machinecard.machinedisplay.VacuumGripperStatus;
+import Domain.Machine;
+
+component MachineCardPopupContent(Machine m) {
+  popupContent@GemColumn(rowGap = "16px", width = "100%", hAlign = "center", components = [
+    machineImage@GemImage(
+      width = "220px",
+      height = "160px",
+      alt = "Machine Image",
+      source = "assets/images/" + m.name + ".png"
+    ),
+
+    detailsList@GemColumn(rowGap = "8px", width = "100%", components = [
+      @GemRow(colGap = "8px", vAlign = "center", components = [
+        @GemIcon(name = "info", size = "20px", color = "#1976d2"),
+        @GemText(value = "Status:", weight = "bold"),
+        @GemText(value = m.state)
+      ]),
+      @GemRow(colGap = "8px", vAlign = "center", components = [
+        @GemIcon(name = "thermostat", size = "20px", color = "#1976d2"),
+        @GemText(value = "Temperature:", weight = "bold"),
+        @GemText(value = m.temperature + " °C")
+      ]),
+      @GemRow(colGap = "8px", vAlign = "center", components = [
+        @GemIcon(name = "speed", size = "20px", color = "#1976d2"),
+        @GemText(value = "RPM:", weight = "bold"),
+        @GemText(value = m.rpm)
+      ]),
+      @GemRow(colGap = "8px", vAlign = "center", components = [
+        @GemIcon(name = "build", size = "20px", color = "#1976d2"),
+        @GemText(value = "Last Maintenance:", weight = "bold"),
+        @GemText(value = m.lastMaintenance)
+      ]),
+      @GemRow(colGap = "8px", vAlign = "center", components = [
+        @GemIcon(name = "event", size = "20px", color = "#1976d2"),
+        @GemText(value = "Due Maintenance:", weight = "bold"),
+        @GemText(value = m.maintenanceDue)
+      ])
+    ]),
+
+    machineSpecificAttributes@GemColumn(rowGap = "0px", components = [
+        @guard(isConveyorBelt()) {
+            @ConveyorBeltStatus(belt = getConveyorBelt());
+        },
+        @guard(isMultiProcessing()) {
+            @MultiProcessingStatus(mp = getMultiProcessing());
+        },
+        @guard(isHighBay()) {
+            @HighBayStatus(bay = getHighBay());
+        },
+        @guard(isSortingLine()) {
+            @SortingLineStatus(sl = getSortingLine());
+        },
+        @guard(isVacuumGripper()) {
+            @VacuumGripperStatus(vg = getVacuumGripper());
+        }
+    ])
+  ]);
+}

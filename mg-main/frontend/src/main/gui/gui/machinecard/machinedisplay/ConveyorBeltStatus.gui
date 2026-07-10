@@ -1,0 +1,18 @@
+package gui.machinecard.machinedisplay;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+
+component ConveyorBeltStatus(ConveyorBelt belt) {
+    @GemColumn(rowGap = "0px", components = [
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Direction:", weight = "bold"),
+            @GemText(value = (belt.forward ? "Forward" : "Backward"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Conveyor Running:", weight = "bold"),
+            @GemText(value = (belt.conveyorRunning ? "Yes" : "No"))
+        ])
+    ]);
+}

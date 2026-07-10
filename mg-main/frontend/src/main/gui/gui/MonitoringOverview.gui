@@ -1,9 +1,73 @@
 package gui;
 
 import mc.fenix.basic.GemText;
-import gui.navigation.NavContainer;
-import gui.MachineCard;
+import mc.fenix.basic.GemImage;
+import mc.fenix.basic.GemButton;
+import mc.fenix.basic.GemIcon;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+import mc.fenix.arrange.GemGrid;
+import mc.fenix.arrange.GemCard;
+import mc.fenix.arrange.GemDialog;
 
-page MonitoringOverview() {
-  @MachineCard();
+import Domain.Machine;
+
+import gui.navigation.NavContainer;
+import gui.navigation.IconButton;
+import gui.machinecard.MachineCard;
+import gui.machinecard.MachineRow;
+import gui.machinecard.MachineCardPopup;
+
+page MonitoringOverview(List<Machine> machines, ?boolean machineCardPopupVisible, ?long popupMachineId, ?boolean rowView) {
+    @NavContainer(content = [
+        headerRow@GemRow(hAlign = "space-between", vAlign = "top", height="32px", components = [
+            pageHeader@GemText(value = "Machines Overview", size = "1.4rem", weight = "bold"),
+            viewToggleRow@GemRow(colGap = "4px", components = [
+                rowViewButton@IconButton(
+                    iconName = "view_list",
+                    iconColor = (rowView ? "#0f62fe" : "#161616"),
+                    onClick = showRowView()
+                ),
+                gridViewButton@IconButton(
+                    iconName = "grid_view",
+                    iconColor = (rowView ? "#161616" : "#0f62fe"),
+                    onClick = showGridView()
+                )
+            ])
+        ]),
+        @MachineCardPopup(
+            showPopup = machineCardPopupVisible,
+            machineGemId = popupMachineId,
+            closeButtonClick = closeMachineCardPopup()
+        ),
+        @guard(rowView) {
+            machineList@GemColumn(
+                rowGap = "10px",
+                components = [
+                    @iterate(Machine m : machines) {
+                        @MachineRow(
+                            m = m,
+                            detailsButtonClick = showMachineCardPopup(m)
+                        );
+                    }
+                ]
+            );
+        } else {
+            machineCardGrid@GemGrid(
+                x = ["1fr", "1fr", "1fr"],
+                colGap = "12px",
+                rowGap = "12px",
+                rows = [
+                    [
+                        @iterate(Machine m : machines) {
+                            @MachineCard(
+                                m = m,
+                                detailsButtonClick = showMachineCardPopup(m)
+                            );
+                        }
+                      ]
+                ]
+            );
+        }
+    ]);
 }

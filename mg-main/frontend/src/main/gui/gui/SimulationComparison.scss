@@ -1,0 +1,85 @@
+:host ::ng-deep {
+  // TODO: extract to global styles for reuse
+
+  gem-table {
+    .gem-table-border {
+      border: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+      overflow: hidden;
+    }
+
+    table.gem-table-style {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: var(--cds-layer-01, #f4f4f4);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.875rem;
+    }
+
+    thead tr.gem-table-row {
+      background-color: var(--cds-layer-accent-01, #e0e0e0);
+      border-bottom: 2px solid var(--cds-border-strong-01, #8d8d8d);
+
+      th.gem-table-cell {
+        padding: 0.875rem 1rem;
+        text-align: left;
+        font-weight: 600;
+        color: var(--cds-text-primary, #161616);
+        border-right: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+        vertical-align: middle;
+
+        &:last-child {
+          border-right: none;
+        }
+
+        &:first-child {
+          width: 200px;
+          background-color: var(--cds-layer-accent-01, #e0e0e0);
+        }
+
+        gem-dropdown-input {
+          display: block;
+          width: 100%;
+        }
+      }
+    }
+
+    tbody tr.gem-table-row {
+      border-bottom: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+      transition: background-color 70ms cubic-bezier(0, 0, 0.38, 0.9);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: var(--cds-layer-hover-01, #e8e8e8);
+      }
+
+      td.gem-table-cell {
+        padding: 0.875rem 1rem;
+        color: var(--cds-text-primary, #161616);
+        border-right: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+        vertical-align: middle;
+
+        &:last-child {
+          border-right: none;
+        }
+
+        &:first-child {
+          background-color: var(--cds-layer-accent-01, #e0e0e0);
+          color: var(--cds-text-secondary, #525252);
+          font-weight: 600;
+          border-right: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+        }
+      }
+
+      &:nth-child(even) td.gem-table-cell:not(:first-child) {
+        background-color: var(--cds-layer-02, #ffffff);
+      }
+
+      &:nth-child(odd) td.gem-table-cell:not(:first-child) {
+        background-color: var(--cds-layer-01, #f4f4f4);
+      }
+    }
+  }
+}

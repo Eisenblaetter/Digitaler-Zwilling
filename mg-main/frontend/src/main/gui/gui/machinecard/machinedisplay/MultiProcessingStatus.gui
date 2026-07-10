@@ -1,0 +1,58 @@
+package gui.machinecard.machinedisplay;
+
+import mc.fenix.basic.GemText;
+import mc.fenix.arrange.GemColumn;
+import mc.fenix.arrange.GemRow;
+
+component MultiProcessingStatus(MultiProcessing mp) {
+    @GemColumn(rowGap = "0px", components = [
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Color Present:", weight = "bold"),
+            @GemText(value = mp.colorPresent)
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Conveyor Running:", weight = "bold"),
+            @GemText(value = (mp.conveyorRunning ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Act Oven Inward:", weight = "bold"),
+            @GemText(value = (mp.actOvenInward ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Sens Oven:", weight = "bold"),
+            @GemText(value = (mp.sensOven ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Oven Light:", weight = "bold"),
+            @GemText(value = (mp.ovenLight ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Act Gripper to Oven:", weight = "bold"),
+            @GemText(value = (mp.actGripperToOven ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Sens Turntable Pos Vacuum:", weight = "bold"),
+            @GemText(value = (mp.sensTurntablePosVacuum ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Act Rot Clockwise:", weight = "bold"),
+            @GemText(value = (mp.actRotClockwise ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Sens Turntable Pos Saw:", weight = "bold"),
+            @GemText(value = (mp.sensTurntablePosSaw ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Act Saw:", weight = "bold"),
+            @GemText(value = (mp.actSaw ? "Yes" : "No"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Conveyor Direction:", weight = "bold"),
+            @GemText(value = (mp.conveyorForward ? "Forward" : "Backward"))
+        ]),
+        @GemRow(colGap = "8px", vAlign = "center", components = [
+            @GemText(value = "Compressor:", weight = "bold"),
+            @GemText(value = (mp.compressor ? "Yes" : "No"))
+        ])
+    ]);
+}
