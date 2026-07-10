@@ -1,3 +1,18 @@
+Ideen:
+- red/blue as config inputs from GUI
+- either ordered by color or random order (more time to switch out tool for some machines)
+- montigem class SimResult with subclasses for different machines
+- lambda funktion in SimStateTransition für optionale aktion, this mitgeben damit man alle klassenattribute daraus abändern kann theoretisch
+
+
+SimConfig -> SimMachine -> SimHandover				    -> SimConfig (aus nextConfig) -> SimMachine -> ...
+			    -> success, nextConfig (Kopie von original SimConfig mit Änderungen)
+
+
+
+Move classes with only attributes and stuff to Simulation .umlp after SimEngine base is done
+
+
 Pseudocode für Maschinen:
 
 public class SimulationMachine {
@@ -34,6 +49,9 @@ public class SimulationMachine {
 
     public void initSim() {
         // wenn config.overrides gesetzt, nehme config.process und überschreibe die zustände
+
+        // results objekt von montigem entweder erstellen falls noch nicht existiert oder holen und bereitstellen als
+        instanzvariable
     }
 
     public SimConfig finishSim() {
@@ -42,8 +60,10 @@ public class SimulationMachine {
 
         config.inputMaterial = // ändere lastStage von package auf die aktuelle Stage
 
+        // montigem results abspeichern/updaten
+
         return config; // neu vorbereitete config an nächste maschine zurückgeben, wahrscheinlich inhalt außer
-        bei package unverändert
+        bei package unverändert; Kopie erstellen!
     }
 }
 
@@ -58,10 +78,10 @@ public class MachineXYProcesses {
     // irgendwie konstante Prozesse definieren
     // HashMap: processName -> Array an Zustandsübergängen
     public PriorityQueue sortItem = {
-        // Array an SimStateTransition
+        // Array an SimStateTransition<Machine>
         SimStateTransition(
             order: 1
-            to: INIT,
+            to: Machine.states.INIT,
             baseDuration: 30 // seconds
         ),
         // etc., model whole transition chain
