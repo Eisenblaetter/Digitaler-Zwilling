@@ -6,6 +6,8 @@ umlp Simulations {
     FAILED;
   }
 
+  interface SimMachineState {}
+
   class Simulation {
     int simulationId;
     String name;
@@ -16,4 +18,21 @@ umlp Simulations {
     int countMachines;
   }
 
+  class SimConfig {
+    int speedModifier;
+    String processName;
+    double temperatureOverride;
+    // more complex attributes in manual extensions, e.g. transitionOverrides
+  }
+
+  class SimMachine {
+    SimConfig config;
+    SimMachineState state;
+  }
+
+  class SimStateTransition {
+    int order;
+    SimMachineState toState;
+    int baseExecutionTimeMs;
+  }
 }
