@@ -1,0 +1,70 @@
+Pseudocode für Maschinen:
+
+public class SimulationMachine {
+
+    public SimulationMachine(SimConfig config) {
+        // set config
+    }
+
+    public SimConfig simulate() {
+        initSim();
+
+        // starte vordefinierten ablauf abhängig von config.processName
+        // zustandsübergang prüfen ob möglich, dann aktuellen zustand setzen, sleep, dann ggf. aktion
+        SimStateTransition[] transitions = MachineXYProcess.getTransitions(processName); // aus HashMap holen
+
+        // main loop, zustandsübergänge mit richtiger zeit ausführen
+        for (SimStateTransition transition : transitions) {
+            // throw error on not allowed transitions
+            checkTransitionAllowed(); // transition to error if not allowed
+
+            int extraTime = getExtraTime(); // individuell für jede maschine, z.b. overheating oder
+            richtung/farbe input
+
+            Thread.sleep(transition.baseDuration * config.speedModifier + extraTime); // statt naivem sleep falls
+            dazwischen noch aktion könnte man auch interleaving machen von sleep und aktion ausführen
+            this.currentState = transition.to;
+
+            // hier lassen sich theoretisch weitere aktionen implementieren wie z.b. attributsänderungen für spezifische
+            maschinen
+        }
+
+        return finishSim();
+    }
+
+    public void initSim() {
+        // wenn config.overrides gesetzt, nehme config.process und überschreibe die zustände
+    }
+
+    public SimConfig finishSim() {
+        // ändere bestimmte dinge an config je nach prozess, z.B. von sorting line zum ersten gripper füge
+        override ein für richtung des arms (links drehen statt rechts)
+
+        config.inputMaterial = // ändere lastStage von package auf die aktuelle Stage
+
+        return config; // neu vorbereitete config an nächste maschine zurückgeben, wahrscheinlich inhalt außer
+        bei package unverändert
+    }
+}
+
+public class MachineXYProcesses {
+    // States der Maschine definieren
+    enum MachineXYStates {
+        INIT,
+        SORT_ITEM,
+        FINISH
+    }
+
+    // irgendwie konstante Prozesse definieren
+    // HashMap: processName -> Array an Zustandsübergängen
+    public PriorityQueue sortItem = {
+        // Array an SimStateTransition
+        SimStateTransition(
+            order: 1
+            to: INIT,
+            baseDuration: 30 // seconds
+        ),
+        // etc., model whole transition chain
+        // override by passing an array of overrides in SimConfig with appropriate order
+    }
+}
