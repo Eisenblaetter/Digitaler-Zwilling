@@ -6,12 +6,11 @@ umlp Simulations {
     FAILED;
   }
 
-  interface SimMachineState {}
-
   class Simulation {
     int simulationId;
     String name;
     SimulationState state;
+
     int duration;
     int totalConsumption;
     int avgConsumption;
@@ -19,7 +18,7 @@ umlp Simulations {
   }
 
   class SimConfig {
-    int speedModifier;
+    double speedModifier;
     String processName;
     double temperatureOverride;
     // more complex attributes in manual extensions, e.g. transitionOverrides
@@ -27,12 +26,7 @@ umlp Simulations {
 
   class SimMachine {
     SimConfig config;
-    SimMachineState state;
-  }
-
-  class SimStateTransition {
-    int order;
-    SimMachineState toState;
-    int baseExecutionTimeMs;
+    // name of the current engine state (enum), shown live in the frontend
+    String currentState;
   }
 }
