@@ -10,9 +10,6 @@ import jsweet.lang.Erased;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Entry point for running simulations.
- */
 @Erased
 public class SimEngine {
 
@@ -36,6 +33,7 @@ public class SimEngine {
         );
 
         // TODO: create/update the montigem Simulation entity (RUNNING/FINISHED/FAILED) around this run
+        // TODO: if we want overrides of config from one machine to another, save attr previousMachineConfig and merge
         List<Package> packages = createPackages(baseConfig);
         for (SimMachine machine : machines) {
             packages = machine.executeSimulation(packages);
