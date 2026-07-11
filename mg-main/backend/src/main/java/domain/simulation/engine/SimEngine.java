@@ -1,7 +1,10 @@
 package domain.simulation.engine;
 
+import domain.ConveyorBeltSim;
 import domain.SimConfig;
 import domain.SimMachine;
+import domain.SortingLineSim;
+import domain.VacuumGripperSim;
 import jsweet.lang.Erased;
 
 import java.util.ArrayList;

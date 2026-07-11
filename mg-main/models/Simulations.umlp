@@ -29,4 +29,15 @@ umlp Simulations {
     // name of the current engine state (enum), shown live in the frontend
     String currentState;
   }
+
+  // simulated machines; add machine-specific sim attributes here so the frontend can display them
+  class SortingLineSim extends SimMachine {
+  }
+
+  class VacuumGripperSim extends SimMachine {
+    boolean itemGrabbed;
+  }
+
+  class ConveyorBeltSim extends SimMachine {
+  }
 }

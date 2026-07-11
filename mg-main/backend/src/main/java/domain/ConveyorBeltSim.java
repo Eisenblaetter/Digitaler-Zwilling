@@ -1,15 +1,16 @@
-package domain.simulation.engine;
+package domain;
 
-import domain.SimConfig;
-import domain.SimMachine;
+import domain.simulation.engine.CommonState;
+import domain.simulation.engine.MachineState;
+import domain.simulation.engine.SimStateTransition;
 import jsweet.lang.Erased;
 
 import java.util.List;
 import java.util.Map;
 
-@Erased
-public class ConveyorBeltSim extends SimMachine {
+public class ConveyorBeltSim extends ConveyorBeltSimTOP {
 
+    @Erased
     public enum States implements MachineState {
         TRANSPORT_ITEM
     }
@@ -17,6 +18,7 @@ public class ConveyorBeltSim extends SimMachine {
     public static final String PROCESS_TRANSPORT_ITEM = "transportItem";
     // TODO: depending on real system, split into transport (forward -> backward belt movement) and transportReverse (backward -> forward)
 
+    @Erased
     private static final Map<String, List<SimStateTransition<ConveyorBeltSim>>> PROCESSES = Map.of(
             PROCESS_TRANSPORT_ITEM, List.of(
                     new SimStateTransition<>(1, CommonState.INIT, 500),
@@ -25,11 +27,16 @@ public class ConveyorBeltSim extends SimMachine {
             )
     );
 
+    public ConveyorBeltSim() {
+        // required by the generated builder
+    }
+
     public ConveyorBeltSim(SimConfig config) {
-        super(config);
+        setConfig(config);
     }
 
     @Override
+    @Erased
     @SuppressWarnings({"unchecked", "rawtypes"})
     protected Map<String, List<SimStateTransition<SimMachine>>> processes() {
         return (Map) PROCESSES;
