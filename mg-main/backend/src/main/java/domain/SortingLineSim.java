@@ -29,14 +29,6 @@ public class SortingLineSim extends SortingLineSimTOP {
             )
     );
 
-    public SortingLineSim() {
-        // required by the generated builder
-    }
-
-    public SortingLineSim(SimConfig config) {
-        setConfig(config);
-    }
-
     @Override
     @Erased
     @SuppressWarnings({"unchecked", "rawtypes"})

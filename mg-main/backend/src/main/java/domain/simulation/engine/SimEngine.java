@@ -25,10 +25,10 @@ public class SimEngine {
      */
     public List<Package> runFullSimpleProcess(SimConfig baseConfig) throws InterruptedException {
         List<SimMachine> machines = List.of(
-                new SortingLineSim(configFor(baseConfig, SortingLineSim.PROCESS_SORT_ITEM)),
-                new VacuumGripperSim(configFor(baseConfig, VacuumGripperSim.PROCESS_TAKE_ITEM_OFF_SORTING_LINE)),
-                new ConveyorBeltSim(configFor(baseConfig, ConveyorBeltSim.PROCESS_TRANSPORT_ITEM)),
-                new VacuumGripperSim(configFor(baseConfig, VacuumGripperSim.PROCESS_TAKE_ITEM_OFF_CONVEYOR_BELT))
+                createMachine("sortingLine", baseConfig, SortingLineSim.PROCESS_SORT_ITEM),
+                createMachine("vacuumGripper", baseConfig, VacuumGripperSim.PROCESS_TAKE_ITEM_OFF_SORTING_LINE),
+                createMachine("conveyorBelt", baseConfig, ConveyorBeltSim.PROCESS_TRANSPORT_ITEM),
+                createMachine("vacuumGripper", baseConfig, VacuumGripperSim.PROCESS_TAKE_ITEM_OFF_CONVEYOR_BELT)
                 // TODO: extend with the remaining machines of the plant (high bay, multi processing, ...)
         );
 
@@ -66,9 +66,21 @@ public class SimEngine {
     public SimMachine createMachine(String machineName, SimConfig config, String processName) {
         SimConfig machineConfig = configFor(config, processName);
         return switch (machineName) {
-            case "sortingLine" -> new SortingLineSim(machineConfig);
-            case "vacuumGripper" -> new VacuumGripperSim(machineConfig);
-            case "conveyorBelt" -> new ConveyorBeltSim(machineConfig);
+            case "sortingLine" -> {
+                SortingLineSim sl = new SortingLineSim();
+                sl.setConfig(machineConfig);
+                yield sl;
+            }
+            case "vacuumGripper" -> {
+                VacuumGripperSim vg = new VacuumGripperSim();
+                vg.setConfig(machineConfig);
+                yield vg;
+            }
+            case "conveyorBelt" -> {
+                ConveyorBeltSim cb = new ConveyorBeltSim();
+                cb.setConfig(machineConfig);
+                yield cb;
+            }
             default -> throw new IllegalArgumentException("Unknown machine: " + machineName);
         };
     }

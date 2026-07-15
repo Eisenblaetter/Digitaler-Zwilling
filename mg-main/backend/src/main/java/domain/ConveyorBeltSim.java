@@ -27,14 +27,6 @@ public class ConveyorBeltSim extends ConveyorBeltSimTOP {
             )
     );
 
-    public ConveyorBeltSim() {
-        // required by the generated builder
-    }
-
-    public ConveyorBeltSim(SimConfig config) {
-        setConfig(config);
-    }
-
     @Override
     @Erased
     @SuppressWarnings({"unchecked", "rawtypes"})

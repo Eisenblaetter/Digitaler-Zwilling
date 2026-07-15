@@ -42,14 +42,6 @@ public class VacuumGripperSim extends VacuumGripperSimTOP {
             )
     );
 
-    public VacuumGripperSim() {
-        // required by the generated builder
-    }
-
-    public VacuumGripperSim(SimConfig config) {
-        setConfig(config);
-    }
-
     @Override
     @Erased
     @SuppressWarnings({"unchecked", "rawtypes"})

@@ -13,13 +13,6 @@ import java.util.TreeMap;
 
 public class SimMachine extends SimMachineTOP {
 
-    public SimMachine() {
-    }
-
-    public SimMachine(SimConfig config) {
-        setConfig(config);
-    }
-
     @Erased
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -101,6 +94,11 @@ public class SimMachine extends SimMachineTOP {
 
     @Erased
     private List<SimStateTransition<SimMachine>> initSim() {
+        // check for if config exists, otherwise error out and abort
+        if (getConfig() == null) {
+            throw new IllegalArgumentException("simulation config must not be null!");
+        }
+
         setCurrentState(CommonState.INIT.toString());
 
         if (getConfig().getSpeedModifier() == null || getConfig().getSpeedModifier() <= 0) {
