@@ -1,0 +1,9 @@
+// Dedicated stylesheet used only by frontend e2e test (see angular/angular-cli#27007)e
+@use '@carbon/styles' with (
+	$use-flexbox-grid: true,
+	$use-akamai-cdn: true
+);
+
+@import "../node_modules/@umlp/theme/src/main/gui/mc/fenix/theme/theme";
+
+@include montigem-theme();

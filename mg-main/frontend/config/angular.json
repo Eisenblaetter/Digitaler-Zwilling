@@ -32,7 +32,8 @@
                         "styles": [
                             "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
                             "./node_modules/font-awesome/css/font-awesome.css",
-                            "src/styles.scss"
+                            "src/styles.scss",
+                            "./node_modules/@ibm/plex/css/ibm-plex.css"
                         ],
                         "scripts": [],
                         "preserveSymlinks": true
@@ -97,12 +98,13 @@
                         ],
                         "tsConfig": "tsconfig.spec.json",
                         "inlineStyleLanguage": "scss",
+                        "sourceMap": true,
                         "assets": [
                             "src/favicon.ico",
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss",
+                            "src/styles-test.scss",
                             "node_modules/@ibm/plex/css/ibm-plex.css"
                         ],
                         "scripts": [],

@@ -1,9 +1,7 @@
-@use '@carbon/styles/scss/config' with (
+@use '@carbon/styles' with (
 	$use-flexbox-grid: true,
 	$font-path: '@ibm/plex'
 );
-
-@use '@carbon/styles';
 
 @import "../node_modules/@umlp/theme/src/main/gui/mc/fenix/theme/theme";
 
